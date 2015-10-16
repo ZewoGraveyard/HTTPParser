@@ -1,0 +1,4 @@
+module http_parser [system] {
+    header "http_parser.h"
+    export *
+}

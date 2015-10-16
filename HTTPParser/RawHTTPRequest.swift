@@ -1,4 +1,4 @@
-// HTTPParser.h
+// RawHTTPRequest.swift
 //
 // The MIT License (MIT)
 //
@@ -21,3 +21,11 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
+struct RawHTTPRequest {
+    var method: String = ""
+    var uri: String = ""
+    var version: String = ""
+    var headers: [String: String] = [:]
+    var body: [Int8] = []
+}

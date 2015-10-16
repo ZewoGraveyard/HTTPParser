@@ -9,7 +9,24 @@
 /* Begin PBXBuildFile section */
 		B0B94B151BD099AD00D297F3 /* HTTPParser.h in Headers */ = {isa = PBXBuildFile; fileRef = B0B94B141BD099AD00D297F3 /* HTTPParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0B94B1C1BD099AE00D297F3 /* HTTPParser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0B94B111BD099AD00D297F3 /* HTTPParser.framework */; settings = {ASSET_TAGS = (); }; };
-		B0B94B211BD099AE00D297F3 /* HTTPParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B201BD099AE00D297F3 /* HTTPParserTests.swift */; };
+		B0B94B301BD09BF500D297F3 /* http_parser.c in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B2D1BD09BF500D297F3 /* http_parser.c */; settings = {ASSET_TAGS = (); }; };
+		B0B94B311BD09BF500D297F3 /* http_parser.h in Headers */ = {isa = PBXBuildFile; fileRef = B0B94B2E1BD09BF500D297F3 /* http_parser.h */; settings = {ASSET_TAGS = (); }; };
+		B0B94B331BD09C2600D297F3 /* HTTPRequestParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B321BD09C2600D297F3 /* HTTPRequestParser.swift */; settings = {ASSET_TAGS = (); }; };
+		B0B94B351BD09FF200D297F3 /* HTTPStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B341BD09FF200D297F3 /* HTTPStream.swift */; settings = {ASSET_TAGS = (); }; };
+		B0B94B371BD0A04100D297F3 /* RawHTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B361BD0A04100D297F3 /* RawHTTPRequest.swift */; settings = {ASSET_TAGS = (); }; };
+		B0B94B3B1BD0A1EC00D297F3 /* HTTPParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B391BD0A1EC00D297F3 /* HTTPParserTests.swift */; settings = {ASSET_TAGS = (); }; };
+		B0B94B3F1BD0A4C900D297F3 /* HTTPParseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B3E1BD0A4C900D297F3 /* HTTPParseResult.swift */; settings = {ASSET_TAGS = (); }; };
+		B0B94B411BD0A51300D297F3 /* HTTPParseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B401BD0A51300D297F3 /* HTTPParseError.swift */; settings = {ASSET_TAGS = (); }; };
+		B0B94B511BD0C40100D297F3 /* HTTPParser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0B94B471BD0C40100D297F3 /* HTTPParser.framework */; settings = {ASSET_TAGS = (); }; };
+		B0B94B5E1BD0C47900D297F3 /* HTTPParser.h in Headers */ = {isa = PBXBuildFile; fileRef = B0B94B141BD099AD00D297F3 /* HTTPParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B0B94B5F1BD0C48200D297F3 /* http_parser.h in Headers */ = {isa = PBXBuildFile; fileRef = B0B94B2E1BD09BF500D297F3 /* http_parser.h */; };
+		B0B94B601BD0C48F00D297F3 /* http_parser.c in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B2D1BD09BF500D297F3 /* http_parser.c */; settings = {ASSET_TAGS = (); }; };
+		B0B94B611BD0C48F00D297F3 /* HTTPRequestParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B321BD09C2600D297F3 /* HTTPRequestParser.swift */; settings = {ASSET_TAGS = (); }; };
+		B0B94B621BD0C48F00D297F3 /* HTTPStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B341BD09FF200D297F3 /* HTTPStream.swift */; settings = {ASSET_TAGS = (); }; };
+		B0B94B631BD0C48F00D297F3 /* RawHTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B361BD0A04100D297F3 /* RawHTTPRequest.swift */; settings = {ASSET_TAGS = (); }; };
+		B0B94B641BD0C48F00D297F3 /* HTTPParseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B3E1BD0A4C900D297F3 /* HTTPParseResult.swift */; settings = {ASSET_TAGS = (); }; };
+		B0B94B651BD0C48F00D297F3 /* HTTPParseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B401BD0A51300D297F3 /* HTTPParseError.swift */; settings = {ASSET_TAGS = (); }; };
+		B0B94B661BD0C58300D297F3 /* HTTPParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B391BD0A1EC00D297F3 /* HTTPParserTests.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -20,15 +37,32 @@
 			remoteGlobalIDString = B0B94B101BD099AD00D297F3;
 			remoteInfo = HTTPParser;
 		};
+		B0B94B521BD0C40100D297F3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B0B94B081BD099AD00D297F3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B0B94B461BD0C40100D297F3;
+			remoteInfo = "HTTPParser OSX";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		B0B94B111BD099AD00D297F3 /* HTTPParser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HTTPParser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0B94B141BD099AD00D297F3 /* HTTPParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTTPParser.h; sourceTree = "<group>"; };
 		B0B94B161BD099AD00D297F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B0B94B1B1BD099AE00D297F3 /* HTTPParserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HTTPParserTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B0B94B201BD099AE00D297F3 /* HTTPParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPParserTests.swift; sourceTree = "<group>"; };
-		B0B94B221BD099AE00D297F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B0B94B1B1BD099AE00D297F3 /* HTTPParser iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "HTTPParser iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0B94B2D1BD09BF500D297F3 /* http_parser.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = http_parser.c; sourceTree = "<group>"; };
+		B0B94B2E1BD09BF500D297F3 /* http_parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = http_parser.h; sourceTree = "<group>"; };
+		B0B94B2F1BD09BF500D297F3 /* module.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.map; sourceTree = "<group>"; };
+		B0B94B321BD09C2600D297F3 /* HTTPRequestParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPRequestParser.swift; sourceTree = "<group>"; };
+		B0B94B341BD09FF200D297F3 /* HTTPStream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPStream.swift; sourceTree = "<group>"; };
+		B0B94B361BD0A04100D297F3 /* RawHTTPRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RawHTTPRequest.swift; sourceTree = "<group>"; };
+		B0B94B391BD0A1EC00D297F3 /* HTTPParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPParserTests.swift; sourceTree = "<group>"; };
+		B0B94B3A1BD0A1EC00D297F3 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B0B94B3E1BD0A4C900D297F3 /* HTTPParseResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPParseResult.swift; sourceTree = "<group>"; };
+		B0B94B401BD0A51300D297F3 /* HTTPParseError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPParseError.swift; sourceTree = "<group>"; };
+		B0B94B471BD0C40100D297F3 /* HTTPParser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HTTPParser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0B94B501BD0C40100D297F3 /* HTTPParser OSX Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "HTTPParser OSX Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,14 +81,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B0B94B431BD0C40100D297F3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B0B94B4D1BD0C40100D297F3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B0B94B511BD0C40100D297F3 /* HTTPParser.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		B0B94B071BD099AD00D297F3 = {
 			isa = PBXGroup;
 			children = (
+				B0B94B2B1BD09B6D00D297F3 /* Dependencies */,
 				B0B94B131BD099AD00D297F3 /* HTTPParser */,
-				B0B94B1F1BD099AE00D297F3 /* HTTPParserTests */,
+				B0B94B381BD0A1EC00D297F3 /* HTTPParser Tests */,
 				B0B94B121BD099AD00D297F3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -63,7 +113,9 @@
 			isa = PBXGroup;
 			children = (
 				B0B94B111BD099AD00D297F3 /* HTTPParser.framework */,
-				B0B94B1B1BD099AE00D297F3 /* HTTPParserTests.xctest */,
+				B0B94B1B1BD099AE00D297F3 /* HTTPParser iOS Tests.xctest */,
+				B0B94B471BD0C40100D297F3 /* HTTPParser.framework */,
+				B0B94B501BD0C40100D297F3 /* HTTPParser OSX Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -72,19 +124,43 @@
 			isa = PBXGroup;
 			children = (
 				B0B94B141BD099AD00D297F3 /* HTTPParser.h */,
+				B0B94B321BD09C2600D297F3 /* HTTPRequestParser.swift */,
+				B0B94B341BD09FF200D297F3 /* HTTPStream.swift */,
+				B0B94B361BD0A04100D297F3 /* RawHTTPRequest.swift */,
+				B0B94B3E1BD0A4C900D297F3 /* HTTPParseResult.swift */,
+				B0B94B401BD0A51300D297F3 /* HTTPParseError.swift */,
 				B0B94B161BD099AD00D297F3 /* Info.plist */,
 			);
 			path = HTTPParser;
 			sourceTree = "<group>";
 		};
-		B0B94B1F1BD099AE00D297F3 /* HTTPParserTests */ = {
+		B0B94B2B1BD09B6D00D297F3 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				B0B94B201BD099AE00D297F3 /* HTTPParserTests.swift */,
-				B0B94B221BD099AE00D297F3 /* Info.plist */,
+				B0B94B2C1BD09BF500D297F3 /* http_parser */,
 			);
-			path = HTTPParserTests;
+			name = Dependencies;
 			sourceTree = "<group>";
+		};
+		B0B94B2C1BD09BF500D297F3 /* http_parser */ = {
+			isa = PBXGroup;
+			children = (
+				B0B94B2D1BD09BF500D297F3 /* http_parser.c */,
+				B0B94B2E1BD09BF500D297F3 /* http_parser.h */,
+				B0B94B2F1BD09BF500D297F3 /* module.map */,
+			);
+			name = http_parser;
+			path = Dependencies/http_parser;
+			sourceTree = "<group>";
+		};
+		B0B94B381BD0A1EC00D297F3 /* HTTPParser Tests */ = {
+			isa = PBXGroup;
+			children = (
+				B0B94B391BD0A1EC00D297F3 /* HTTPParserTests.swift */,
+				B0B94B3A1BD0A1EC00D297F3 /* Info.plist */,
+			);
+			path = "HTTPParser Tests";
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -94,15 +170,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0B94B151BD099AD00D297F3 /* HTTPParser.h in Headers */,
+				B0B94B311BD09BF500D297F3 /* http_parser.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B0B94B441BD0C40100D297F3 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B0B94B5E1BD0C47900D297F3 /* HTTPParser.h in Headers */,
+				B0B94B5F1BD0C48200D297F3 /* http_parser.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		B0B94B101BD099AD00D297F3 /* HTTPParser */ = {
+		B0B94B101BD099AD00D297F3 /* HTTPParser iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B0B94B251BD099AE00D297F3 /* Build configuration list for PBXNativeTarget "HTTPParser" */;
+			buildConfigurationList = B0B94B251BD099AE00D297F3 /* Build configuration list for PBXNativeTarget "HTTPParser iOS" */;
 			buildPhases = (
 				B0B94B0C1BD099AD00D297F3 /* Sources */,
 				B0B94B0D1BD099AD00D297F3 /* Frameworks */,
@@ -113,14 +199,14 @@
 			);
 			dependencies = (
 			);
-			name = HTTPParser;
+			name = "HTTPParser iOS";
 			productName = HTTPParser;
 			productReference = B0B94B111BD099AD00D297F3 /* HTTPParser.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		B0B94B1A1BD099AE00D297F3 /* HTTPParserTests */ = {
+		B0B94B1A1BD099AE00D297F3 /* HTTPParser iOS Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B0B94B281BD099AE00D297F3 /* Build configuration list for PBXNativeTarget "HTTPParserTests" */;
+			buildConfigurationList = B0B94B281BD099AE00D297F3 /* Build configuration list for PBXNativeTarget "HTTPParser iOS Tests" */;
 			buildPhases = (
 				B0B94B171BD099AE00D297F3 /* Sources */,
 				B0B94B181BD099AE00D297F3 /* Frameworks */,
@@ -131,9 +217,45 @@
 			dependencies = (
 				B0B94B1E1BD099AE00D297F3 /* PBXTargetDependency */,
 			);
-			name = HTTPParserTests;
+			name = "HTTPParser iOS Tests";
 			productName = HTTPParserTests;
-			productReference = B0B94B1B1BD099AE00D297F3 /* HTTPParserTests.xctest */;
+			productReference = B0B94B1B1BD099AE00D297F3 /* HTTPParser iOS Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B0B94B461BD0C40100D297F3 /* HTTPParser OSX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B0B94B581BD0C40100D297F3 /* Build configuration list for PBXNativeTarget "HTTPParser OSX" */;
+			buildPhases = (
+				B0B94B421BD0C40100D297F3 /* Sources */,
+				B0B94B431BD0C40100D297F3 /* Frameworks */,
+				B0B94B441BD0C40100D297F3 /* Headers */,
+				B0B94B451BD0C40100D297F3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "HTTPParser OSX";
+			productName = "HTTPParser OSX";
+			productReference = B0B94B471BD0C40100D297F3 /* HTTPParser.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		B0B94B4F1BD0C40100D297F3 /* HTTPParser OSX Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B0B94B5B1BD0C40100D297F3 /* Build configuration list for PBXNativeTarget "HTTPParser OSX Tests" */;
+			buildPhases = (
+				B0B94B4C1BD0C40100D297F3 /* Sources */,
+				B0B94B4D1BD0C40100D297F3 /* Frameworks */,
+				B0B94B4E1BD0C40100D297F3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B0B94B531BD0C40100D297F3 /* PBXTargetDependency */,
+			);
+			name = "HTTPParser OSX Tests";
+			productName = "HTTPParser OSXTests";
+			productReference = B0B94B501BD0C40100D297F3 /* HTTPParser OSX Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -142,6 +264,7 @@
 		B0B94B081BD099AD00D297F3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = Zewo;
 				TargetAttributes = {
@@ -149,6 +272,12 @@
 						CreatedOnToolsVersion = 7.0;
 					};
 					B0B94B1A1BD099AE00D297F3 = {
+						CreatedOnToolsVersion = 7.0;
+					};
+					B0B94B461BD0C40100D297F3 = {
+						CreatedOnToolsVersion = 7.0;
+					};
+					B0B94B4F1BD0C40100D297F3 = {
 						CreatedOnToolsVersion = 7.0;
 					};
 				};
@@ -165,8 +294,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B0B94B101BD099AD00D297F3 /* HTTPParser */,
-				B0B94B1A1BD099AE00D297F3 /* HTTPParserTests */,
+				B0B94B101BD099AD00D297F3 /* HTTPParser iOS */,
+				B0B94B1A1BD099AE00D297F3 /* HTTPParser iOS Tests */,
+				B0B94B461BD0C40100D297F3 /* HTTPParser OSX */,
+				B0B94B4F1BD0C40100D297F3 /* HTTPParser OSX Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -186,6 +317,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B0B94B451BD0C40100D297F3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B0B94B4E1BD0C40100D297F3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -193,6 +338,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0B94B3F1BD0A4C900D297F3 /* HTTPParseResult.swift in Sources */,
+				B0B94B331BD09C2600D297F3 /* HTTPRequestParser.swift in Sources */,
+				B0B94B371BD0A04100D297F3 /* RawHTTPRequest.swift in Sources */,
+				B0B94B301BD09BF500D297F3 /* http_parser.c in Sources */,
+				B0B94B411BD0A51300D297F3 /* HTTPParseError.swift in Sources */,
+				B0B94B351BD09FF200D297F3 /* HTTPStream.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,7 +351,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B0B94B211BD099AE00D297F3 /* HTTPParserTests.swift in Sources */,
+				B0B94B3B1BD0A1EC00D297F3 /* HTTPParserTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B0B94B421BD0C40100D297F3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B0B94B641BD0C48F00D297F3 /* HTTPParseResult.swift in Sources */,
+				B0B94B611BD0C48F00D297F3 /* HTTPRequestParser.swift in Sources */,
+				B0B94B601BD0C48F00D297F3 /* http_parser.c in Sources */,
+				B0B94B631BD0C48F00D297F3 /* RawHTTPRequest.swift in Sources */,
+				B0B94B651BD0C48F00D297F3 /* HTTPParseError.swift in Sources */,
+				B0B94B621BD0C48F00D297F3 /* HTTPStream.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B0B94B4C1BD0C40100D297F3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B0B94B661BD0C58300D297F3 /* HTTPParserTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,8 +381,13 @@
 /* Begin PBXTargetDependency section */
 		B0B94B1E1BD099AE00D297F3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B0B94B101BD099AD00D297F3 /* HTTPParser */;
+			target = B0B94B101BD099AD00D297F3 /* HTTPParser iOS */;
 			targetProxy = B0B94B1D1BD099AE00D297F3 /* PBXContainerItemProxy */;
+		};
+		B0B94B531BD0C40100D297F3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B0B94B461BD0C40100D297F3 /* HTTPParser OSX */;
+			targetProxy = B0B94B521BD0C40100D297F3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -307,6 +484,7 @@
 		B0B94B261BD099AE00D297F3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -315,14 +493,17 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zewo.HTTPParser;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = HTTPParser;
 				SKIP_INSTALL = YES;
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Dependencies";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		B0B94B271BD099AE00D297F3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -331,15 +512,16 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zewo.HTTPParser;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = HTTPParser;
 				SKIP_INSTALL = YES;
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Dependencies";
 			};
 			name = Release;
 		};
 		B0B94B291BD099AE00D297F3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = HTTPParserTests/Info.plist;
+				INFOPLIST_FILE = "HTTPParser Tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zewo.HTTPParserTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -349,10 +531,78 @@
 		B0B94B2A1BD099AE00D297F3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = HTTPParserTests/Info.plist;
+				INFOPLIST_FILE = "HTTPParser Tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zewo.HTTPParserTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		B0B94B591BD0C40100D297F3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = HTTPParser/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.zewo.HTTPParser-OSX";
+				PRODUCT_NAME = HTTPParser;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Dependencies";
+			};
+			name = Debug;
+		};
+		B0B94B5A1BD0C40100D297F3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = HTTPParser/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.zewo.HTTPParser-OSX";
+				PRODUCT_NAME = HTTPParser;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Dependencies";
+			};
+			name = Release;
+		};
+		B0B94B5C1BD0C40100D297F3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "HTTPParser Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.zewo.HTTPParser-OSXTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		B0B94B5D1BD0C40100D297F3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "HTTPParser Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.zewo.HTTPParser-OSXTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
@@ -368,19 +618,37 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B0B94B251BD099AE00D297F3 /* Build configuration list for PBXNativeTarget "HTTPParser" */ = {
+		B0B94B251BD099AE00D297F3 /* Build configuration list for PBXNativeTarget "HTTPParser iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B0B94B261BD099AE00D297F3 /* Debug */,
 				B0B94B271BD099AE00D297F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
-		B0B94B281BD099AE00D297F3 /* Build configuration list for PBXNativeTarget "HTTPParserTests" */ = {
+		B0B94B281BD099AE00D297F3 /* Build configuration list for PBXNativeTarget "HTTPParser iOS Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B0B94B291BD099AE00D297F3 /* Debug */,
 				B0B94B2A1BD099AE00D297F3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B0B94B581BD0C40100D297F3 /* Build configuration list for PBXNativeTarget "HTTPParser OSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B0B94B591BD0C40100D297F3 /* Debug */,
+				B0B94B5A1BD0C40100D297F3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		B0B94B5B1BD0C40100D297F3 /* Build configuration list for PBXNativeTarget "HTTPParser OSX Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B0B94B5C1BD0C40100D297F3 /* Debug */,
+				B0B94B5D1BD0C40100D297F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
