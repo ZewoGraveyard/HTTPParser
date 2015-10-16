@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B0B94B461BD0C40100D297F3"
-               BuildableName = "HTTPParser OSX.framework"
+               BuildableName = "HTTPParser.framework"
                BlueprintName = "HTTPParser OSX"
                ReferencedContainer = "container:HTTPParser.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B0B94B461BD0C40100D297F3"
-            BuildableName = "HTTPParser OSX.framework"
+            BuildableName = "HTTPParser.framework"
             BlueprintName = "HTTPParser OSX"
             ReferencedContainer = "container:HTTPParser.xcodeproj">
          </BuildableReference>
@@ -65,7 +65,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B0B94B461BD0C40100D297F3"
-            BuildableName = "HTTPParser OSX.framework"
+            BuildableName = "HTTPParser.framework"
             BlueprintName = "HTTPParser OSX"
             ReferencedContainer = "container:HTTPParser.xcodeproj">
          </BuildableReference>
@@ -83,7 +83,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B0B94B461BD0C40100D297F3"
-            BuildableName = "HTTPParser OSX.framework"
+            BuildableName = "HTTPParser.framework"
             BlueprintName = "HTTPParser OSX"
             ReferencedContainer = "container:HTTPParser.xcodeproj">
          </BuildableReference>

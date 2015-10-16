@@ -294,10 +294,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B0B94B101BD099AD00D297F3 /* HTTPParser iOS */,
-				B0B94B1A1BD099AE00D297F3 /* HTTPParser iOS Tests */,
 				B0B94B461BD0C40100D297F3 /* HTTPParser OSX */,
+				B0B94B101BD099AD00D297F3 /* HTTPParser iOS */,
 				B0B94B4F1BD0C40100D297F3 /* HTTPParser OSX Tests */,
+				B0B94B1A1BD099AE00D297F3 /* HTTPParser iOS Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -491,6 +491,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = HTTPParser/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zewo.HTTPParser;
 				PRODUCT_NAME = HTTPParser;
@@ -510,6 +511,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = HTTPParser/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zewo.HTTPParser;
 				PRODUCT_NAME = HTTPParser;
@@ -550,7 +552,7 @@
 				INFOPLIST_FILE = HTTPParser/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.zewo.HTTPParser-OSX";
 				PRODUCT_NAME = HTTPParser;
 				SDKROOT = macosx;
@@ -571,7 +573,7 @@
 				INFOPLIST_FILE = HTTPParser/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.zewo.HTTPParser-OSX";
 				PRODUCT_NAME = HTTPParser;
 				SDKROOT = macosx;

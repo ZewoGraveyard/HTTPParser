@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B0B94B101BD099AD00D297F3"
-               BuildableName = "HTTPParser iOS.framework"
+               BuildableName = "HTTPParser.framework"
                BlueprintName = "HTTPParser iOS"
                ReferencedContainer = "container:HTTPParser.xcodeproj">
             </BuildableReference>
@@ -44,7 +44,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B0B94B101BD099AD00D297F3"
-            BuildableName = "HTTPParser iOS.framework"
+            BuildableName = "HTTPParser.framework"
             BlueprintName = "HTTPParser iOS"
             ReferencedContainer = "container:HTTPParser.xcodeproj">
          </BuildableReference>
@@ -66,7 +66,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B0B94B101BD099AD00D297F3"
-            BuildableName = "HTTPParser iOS.framework"
+            BuildableName = "HTTPParser.framework"
             BlueprintName = "HTTPParser iOS"
             ReferencedContainer = "container:HTTPParser.xcodeproj">
          </BuildableReference>
@@ -84,7 +84,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B0B94B101BD099AD00D297F3"
-            BuildableName = "HTTPParser iOS.framework"
+            BuildableName = "HTTPParser.framework"
             BlueprintName = "HTTPParser iOS"
             ReferencedContainer = "container:HTTPParser.xcodeproj">
          </BuildableReference>
