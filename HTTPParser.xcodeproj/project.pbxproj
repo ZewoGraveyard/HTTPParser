@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3AB633811BD1354500579B74 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB633801BD1354500579B74 /* main.swift */; };
+		3AB633851BD135E900579B74 /* HTTPRequestParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B321BD09C2600D297F3 /* HTTPRequestParser.swift */; settings = {ASSET_TAGS = (); }; };
+		3AB633861BD135E900579B74 /* HTTPStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B341BD09FF200D297F3 /* HTTPStream.swift */; settings = {ASSET_TAGS = (); }; };
+		3AB633871BD135E900579B74 /* RawHTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B361BD0A04100D297F3 /* RawHTTPRequest.swift */; settings = {ASSET_TAGS = (); }; };
+		3AB633881BD135E900579B74 /* HTTPParseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B3E1BD0A4C900D297F3 /* HTTPParseResult.swift */; settings = {ASSET_TAGS = (); }; };
+		3AB633891BD135E900579B74 /* HTTPParseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B401BD0A51300D297F3 /* HTTPParseError.swift */; settings = {ASSET_TAGS = (); }; };
+		3AB6338A1BD135EF00579B74 /* http_parser.c in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B2D1BD09BF500D297F3 /* http_parser.c */; settings = {ASSET_TAGS = (); }; };
 		B0B94B151BD099AD00D297F3 /* HTTPParser.h in Headers */ = {isa = PBXBuildFile; fileRef = B0B94B141BD099AD00D297F3 /* HTTPParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0B94B1C1BD099AE00D297F3 /* HTTPParser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0B94B111BD099AD00D297F3 /* HTTPParser.framework */; settings = {ASSET_TAGS = (); }; };
 		B0B94B301BD09BF500D297F3 /* http_parser.c in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B2D1BD09BF500D297F3 /* http_parser.c */; settings = {ASSET_TAGS = (); }; };
@@ -46,7 +53,21 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		3AB6337C1BD1354500579B74 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		3AB6337E1BD1354500579B74 /* HTTPParser Command Line */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "HTTPParser Command Line"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3AB633801BD1354500579B74 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		B0B94B111BD099AD00D297F3 /* HTTPParser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HTTPParser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0B94B141BD099AD00D297F3 /* HTTPParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTTPParser.h; sourceTree = "<group>"; };
 		B0B94B161BD099AD00D297F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -66,6 +87,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		3AB6337B1BD1354500579B74 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B0B94B0D1BD099AD00D297F3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -99,12 +127,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3AB6337F1BD1354500579B74 /* HTTPParser Command Line */ = {
+			isa = PBXGroup;
+			children = (
+				3AB633801BD1354500579B74 /* main.swift */,
+			);
+			path = "HTTPParser Command Line";
+			sourceTree = "<group>";
+		};
 		B0B94B071BD099AD00D297F3 = {
 			isa = PBXGroup;
 			children = (
 				B0B94B2B1BD09B6D00D297F3 /* Dependencies */,
 				B0B94B131BD099AD00D297F3 /* HTTPParser */,
 				B0B94B381BD0A1EC00D297F3 /* HTTPParser Tests */,
+				3AB6337F1BD1354500579B74 /* HTTPParser Command Line */,
 				B0B94B121BD099AD00D297F3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -116,6 +153,7 @@
 				B0B94B1B1BD099AE00D297F3 /* HTTPParser iOS Tests.xctest */,
 				B0B94B471BD0C40100D297F3 /* HTTPParser.framework */,
 				B0B94B501BD0C40100D297F3 /* HTTPParser OSX Tests.xctest */,
+				3AB6337E1BD1354500579B74 /* HTTPParser Command Line */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -186,6 +224,23 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		3AB6337D1BD1354500579B74 /* HTTPParser Command Line */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3AB633841BD1354500579B74 /* Build configuration list for PBXNativeTarget "HTTPParser Command Line" */;
+			buildPhases = (
+				3AB6337A1BD1354500579B74 /* Sources */,
+				3AB6337B1BD1354500579B74 /* Frameworks */,
+				3AB6337C1BD1354500579B74 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "HTTPParser Command Line";
+			productName = "HTTPParser Command Line";
+			productReference = 3AB6337E1BD1354500579B74 /* HTTPParser Command Line */;
+			productType = "com.apple.product-type.tool";
+		};
 		B0B94B101BD099AD00D297F3 /* HTTPParser iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B0B94B251BD099AE00D297F3 /* Build configuration list for PBXNativeTarget "HTTPParser iOS" */;
@@ -268,6 +323,9 @@
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = Zewo;
 				TargetAttributes = {
+					3AB6337D1BD1354500579B74 = {
+						CreatedOnToolsVersion = 7.0.1;
+					};
 					B0B94B101BD099AD00D297F3 = {
 						CreatedOnToolsVersion = 7.0;
 					};
@@ -298,6 +356,7 @@
 				B0B94B101BD099AD00D297F3 /* HTTPParser iOS */,
 				B0B94B4F1BD0C40100D297F3 /* HTTPParser OSX Tests */,
 				B0B94B1A1BD099AE00D297F3 /* HTTPParser iOS Tests */,
+				3AB6337D1BD1354500579B74 /* HTTPParser Command Line */,
 			);
 		};
 /* End PBXProject section */
@@ -334,6 +393,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		3AB6337A1BD1354500579B74 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3AB633881BD135E900579B74 /* HTTPParseResult.swift in Sources */,
+				3AB633851BD135E900579B74 /* HTTPRequestParser.swift in Sources */,
+				3AB633811BD1354500579B74 /* main.swift in Sources */,
+				3AB6338A1BD135EF00579B74 /* http_parser.c in Sources */,
+				3AB633871BD135E900579B74 /* RawHTTPRequest.swift in Sources */,
+				3AB633891BD135E900579B74 /* HTTPParseError.swift in Sources */,
+				3AB633861BD135E900579B74 /* HTTPStream.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B0B94B0C1BD099AD00D297F3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -392,6 +465,27 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		3AB633821BD1354500579B74 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Dependencies";
+			};
+			name = Debug;
+		};
+		3AB633831BD1354500579B74 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Dependencies";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+			};
+			name = Release;
+		};
 		B0B94B231BD099AE00D297F3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -517,6 +611,7 @@
 				PRODUCT_NAME = HTTPParser;
 				SKIP_INSTALL = YES;
 				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Dependencies";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -537,6 +632,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zewo.HTTPParserTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -579,6 +675,7 @@
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Dependencies";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -605,12 +702,21 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.zewo.HTTPParser-OSXTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		3AB633841BD1354500579B74 /* Build configuration list for PBXNativeTarget "HTTPParser Command Line" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3AB633821BD1354500579B74 /* Debug */,
+				3AB633831BD1354500579B74 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		B0B94B0B1BD099AD00D297F3 /* Build configuration list for PBXProject "HTTPParser" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -645,6 +751,7 @@
 				B0B94B5A1BD0C40100D297F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B0B94B5B1BD0C40100D297F3 /* Build configuration list for PBXNativeTarget "HTTPParser OSX Tests" */ = {
 			isa = XCConfigurationList;
@@ -653,6 +760,7 @@
 				B0B94B5D1BD0C40100D297F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

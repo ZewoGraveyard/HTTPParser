@@ -95,7 +95,8 @@ public func parseRequest(stream stream: HTTPStream, completion: HTTPParseResult<
         let contextPointer = UnsafeMutablePointer<HTTPParseContext>(parser.memory.data)
         let result = HTTPParseResult.Success(contextPointer.memory.request)
         contextPointer.memory.completion(result)
-        free(contextPointer)
+        contextPointer.dealloc(1)
+        contextPointer.destroy()
 
         return 0
     }

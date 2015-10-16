@@ -123,7 +123,6 @@ class HTTPParserTests: XCTestCase {
         }
         parseRequest(stream: HTTPStreamMock()) { result in
             result.success { request in
-                print(request)
                 XCTAssert(request.method == "GET")
                 XCTAssert(request.uri == "/")
                 XCTAssert(request.version == "HTTP/1.1")
@@ -157,6 +156,35 @@ class HTTPParserTests: XCTestCase {
             }
             result.failure { error in
                 XCTAssert(false)
+            }
+        }
+    }
+    
+    func testManyRequests() {
+        struct HTTPStreamMock : HTTPStream {
+            private func readData(handler: (UnsafePointer<Int8>, Int) -> Void) throws {
+                let data =
+                "POST / HTTP/1.1\r\n" +
+                "Content-Length: 4\r\n" +
+                "\r\n" +
+                "Zewo"
+                data.sendToHandler(handler)
+            }
+        }
+        self.measureBlock {
+            for _ in 0 ..< 10000 {
+                parseRequest(stream: HTTPStreamMock()) { result in
+                    result.success { request in
+                        XCTAssert(request.method == "POST")
+                        XCTAssert(request.uri == "/")
+                        XCTAssert(request.version == "HTTP/1.1")
+                        XCTAssert(request.headers["Content-Length"] == "4")
+                        XCTAssert(request.body == "Zewo".mapToBody())
+                    }
+                    result.failure { error in
+                        XCTAssert(false)
+                    }
+                }
             }
         }
     }
