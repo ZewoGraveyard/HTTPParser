@@ -23,7 +23,7 @@
 // SOFTWARE.
 
 import XCTest
-@testable import HTTPParser
+import HTTPParser
 
 extension String {
     func sendToHandler(handler: (UnsafePointer<Int8>, Int) -> Void) {

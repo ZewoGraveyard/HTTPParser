@@ -22,6 +22,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-protocol HTTPStream {
+public protocol HTTPStream {
     func readData(handler: (UnsafePointer<Int8>, Int)  -> Void) throws
 }

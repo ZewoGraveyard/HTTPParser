@@ -24,7 +24,7 @@
 
 import http_parser
 
-func parseRequest(stream stream: HTTPStream, completion: HTTPParseResult<RawHTTPRequest> -> Void) {
+public func parseRequest(stream stream: HTTPStream, completion: HTTPParseResult<RawHTTPRequest> -> Void) {
 
     struct HTTPParseContext {
         var request: RawHTTPRequest = RawHTTPRequest()

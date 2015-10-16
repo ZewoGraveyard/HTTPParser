@@ -22,18 +22,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-enum HTTPParseResult<T> {
+public enum HTTPParseResult<T> {
     case Success(T)
     case Failure(ErrorType)
 
-    func success(handler: T -> Void) {
+    public func success(handler: T -> Void) {
         switch self {
         case .Success(let value): handler(value)
         default: break
         }
     }
 
-    func failure(handler: ErrorType -> Void) {
+    public func failure(handler: ErrorType -> Void) {
         switch self {
         case .Failure(let error): handler(error)
         default: break
