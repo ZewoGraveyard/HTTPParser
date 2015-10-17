@@ -22,19 +22,23 @@ HTTPParser
 
 ##Usage
 
+`parseRequest`
+--------------
+
 ```swift
 import HTTPParser
 
-struct FakeHTTPStream : HTTPStream {
-    private func readData(handler: (UnsafePointer<Int8>, Int) -> Void) throws {
-        // Here you'll probably get the real data from a socket, right?
-        let data =
-        "GET / HTTP/1.1\r\n" +
-        "\r\n"
+extension String {
+    var bytes: [Int8] {
+        return self.utf8.map { Int8($0) }
+    }
+}
 
-        data.withCString { dataPointer in
-            handler(dataPointer, data.utf8.count)
-        }
+struct FakeHTTPStream : HTTPStream {
+    func readData(read: [Int8] -> Void) throws {
+        // Here you'll probably get the real data from a socket, right?
+        let data = "GET / HTTP/1.1\r\n\r\n".bytes
+        read(data)
     }
 }
 
@@ -43,10 +47,67 @@ HTTPParser.parseRequest(stream: FakeHTTPStream()) { result in
         // here's your parsed request
     }
     result.failure { error in
-        // something bad happened
+        // something bad happened :(
+    }
+}
+```
+
+`parseResponse`
+--------------
+
+```swift
+import HTTPParser
+
+extension String {
+    var bytes: [Int8] {
+        return self.utf8.map { Int8($0) }
     }
 }
 
+struct FakeHTTPStream : HTTPStream {
+    func readData(read: [Int8] -> Void) throws {
+        // Here you'll probably get the real data from a socket, right?
+        let data = "HTTP/1.1 204 No Content\r\n\r\n".bytes
+        read(data)
+    }
+}
+
+HTTPParser.parseResponse(stream: FakeHTTPStream()) { result in
+    result.success { response in
+        // here's your parsed response
+    }
+    result.failure { error in
+        // something bad happened :(
+    }
+}
+```
+
+`readData`
+----------
+
+```swift
+struct FakeHTTPStream : HTTPStream {
+    func readData(read: [Int8] -> Void) throws {
+        // You can call read as many times as you want
+        // passing pieces of the request or response
+        // once the parser completes it will spit the result
+        let data1 = "HTTP/1".bytes
+        let data2 = ".1 204 No Con".bytes
+        let data3 = "tent\r\n\r\n").bytes
+        read(data1)
+        read(data2)
+        read(data3)
+        // The parser supports persistent streams (keep-alive)
+        // so you can keep streaming requests or responses
+        // all you want
+        let data4 = "HTTP/1".bytes
+        let data5 = ".1 200 O".bytes
+        let data6 = "K\r\n\r\n").bytes
+        read(data1)
+        read(data2)
+        read(data3)
+    }
+}
 ```
 
 ## Installation

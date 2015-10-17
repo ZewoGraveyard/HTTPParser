@@ -33,32 +33,27 @@ func now() -> Double {
 }
 
 extension String {
-    func sendToHandler(handler: (UnsafePointer<Int8>, Int) -> Void) {
-        self.withCString { stringPointer in
-            handler(stringPointer, self.utf8.count)
-        }
-    }
-    
-    func mapToBody() -> [Int8] {
-        return ([] + self.utf8).map { Int8($0) }
+    var bytes: [Int8] {
+        return self.utf8.map { Int8($0) }
     }
 }
 
-public struct HTTPStreamMock : HTTPStream {
-    public func readData(handler: (UnsafePointer<Int8>, Int) -> Void) throws {
-        let data =
-        "POST / HTTP/1.1\r\n" +
-        "Content-Length: 4\r\n" +
-        "\r\n" +
-        "Zewo"
-        data.sendToHandler(handler)
+var request = ("POST / HTTP/1.1\r\n" +
+               "Content-Length: 4\r\n" +
+               "\r\n" +
+               "Zewo").bytes
+
+final class Stream : HTTPStream {
+    func readData(read: [Int8] -> Void) throws {
+        read(request)
     }
 }
 
-let numberOfRequests = 100000
+let numberOfRequests = 1000000
+let stream = Stream()
 let startTime = now()
 for _ in 0 ..< numberOfRequests {
-    parseRequest(stream: HTTPStreamMock()) { result in
+    parseRequest(stream: stream) { result in
         result.success { _ in }
         result.failure { error in fatalError("\(error)") }
     }

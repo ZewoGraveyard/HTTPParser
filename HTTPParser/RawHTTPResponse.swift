@@ -1,4 +1,4 @@
-// HTTPParseResult.swift
+// RawHTTPResponse.swift
 //
 // The MIT License (MIT)
 //
@@ -22,21 +22,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-public enum HTTPParseResult<T> {
-    case Success(T)
-    case Failure(ErrorType)
-
-    public func success(handleSuccess: T -> Void) {
-        switch self {
-        case .Success(let value): handleSuccess(value)
-        default: break
-        }
-    }
-
-    public func failure(handleFailure: ErrorType -> Void) {
-        switch self {
-        case .Failure(let error): handleFailure(error)
-        default: break
-        }
-    }
+public struct RawHTTPResponse {
+    public var statusCode: Int = 0
+    public var reasonPhrase: String = ""
+    public var version: String = ""
+    public var headers: [String: String] = [:]
+    public var body: [Int8] = []
 }

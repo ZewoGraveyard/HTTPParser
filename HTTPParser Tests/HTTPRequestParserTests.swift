@@ -1,4 +1,4 @@
-// HTTPParserTests.swift
+// HTTPRequestParserTests.swift
 //
 // The MIT License (MIT)
 //
@@ -26,28 +26,28 @@ import XCTest
 import HTTPParser
 
 extension String {
-    func sendToHandler(handler: (UnsafePointer<Int8>, Int) -> Void) {
-        self.withCString { stringPointer in
-            handler(stringPointer, self.utf8.count)
-        }
-    }
-
-    func mapToBody() -> [Int8] {
-        return ([] + self.utf8).map { Int8($0) }
+    var bytes: [Int8] {
+        return self.utf8.map { Int8($0) }
     }
 }
 
-class HTTPParserTests: XCTestCase {
+let performanceTestData = ("POST / HTTP/1.1\r\n" +
+                           "Content-Length: 4\r\n" +
+                           "\r\n" +
+                           "Zewo").bytes
+
+class HTTPRequestParserTests: XCTestCase {
 
     func testShortRequest() {
         struct HTTPStreamMock : HTTPStream {
-            private func readData(handler: (UnsafePointer<Int8>, Int) -> Void) throws {
-                let data =
-                "GET / HTTP/1.1\r\n" +
-                "\r\n"
-                data.sendToHandler(handler)
+            let data = ("GET / HTTP/1.1\r\n" +
+                        "\r\n").bytes
+
+            func readData(read: [Int8] -> Void) throws {
+                read(data)
             }
         }
+
         parseRequest(stream: HTTPStreamMock()) { result in
             result.success { request in
                 XCTAssert(request.method == "GET")
@@ -64,13 +64,19 @@ class HTTPParserTests: XCTestCase {
 
     func testDiscontinuousShortRequest() {
         struct HTTPStreamMock : HTTPStream {
-            private func readData(handler: (UnsafePointer<Int8>, Int) -> Void) throws {
-                "GET / HT".sendToHandler(handler)
-                "TP/1.".sendToHandler(handler)
-                "1\r\n".sendToHandler(handler)
-                "\r\n".sendToHandler(handler)
+            let data1 = "GET / HT".bytes
+            let data2 = "TP/1.".bytes
+            let data3 = "1\r\n".bytes
+            let data4 = "\r\n".bytes
+
+            func readData(read: [Int8] -> Void) throws {
+                read(data1)
+                read(data2)
+                read(data3)
+                read(data4)
             }
         }
+        
         parseRequest(stream: HTTPStreamMock()) { result in
             result.success { request in
                 XCTAssert(request.method == "GET")
@@ -87,14 +93,15 @@ class HTTPParserTests: XCTestCase {
 
     func testMediumRequest() {
         struct HTTPStreamMock : HTTPStream {
-            private func readData(handler: (UnsafePointer<Int8>, Int) -> Void) throws {
-                let data =
-                "GET / HTTP/1.1\r\n" +
-                "Host: zewo.co\r\n" +
-                "\r\n"
-                data.sendToHandler(handler)
+            let data = ("GET / HTTP/1.1\r\n" +
+                        "Host: zewo.co\r\n" +
+                        "\r\n").bytes
+
+            func readData(read: [Int8] -> Void) throws {
+                read(data)
             }
         }
+
         parseRequest(stream: HTTPStreamMock()) { result in
             result.success { request in
                 XCTAssert(request.method == "GET")
@@ -111,16 +118,25 @@ class HTTPParserTests: XCTestCase {
 
     func testDiscontinuousMediumRequest() {
         struct HTTPStreamMock : HTTPStream {
-            private func readData(handler: (UnsafePointer<Int8>, Int) -> Void) throws {
-                "GET / HTT".sendToHandler(handler)
-                "P/1.1\r\n".sendToHandler(handler)
-                "Hos".sendToHandler(handler)
-                "t: zewo.c".sendToHandler(handler)
-                "o\r\n".sendToHandler(handler)
-                "\r".sendToHandler(handler)
-                "\n".sendToHandler(handler)
+            let data1 = "GET / HTT".bytes
+            let data2 = "P/1.1\r\n".bytes
+            let data3 = "Hos".bytes
+            let data4 = "t: zewo.c".bytes
+            let data5 = "o\r\n".bytes
+            let data6 = "\r".bytes
+            let data7 = "\n".bytes
+
+            func readData(read: [Int8] -> Void) throws {
+                read(data1)
+                read(data2)
+                read(data3)
+                read(data4)
+                read(data5)
+                read(data6)
+                read(data7)
             }
         }
+
         parseRequest(stream: HTTPStreamMock()) { result in
             result.success { request in
                 XCTAssert(request.method == "GET")
@@ -137,22 +153,22 @@ class HTTPParserTests: XCTestCase {
 
     func testCompleteRequest() {
         struct HTTPStreamMock : HTTPStream {
-            private func readData(handler: (UnsafePointer<Int8>, Int) -> Void) throws {
-                let data =
-                "POST / HTTP/1.1\r\n" +
-                "Content-Length: 4\r\n" +
-                "\r\n" +
-                "Zewo"
-                data.sendToHandler(handler)
+            let data = ("POST / HTTP/1.1\r\n" +
+                        "Content-Length: 4\r\n" +
+                        "\r\n" +
+                        "Zewo").bytes
+            func readData(read: [Int8] -> Void) throws {
+                read(data)
             }
         }
+
         parseRequest(stream: HTTPStreamMock()) { result in
             result.success { request in
                 XCTAssert(request.method == "POST")
                 XCTAssert(request.uri == "/")
                 XCTAssert(request.version == "HTTP/1.1")
                 XCTAssert(request.headers["Content-Length"] == "4")
-                XCTAssert(request.body == "Zewo".mapToBody())
+                XCTAssert(request.body == "Zewo".bytes)
             }
             result.failure { error in
                 XCTAssert(false)
@@ -162,29 +178,67 @@ class HTTPParserTests: XCTestCase {
     
     func testManyRequests() {
         struct HTTPStreamMock : HTTPStream {
-            private func readData(handler: (UnsafePointer<Int8>, Int) -> Void) throws {
-                let data =
-                "POST / HTTP/1.1\r\n" +
-                "Content-Length: 4\r\n" +
-                "\r\n" +
-                "Zewo"
-                data.sendToHandler(handler)
+            func readData(read: [Int8] -> Void) throws {
+                read(performanceTestData)
             }
         }
+
+        let streamMock = HTTPStreamMock()
+
         self.measureBlock {
             for _ in 0 ..< 10000 {
-                parseRequest(stream: HTTPStreamMock()) { result in
-                    result.success { request in
-                        XCTAssert(request.method == "POST")
-                        XCTAssert(request.uri == "/")
-                        XCTAssert(request.version == "HTTP/1.1")
-                        XCTAssert(request.headers["Content-Length"] == "4")
-                        XCTAssert(request.body == "Zewo".mapToBody())
-                    }
+                parseRequest(stream: streamMock) { result in
+                    result.success { _ in }
                     result.failure { error in
                         XCTAssert(false)
                     }
                 }
+            }
+        }
+    }
+
+    func testMultipleShortRequestsInTheSameStream() {
+        struct HTTPStreamMock : HTTPStream {
+            let data1 = "GET / HT".bytes
+            let data2 = "TP/1.".bytes
+            let data3 = "1\r\n".bytes
+            let data4 = "\r\n".bytes
+
+            let data5 = "HEAD /profile HT".bytes
+            let data6 = "TP/1.".bytes
+            let data7 = "1\r\n".bytes
+            let data8 = "\r\n".bytes
+
+            func readData(read: [Int8] -> Void) throws {
+                read(data1)
+                read(data2)
+                read(data3)
+                read(data4)
+                read(data5)
+                read(data6)
+                read(data7)
+                read(data8)
+            }
+        }
+
+        var requestCount = 0
+
+        parseRequest(stream: HTTPStreamMock()) { result in
+            result.success { request in
+                ++requestCount
+                if requestCount == 1 {
+                    XCTAssert(request.method == "GET")
+                    XCTAssert(request.uri == "/")
+                } else {
+                    XCTAssert(request.method == "HEAD")
+                    XCTAssert(request.uri == "/profile")
+                }
+                XCTAssert(request.version == "HTTP/1.1")
+                XCTAssert(request.headers == [:])
+                XCTAssert(request.body == [])
+            }
+            result.failure { error in
+                XCTAssert(false)
             }
         }
     }
