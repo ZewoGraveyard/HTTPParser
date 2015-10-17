@@ -33,6 +33,21 @@ extension String {
 
 class HTTPRequestParserTests: XCTestCase {
 
+    func testMalformedRequest() {
+        let parser = HTTPRequestParser { result in
+            result.success { request in
+                XCTAssert(false)
+            }
+            result.failure { error in
+                XCTAssert(true)
+            }
+        }
+
+        let data = ("howdy ho!").bytes
+
+        parser.parse(data)
+    }
+
     func testShortRequest() {
         let parser = HTTPRequestParser { result in
             result.success { request in
@@ -193,21 +208,34 @@ class HTTPRequestParserTests: XCTestCase {
     }
 
     func testManyRequests() {
-        let performanceTestData = ("POST / HTTP/1.1\r\n" +
-            "Content-Length: 4\r\n" +
-            "\r\n" +
-            "Zewo").bytes
+        let data = ("POST / HTTP/1.1\r\n" +
+                    "Content-Length: 4\r\n" +
+                    "\r\n" +
+                    "Zewo").bytes
 
         self.measureBlock {
             for _ in 0 ..< 10000 {
                 let parser = HTTPRequestParser { result in
-                    result.success { _ in }
-                    result.failure { error in
+                    result.failure { _ in
                         XCTAssert(false)
                     }
                 }
-                parser.parse(performanceTestData)
+                parser.parse(data)
             }
         }
+    }
+
+    func testUpgradeRequests() {
+        let parser = HTTPRequestParser { result in
+            result.failure { _ in
+                XCTAssert(false)
+            }
+        }
+
+        let data = ("GET / HTTP/1.1\r\n" +
+                    "Upgrade: WebSocket\r\n" +
+                    "\r\n").bytes
+
+        parser.parse(data)
     }
 }

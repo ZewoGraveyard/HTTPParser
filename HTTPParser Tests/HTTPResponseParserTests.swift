@@ -27,6 +27,21 @@ import HTTPParser
 
 class HTTPResponseParserTests: XCTestCase {
 
+    func testMalformedRequest() {
+        let parser = HTTPResponseParser { result in
+            result.success { request in
+                XCTAssert(false)
+            }
+            result.failure { error in
+                XCTAssert(true)
+            }
+        }
+
+        let data = ("howdy ho!").bytes
+
+        parser.parse(data)
+    }
+
     func testShortResponse() {
         let parser = HTTPResponseParser { result in
             result.success { response in
@@ -167,5 +182,37 @@ class HTTPResponseParserTests: XCTestCase {
         parser.parse(data2)
         parser.parse(data3)
         parser.parse(data4)
+    }
+
+    func testManyResponses() {
+        let data = ("HTTP/1.1 204 No Content\r\n" +
+                    "Content-Length: 4\r\n" +
+                    "\r\n" +
+                    "Zewo").bytes
+
+        self.measureBlock {
+            for _ in 0 ..< 10000 {
+                let parser = HTTPResponseParser { result in
+                    result.failure { _ in
+                        XCTAssert(false)
+                    }
+                }
+                parser.parse(data)
+            }
+        }
+    }
+
+    func testUpgradeResponse() {
+        let parser = HTTPResponseParser { result in
+            result.failure { _ in
+                XCTAssert(false)
+            }
+        }
+
+        let data = ("HTTP/1.1 204 No Content\r\n" +
+                    "Upgrade: WebSocket\r\n" +
+                    "\r\n").bytes
+
+        parser.parse(data)
     }
 }
