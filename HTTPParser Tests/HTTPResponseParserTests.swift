@@ -32,12 +32,13 @@ class HTTPResponseParserTests: XCTestCase {
             let data = ("HTTP/1.1 204 No Content\r\n" +
                         "\r\n").bytes
 
-            func readData(read: [Int8] -> Void) throws {
+            func readData(read: [Int8] -> Void, close: Void -> Void) throws {
                 read(data)
+                close()
             }
         }
         
-        parseResponse(stream: HTTPStreamMock()) { result in
+        HTTPResponseParser.parse(HTTPStreamMock()) { result in
             result.success { response in
                 XCTAssert(response.statusCode == 204)
                 XCTAssert(response.reasonPhrase == "No Content")
@@ -60,17 +61,18 @@ class HTTPResponseParserTests: XCTestCase {
             let data5 = "\n".bytes
             let data6 = "\r\n".bytes
 
-            func readData(read: [Int8] -> Void) throws {
+            func readData(read: [Int8] -> Void, close: Void -> Void) throws {
                 read(data1)
                 read(data2)
                 read(data3)
                 read(data4)
                 read(data5)
                 read(data6)
+                close()
             }
         }
 
-        parseResponse(stream: HTTPStreamMock()) { result in
+        HTTPResponseParser.parse(HTTPStreamMock()) { result in
             result.success { response in
                 XCTAssert(response.statusCode == 204)
                 XCTAssert(response.reasonPhrase == "No Content")
@@ -90,12 +92,13 @@ class HTTPResponseParserTests: XCTestCase {
                         "Server: Zewo/0.1\r\n" +
                         "\r\n").bytes
 
-            func readData(read: [Int8] -> Void) throws {
+            func readData(read: [Int8] -> Void, close: Void -> Void) throws {
                 read(data)
+                close()
             }
         }
 
-        parseResponse(stream: HTTPStreamMock()) { result in
+        HTTPResponseParser.parse(HTTPStreamMock()) { result in
             result.success { response in
                 XCTAssert(response.statusCode == 204)
                 XCTAssert(response.reasonPhrase == "No Content")
@@ -116,15 +119,16 @@ class HTTPResponseParserTests: XCTestCase {
             let data3 = "wo/0.1\r\n\r".bytes
             let data4 = "\n".bytes
 
-            func readData(read: [Int8] -> Void) throws {
+            func readData(read: [Int8] -> Void, close: Void -> Void) throws {
                 read(data1)
                 read(data2)
                 read(data3)
                 read(data4)
+                close()
             }
         }
 
-        parseResponse(stream: HTTPStreamMock()) { result in
+        HTTPResponseParser.parse(HTTPStreamMock()) { result in
             result.success { response in
                 XCTAssert(response.statusCode == 204)
                 XCTAssert(response.reasonPhrase == "No Content")
@@ -145,12 +149,13 @@ class HTTPResponseParserTests: XCTestCase {
                         "\r\n" +
                         "Zewo").bytes
 
-            func readData(read: [Int8] -> Void) throws {
+            func readData(read: [Int8] -> Void, close: Void -> Void) throws {
                 read(data)
+                close()
             }
         }
 
-        parseResponse(stream: HTTPStreamMock()) { result in
+        HTTPResponseParser.parse(HTTPStreamMock()) { result in
             result.success { response in
                 print(response)
                 XCTAssert(response.statusCode == 204)
@@ -172,15 +177,16 @@ class HTTPResponseParserTests: XCTestCase {
             let data3 = "ontent\r\nContent-".bytes
             let data4 = "Length: 4\r\n\r\nZewo".bytes
 
-            func readData(read: [Int8] -> Void) throws {
+            func readData(read: [Int8] -> Void, close: Void -> Void) throws {
                 read(data1)
                 read(data2)
                 read(data3)
                 read(data4)
+                close()
             }
         }
 
-        parseResponse(stream: HTTPStreamMock()) { result in
+        HTTPResponseParser.parse(HTTPStreamMock()) { result in
             result.success { response in
                 print(response)
                 XCTAssert(response.statusCode == 204)

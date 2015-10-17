@@ -24,41 +24,53 @@
 
 import http_parser
 
-public func parseResponse(stream stream: HTTPStream, completion: HTTPParseResult<RawHTTPResponse> -> Void) {
-    var parser = http_parser()
-    http_parser_init(&parser, HTTP_RESPONSE)
+public struct HTTPResponseParser {
+    static var responseSettings: http_parser_settings = {
+        var settings = http_parser_settings()
+        http_parser_settings_init(&settings)
 
-    var settings: http_parser_settings = http_parser_settings()
-    http_parser_settings_init(&settings)
+        settings.on_status           = onResponseStatus
+        settings.on_header_field     = onResponseHeaderField
+        settings.on_header_value     = onResponseHeaderValue
+        settings.on_headers_complete = onResponseHeadersComplete
+        settings.on_body             = onResponseBody
+        settings.on_message_complete = onResponseMessageComplete
 
-    settings.on_message_begin    = onResponseMessageBegin
-    settings.on_status           = onResponseStatus
-    settings.on_header_field     = onResponseHeaderField
-    settings.on_header_value     = onResponseHeaderValue
-    settings.on_headers_complete = onResponseHeadersComplete
-    settings.on_body             = onResponseBody
-    settings.on_message_complete = onResponseMessageComplete
+        return settings
+    }()
 
-    let completionContext = UnsafeMutablePointer<HTTPResponseParserCompletionContext>.alloc(1)
-    completionContext.initialize(HTTPResponseParserCompletionContext(completion: completion))
-    parser.data = UnsafeMutablePointer<Void>(completionContext)
+    public static func parse(stream: HTTPStream, completion: HTTPParseResult<RawHTTPResponse> -> Void) {
+        var parser = http_parser()
+        http_parser_init(&parser, HTTP_RESPONSE)
 
-    do {
-        try stream.readData { (var buffer) in
-            let bytesParsed = http_parser_execute(&parser, &settings, &buffer, buffer.count)
+        let context = UnsafeMutablePointer<HTTPResponseParserContext>.alloc(1)
+        context.initialize(HTTPResponseParserContext(completion: completion))
+        parser.data = UnsafeMutablePointer<Void>(context)
 
-            if parser.upgrade == 1 {
-                let error = HTTPParseError(description: "Upgrade not supported")
-                completion(HTTPParseResult.Failure(error))
+        do {
+            let read = { (var buffer: [Int8]) in
+                let bytesParsed = http_parser_execute(&parser, &responseSettings, &buffer, buffer.count)
+
+                if parser.upgrade == 1 {
+                    let error = HTTPParseError(description: "Upgrade not supported")
+                    completion(HTTPParseResult.Failure(error))
+                }
+
+                if bytesParsed != buffer.count {
+                    let errorString = http_errno_name(http_errno(parser.http_errno))
+                    let error = HTTPParseError(description: String.fromCString(errorString)!)
+                    completion(HTTPParseResult.Failure(error))
+                }
             }
 
-            if bytesParsed != buffer.count {
-                let errorString = http_errno_name(http_errno(parser.http_errno))
-                let error = HTTPParseError(description: String.fromCString(errorString)!)
-                completion(HTTPParseResult.Failure(error))
+            let close = {
+                context.destroy()
+                context.dealloc(1)
             }
+            
+            try stream.readData(read, close: close)
+        } catch {
+            completion(HTTPParseResult.Failure(error))
         }
-    } catch {
-        completion(HTTPParseResult.Failure(error))
     }
 }

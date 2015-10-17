@@ -44,8 +44,9 @@ var request = ("POST / HTTP/1.1\r\n" +
                "Zewo").bytes
 
 final class Stream : HTTPStream {
-    func readData(read: [Int8] -> Void) throws {
+    func readData(read: [Int8] -> Void, close: Void -> Void) throws {
         read(request)
+        close()
     }
 }
 
@@ -53,7 +54,7 @@ let numberOfRequests = 1000000
 let stream = Stream()
 let startTime = now()
 for _ in 0 ..< numberOfRequests {
-    parseRequest(stream: stream) { result in
+    HTTPRequestParser.parse(stream) { result in
         result.success { _ in }
         result.failure { error in fatalError("\(error)") }
     }

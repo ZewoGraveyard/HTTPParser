@@ -24,14 +24,6 @@
 
 import http_parser
 
-final class HTTPResponseParserCompletionContext {
-    var completion: HTTPParseResult<RawHTTPResponse> -> Void
-
-    init(completion: HTTPParseResult<RawHTTPResponse> -> Void) {
-        self.completion = completion
-    }
-}
-
 final class HTTPResponseParserContext {
     var response = RawHTTPResponse()
     var currentHeaderField = ""
@@ -40,16 +32,6 @@ final class HTTPResponseParserContext {
     init(completion: HTTPParseResult<RawHTTPResponse> -> Void) {
         self.completion = completion
     }
-}
-
-func onResponseMessageBegin(parser: UnsafeMutablePointer<http_parser>) -> Int32 {
-    let completionContext = UnsafeMutablePointer<HTTPResponseParserCompletionContext>(parser.memory.data)
-
-    let context = UnsafeMutablePointer<HTTPResponseParserContext>.alloc(1)
-    context.initialize(HTTPResponseParserContext(completion: completionContext.memory.completion))
-    parser.memory.data = UnsafeMutablePointer<Void>(context)
-
-    return 0
 }
 
 func onResponseStatus(parser: UnsafeMutablePointer<http_parser>, data: UnsafePointer<Int8>, length: Int) -> Int32 {
@@ -113,13 +95,6 @@ func onResponseMessageComplete(parser: UnsafeMutablePointer<http_parser>) -> Int
 
     let result = HTTPParseResult.Success(context.memory.response)
     context.memory.completion(result)
-
-    let completionContext = UnsafeMutablePointer<HTTPResponseParserCompletionContext>.alloc(1)
-    completionContext.initialize(HTTPResponseParserCompletionContext(completion: context.memory.completion))
-    parser.memory.data = UnsafeMutablePointer<Void>(completionContext)
-
-    context.destroy()
-    context.dealloc(1)
 
     return 0
 }

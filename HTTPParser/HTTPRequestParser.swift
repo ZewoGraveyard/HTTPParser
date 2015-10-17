@@ -24,41 +24,53 @@
 
 import http_parser
 
-public func parseRequest(stream stream: HTTPStream, completion: HTTPParseResult<RawHTTPRequest> -> Void) {
-    var parser = http_parser()
-    http_parser_init(&parser, HTTP_REQUEST)
+public struct HTTPRequestParser {
+    static var requestSettings: http_parser_settings = {
+        var settings = http_parser_settings()
+        http_parser_settings_init(&settings)
 
-    var settings: http_parser_settings = http_parser_settings()
-    http_parser_settings_init(&settings)
+        settings.on_url              = onRequestURL
+        settings.on_header_field     = onRequestHeaderField
+        settings.on_header_value     = onRequestHeaderValue
+        settings.on_headers_complete = onRequestHeadersComplete
+        settings.on_body             = onRequestBody
+        settings.on_message_complete = onRequestMessageComplete
+        
+        return settings
+    }()
 
-    settings.on_message_begin    = onRequestMessageBegin
-    settings.on_url              = onRequestURL
-    settings.on_header_field     = onRequestHeaderField
-    settings.on_header_value     = onRequestHeaderValue
-    settings.on_headers_complete = onRequestHeadersComplete
-    settings.on_body             = onRequestBody
-    settings.on_message_complete = onRequestMessageComplete
+    public static func parse(stream: HTTPStream, completion: HTTPParseResult<RawHTTPRequest> -> Void) {
+        var parser = http_parser()
+        http_parser_init(&parser, HTTP_REQUEST)
 
-    let completionContext = UnsafeMutablePointer<HTTPRequestParserCompletionContext>.alloc(1)
-    completionContext.initialize(HTTPRequestParserCompletionContext(completion: completion))
-    parser.data = UnsafeMutablePointer<Void>(completionContext)
+        let context = UnsafeMutablePointer<HTTPRequestParserContext>.alloc(1)
+        context.initialize(HTTPRequestParserContext(completion: completion))
+        parser.data = UnsafeMutablePointer<Void>(context)
 
-    do {
-        try stream.readData { (var buffer) in
-            let bytesParsed = http_parser_execute(&parser, &settings, &buffer, buffer.count)
+        do {
+            let read = { (var buffer: [Int8]) in
+                let bytesParsed = http_parser_execute(&parser, &requestSettings, &buffer, buffer.count)
 
-            if parser.upgrade == 1 {
-                let error = HTTPParseError(description: "Upgrade not supported")
-                completion(HTTPParseResult.Failure(error))
+                if parser.upgrade == 1 {
+                    let error = HTTPParseError(description: "Upgrade not supported")
+                    completion(HTTPParseResult.Failure(error))
+                }
+
+                if bytesParsed != buffer.count {
+                    let errorString = http_errno_name(http_errno(parser.http_errno))
+                    let error = HTTPParseError(description: String.fromCString(errorString)!)
+                    completion(HTTPParseResult.Failure(error))
+                }
             }
 
-            if bytesParsed != buffer.count {
-                let errorString = http_errno_name(http_errno(parser.http_errno))
-                let error = HTTPParseError(description: String.fromCString(errorString)!)
-                completion(HTTPParseResult.Failure(error))
+            let close = {
+                context.destroy()
+                context.dealloc(1)
             }
+
+            try stream.readData(read, close: close)
+        } catch {
+            completion(HTTPParseResult.Failure(error))
         }
-    } catch {
-        completion(HTTPParseResult.Failure(error))
     }
 }

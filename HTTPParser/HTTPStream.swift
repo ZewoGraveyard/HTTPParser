@@ -23,5 +23,5 @@
 // SOFTWARE.
 
 public protocol HTTPStream {
-    func readData(read: [Int8] -> Void) throws
+    func readData(read: [Int8] -> Void, close: Void -> Void) throws
 }

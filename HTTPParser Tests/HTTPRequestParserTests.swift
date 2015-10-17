@@ -43,12 +43,13 @@ class HTTPRequestParserTests: XCTestCase {
             let data = ("GET / HTTP/1.1\r\n" +
                         "\r\n").bytes
 
-            func readData(read: [Int8] -> Void) throws {
+            func readData(read: [Int8] -> Void, close: Void -> Void) throws {
                 read(data)
+                close()
             }
         }
 
-        parseRequest(stream: HTTPStreamMock()) { result in
+        HTTPRequestParser.parse(HTTPStreamMock()) { result in
             result.success { request in
                 XCTAssert(request.method == "GET")
                 XCTAssert(request.uri == "/")
@@ -69,15 +70,16 @@ class HTTPRequestParserTests: XCTestCase {
             let data3 = "1\r\n".bytes
             let data4 = "\r\n".bytes
 
-            func readData(read: [Int8] -> Void) throws {
+            func readData(read: [Int8] -> Void, close: Void -> Void) throws {
                 read(data1)
                 read(data2)
                 read(data3)
                 read(data4)
+                close()
             }
         }
         
-        parseRequest(stream: HTTPStreamMock()) { result in
+        HTTPRequestParser.parse(HTTPStreamMock()) { result in
             result.success { request in
                 XCTAssert(request.method == "GET")
                 XCTAssert(request.uri == "/")
@@ -97,12 +99,13 @@ class HTTPRequestParserTests: XCTestCase {
                         "Host: zewo.co\r\n" +
                         "\r\n").bytes
 
-            func readData(read: [Int8] -> Void) throws {
+            func readData(read: [Int8] -> Void, close: Void -> Void) throws {
                 read(data)
+                close()
             }
         }
 
-        parseRequest(stream: HTTPStreamMock()) { result in
+        HTTPRequestParser.parse(HTTPStreamMock()) { result in
             result.success { request in
                 XCTAssert(request.method == "GET")
                 XCTAssert(request.uri == "/")
@@ -126,7 +129,7 @@ class HTTPRequestParserTests: XCTestCase {
             let data6 = "\r".bytes
             let data7 = "\n".bytes
 
-            func readData(read: [Int8] -> Void) throws {
+            func readData(read: [Int8] -> Void, close: Void -> Void) throws {
                 read(data1)
                 read(data2)
                 read(data3)
@@ -134,10 +137,11 @@ class HTTPRequestParserTests: XCTestCase {
                 read(data5)
                 read(data6)
                 read(data7)
+                close()
             }
         }
 
-        parseRequest(stream: HTTPStreamMock()) { result in
+        HTTPRequestParser.parse(HTTPStreamMock()) { result in
             result.success { request in
                 XCTAssert(request.method == "GET")
                 XCTAssert(request.uri == "/")
@@ -157,12 +161,13 @@ class HTTPRequestParserTests: XCTestCase {
                         "Content-Length: 4\r\n" +
                         "\r\n" +
                         "Zewo").bytes
-            func readData(read: [Int8] -> Void) throws {
+            func readData(read: [Int8] -> Void, close: Void -> Void) throws {
                 read(data)
+                close()
             }
         }
 
-        parseRequest(stream: HTTPStreamMock()) { result in
+        HTTPRequestParser.parse(HTTPStreamMock()) { result in
             result.success { request in
                 XCTAssert(request.method == "POST")
                 XCTAssert(request.uri == "/")
@@ -178,8 +183,9 @@ class HTTPRequestParserTests: XCTestCase {
     
     func testManyRequests() {
         struct HTTPStreamMock : HTTPStream {
-            func readData(read: [Int8] -> Void) throws {
+            func readData(read: [Int8] -> Void, close: Void -> Void) throws {
                 read(performanceTestData)
+                close()
             }
         }
 
@@ -187,7 +193,7 @@ class HTTPRequestParserTests: XCTestCase {
 
         self.measureBlock {
             for _ in 0 ..< 10000 {
-                parseRequest(stream: streamMock) { result in
+                HTTPRequestParser.parse(streamMock) { result in
                     result.success { _ in }
                     result.failure { error in
                         XCTAssert(false)
@@ -209,7 +215,7 @@ class HTTPRequestParserTests: XCTestCase {
             let data7 = "1\r\n".bytes
             let data8 = "\r\n".bytes
 
-            func readData(read: [Int8] -> Void) throws {
+            func readData(read: [Int8] -> Void, close: Void -> Void) throws {
                 read(data1)
                 read(data2)
                 read(data3)
@@ -218,12 +224,13 @@ class HTTPRequestParserTests: XCTestCase {
                 read(data6)
                 read(data7)
                 read(data8)
+                close()
             }
         }
 
         var requestCount = 0
 
-        parseRequest(stream: HTTPStreamMock()) { result in
+        HTTPRequestParser.parse(HTTPStreamMock()) { result in
             result.success { request in
                 ++requestCount
                 if requestCount == 1 {

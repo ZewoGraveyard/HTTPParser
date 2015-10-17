@@ -22,8 +22,8 @@ HTTPParser
 
 ##Usage
 
-`parseRequest`
---------------
+`HTTPRequestParser`
+-------------------
 
 ```swift
 import HTTPParser
@@ -34,17 +34,18 @@ extension String {
     }
 }
 
-struct FakeHTTPStream : HTTPStream {
-    func readData(read: [Int8] -> Void) throws {
+struct Stream : HTTPStream {
+    func readData(read: [Int8] -> Void, close: Void -> Void) throws {
         // Here you'll probably get the real data from a socket, right?
         let data = "GET / HTTP/1.1\r\n\r\n".bytes
         read(data)
+        close()
     }
 }
 
-HTTPParser.parseRequest(stream: FakeHTTPStream()) { result in
+HTTPRequestParser.parse(Stream()) { result in
     result.success { request in
-        // here's your parsed request
+        // here's your parsed request (RawHTTPRequest)
     }
     result.failure { error in
         // something bad happened :(
@@ -52,8 +53,21 @@ HTTPParser.parseRequest(stream: FakeHTTPStream()) { result in
 }
 ```
 
-`parseResponse`
---------------
+`RawHTTPRequest `
+----------------
+
+```swift
+struct RawHTTPRequest {
+    var method: String
+    var uri: String
+    var version: String
+    var headers: [String: String]
+    var body: [Int8]
+}
+```
+
+`HTTPResponseParser`
+-------------------
 
 ```swift
 import HTTPParser
@@ -64,17 +78,18 @@ extension String {
     }
 }
 
-struct FakeHTTPStream : HTTPStream {
-    func readData(read: [Int8] -> Void) throws {
+struct Stream : HTTPStream {
+    func readData(read: [Int8] -> Void, close: Void -> Void) throws {
         // Here you'll probably get the real data from a socket, right?
         let data = "HTTP/1.1 204 No Content\r\n\r\n".bytes
         read(data)
+        close()
     }
 }
 
-HTTPParser.parseResponse(stream: FakeHTTPStream()) { result in
+HTTPResponseParser.parse(Stream()) { result in
     result.success { response in
-        // here's your parsed response
+        // here's your parsed response (RawHTTPResponse)
     }
     result.failure { error in
         // something bad happened :(
@@ -82,12 +97,26 @@ HTTPParser.parseResponse(stream: FakeHTTPStream()) { result in
 }
 ```
 
-`readData`
-----------
+`RawHTTPResponse `
+------------------
 
 ```swift
-struct FakeHTTPStream : HTTPStream {
-    func readData(read: [Int8] -> Void) throws {
+struct RawHTTPResponse {
+    var statusCode: Int
+    var reasonPhrase: String
+    var version: String
+    var headers: [String: String]
+    var body: [Int8]
+}
+```
+
+
+`HTTPStream `
+-------------
+
+```swift
+struct Stream : HTTPStream {
+    func readData(read: [Int8] -> Void, close: Void -> Void) throws {
         // You can call read as many times as you want
         // passing pieces of the request or response
         // once the parser completes it will spit the result
@@ -106,6 +135,8 @@ struct FakeHTTPStream : HTTPStream {
         read(data1)
         read(data2)
         read(data3)
+        // After you're done, call close() to clean up
+        close()
     }
 }
 ```
