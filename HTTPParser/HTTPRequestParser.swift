@@ -24,53 +24,132 @@
 
 import http_parser
 
-public struct HTTPRequestParser {
-    static var requestSettings: http_parser_settings = {
-        var settings = http_parser_settings()
-        http_parser_settings_init(&settings)
+final class HTTPRequestParserContext {
+    var request = RawHTTPRequest()
+    var currentHeaderField = ""
+    var completion: HTTPParseResult<RawHTTPRequest> -> Void
 
-        settings.on_url              = onRequestURL
-        settings.on_header_field     = onRequestHeaderField
-        settings.on_header_value     = onRequestHeaderValue
-        settings.on_headers_complete = onRequestHeadersComplete
-        settings.on_body             = onRequestBody
-        settings.on_message_complete = onRequestMessageComplete
-        
-        return settings
-    }()
+    init(completion: HTTPParseResult<RawHTTPRequest> -> Void) {
+        self.completion = completion
+    }
+}
 
-    public static func parse(stream: HTTPStream, completion: HTTPParseResult<RawHTTPRequest> -> Void) {
-        var parser = http_parser()
-        http_parser_init(&parser, HTTP_REQUEST)
+var requestSettings: http_parser_settings = {
+    var settings = http_parser_settings()
+    http_parser_settings_init(&settings)
 
-        let context = UnsafeMutablePointer<HTTPRequestParserContext>.alloc(1)
-        context.initialize(HTTPRequestParserContext(completion: completion))
-        parser.data = UnsafeMutablePointer<Void>(context)
+    settings.on_url              = onRequestURL
+    settings.on_header_field     = onRequestHeaderField
+    settings.on_header_value     = onRequestHeaderValue
+    settings.on_headers_complete = onRequestHeadersComplete
+    settings.on_body             = onRequestBody
+    settings.on_message_complete = onRequestMessageComplete
 
-        do {
-            let read = { (var buffer: [Int8]) in
-                let bytesParsed = http_parser_execute(&parser, &requestSettings, &buffer, buffer.count)
+    return settings
+}()
 
-                if parser.upgrade == 1 {
-                    let error = HTTPParseError(description: "Upgrade not supported")
-                    completion(HTTPParseResult.Failure(error))
-                }
+public final class HTTPRequestParser {
+    let completion: HTTPParseResult<RawHTTPRequest> -> Void
+    let context: UnsafeMutablePointer<HTTPRequestParserContext>
+    var parser = http_parser()
 
-                if bytesParsed != buffer.count {
-                    let errorString = http_errno_name(http_errno(parser.http_errno))
-                    let error = HTTPParseError(description: String.fromCString(errorString)!)
-                    completion(HTTPParseResult.Failure(error))
-                }
-            }
+    public init(completion: HTTPParseResult<RawHTTPRequest> -> Void) {
+        self.completion = completion
 
-            let close = {
-                context.destroy()
-                context.dealloc(1)
-            }
+        self.context = UnsafeMutablePointer<HTTPRequestParserContext>.alloc(1)
+        self.context.initialize(HTTPRequestParserContext(completion: completion))
 
-            try stream.readData(read, close: close)
-        } catch {
+        http_parser_init(&self.parser, HTTP_REQUEST)
+        self.parser.data = UnsafeMutablePointer<Void>(context)
+    }
+
+    deinit {
+        context.destroy()
+        context.dealloc(1)
+    }
+
+    public func parse(var data: [Int8]) {
+        let bytesParsed = http_parser_execute(&parser, &requestSettings, &data, data.count)
+
+        if parser.upgrade == 1 {
+            let error = HTTPParseError(description: "Upgrade not supported")
+            completion(HTTPParseResult.Failure(error))
+        }
+
+        if bytesParsed != data.count {
+            let errorString = http_errno_name(http_errno(parser.http_errno))
+            let error = HTTPParseError(description: String.fromCString(errorString)!)
             completion(HTTPParseResult.Failure(error))
         }
     }
+}
+
+func onRequestURL(parser: UnsafeMutablePointer<http_parser>, data: UnsafePointer<Int8>, length: Int) -> Int32 {
+    let context = UnsafeMutablePointer<HTTPRequestParserContext>(parser.memory.data)
+
+    var buffer: [Int8] = [Int8](count: length + 1, repeatedValue: 0)
+    strncpy(&buffer, data, length)
+    context.memory.request.uri = String.fromCString(buffer)!
+
+    return 0
+}
+
+func onRequestHeaderField(parser: UnsafeMutablePointer<http_parser>, data: UnsafePointer<Int8>, length: Int) -> Int32 {
+    let context = UnsafeMutablePointer<HTTPRequestParserContext>(parser.memory.data)
+
+    var buffer: [Int8] = [Int8](count: length + 1, repeatedValue: 0)
+    strncpy(&buffer, data, length)
+    context.memory.currentHeaderField += String.fromCString(buffer)!
+
+    return 0
+}
+
+func onRequestHeaderValue(parser: UnsafeMutablePointer<http_parser>, data: UnsafePointer<Int8>, length: Int) -> Int32 {
+    let context = UnsafeMutablePointer<HTTPRequestParserContext>(parser.memory.data)
+
+    var buffer: [Int8] = [Int8](count: length + 1, repeatedValue: 0)
+    strncpy(&buffer, data, length)
+    let headerField = context.memory.currentHeaderField
+    let previousHeaderValue = context.memory.request.headers[headerField] ?? ""
+    context.memory.request.headers[headerField] = previousHeaderValue + String.fromCString(buffer)!
+
+    return 0
+}
+
+func onRequestHeadersComplete(parser: UnsafeMutablePointer<http_parser>) -> Int32 {
+    let context = UnsafeMutablePointer<HTTPRequestParserContext>(parser.memory.data)
+
+    context.memory.currentHeaderField = ""
+    let method = http_method_str(http_method(parser.memory.method))
+    context.memory.request.method = String.fromCString(method)!
+    let major = parser.memory.http_major
+    let minor = parser.memory.http_minor
+    context.memory.request.version = "HTTP/\(major).\(minor)"
+
+    return 0
+}
+
+func onRequestBody(parser: UnsafeMutablePointer<http_parser>, data: UnsafePointer<Int8>, length: Int) -> Int32 {
+    let context = UnsafeMutablePointer<HTTPRequestParserContext>(parser.memory.data)
+
+    var buffer: [Int8] = [Int8](count: length, repeatedValue: 0)
+    memcpy(&buffer, data, length)
+    context.memory.request.body += buffer
+
+    return 0
+}
+
+func onRequestMessageComplete(parser: UnsafeMutablePointer<http_parser>) -> Int32 {
+    let context = UnsafeMutablePointer<HTTPRequestParserContext>(parser.memory.data)
+
+    let result = HTTPParseResult.Success(context.memory.request)
+    context.memory.completion(result)
+
+    context.memory.request.body = []
+    context.memory.request.headers = [:]
+    context.memory.request.method = ""
+    context.memory.request.uri = ""
+    context.memory.request.version = ""
+    
+    return 0
 }

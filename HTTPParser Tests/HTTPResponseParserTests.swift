@@ -28,17 +28,7 @@ import HTTPParser
 class HTTPResponseParserTests: XCTestCase {
 
     func testShortResponse() {
-        struct HTTPStreamMock : HTTPStream {
-            let data = ("HTTP/1.1 204 No Content\r\n" +
-                        "\r\n").bytes
-
-            func readData(read: [Int8] -> Void, close: Void -> Void) throws {
-                read(data)
-                close()
-            }
-        }
-        
-        HTTPResponseParser.parse(HTTPStreamMock()) { result in
+        let parser = HTTPResponseParser { result in
             result.success { response in
                 XCTAssert(response.statusCode == 204)
                 XCTAssert(response.reasonPhrase == "No Content")
@@ -50,29 +40,15 @@ class HTTPResponseParserTests: XCTestCase {
                 XCTAssert(false)
             }
         }
+
+        let data = ("HTTP/1.1 204 No Content\r\n" +
+                    "\r\n").bytes
+
+        parser.parse(data)
     }
 
     func testDiscontinuousShortResponse() {
-        struct HTTPStreamMock : HTTPStream {
-            let data1 = "HTTP/".bytes
-            let data2 = "1.1 2".bytes
-            let data3 = "04 No Co".bytes
-            let data4 = "ntent\r".bytes
-            let data5 = "\n".bytes
-            let data6 = "\r\n".bytes
-
-            func readData(read: [Int8] -> Void, close: Void -> Void) throws {
-                read(data1)
-                read(data2)
-                read(data3)
-                read(data4)
-                read(data5)
-                read(data6)
-                close()
-            }
-        }
-
-        HTTPResponseParser.parse(HTTPStreamMock()) { result in
+        let parser = HTTPResponseParser { result in
             result.success { response in
                 XCTAssert(response.statusCode == 204)
                 XCTAssert(response.reasonPhrase == "No Content")
@@ -84,21 +60,24 @@ class HTTPResponseParserTests: XCTestCase {
                 XCTAssert(false)
             }
         }
+
+        let data1 = "HTTP/".bytes
+        let data2 = "1.1 2".bytes
+        let data3 = "04 No Co".bytes
+        let data4 = "ntent\r".bytes
+        let data5 = "\n".bytes
+        let data6 = "\r\n".bytes
+
+        parser.parse(data1)
+        parser.parse(data2)
+        parser.parse(data3)
+        parser.parse(data4)
+        parser.parse(data5)
+        parser.parse(data6)
     }
 
     func testMediumResponse() {
-        struct HTTPStreamMock : HTTPStream {
-            let data = ("HTTP/1.1 204 No Content\r\n" +
-                        "Server: Zewo/0.1\r\n" +
-                        "\r\n").bytes
-
-            func readData(read: [Int8] -> Void, close: Void -> Void) throws {
-                read(data)
-                close()
-            }
-        }
-
-        HTTPResponseParser.parse(HTTPStreamMock()) { result in
+        let parser = HTTPResponseParser { result in
             result.success { response in
                 XCTAssert(response.statusCode == 204)
                 XCTAssert(response.reasonPhrase == "No Content")
@@ -110,25 +89,16 @@ class HTTPResponseParserTests: XCTestCase {
                 XCTAssert(false)
             }
         }
+
+        let data = ("HTTP/1.1 204 No Content\r\n" +
+                    "Server: Zewo/0.1\r\n" +
+                    "\r\n").bytes
+
+        parser.parse(data)
     }
 
     func testDiscontinuousMediumResponse() {
-        struct HTTPStreamMock : HTTPStream {
-            let data1 = "HTTP/1.".bytes
-            let data2 = "1 204 No Content\r\nServer: Ze".bytes
-            let data3 = "wo/0.1\r\n\r".bytes
-            let data4 = "\n".bytes
-
-            func readData(read: [Int8] -> Void, close: Void -> Void) throws {
-                read(data1)
-                read(data2)
-                read(data3)
-                read(data4)
-                close()
-            }
-        }
-
-        HTTPResponseParser.parse(HTTPStreamMock()) { result in
+        let parser = HTTPResponseParser { result in
             result.success { response in
                 XCTAssert(response.statusCode == 204)
                 XCTAssert(response.reasonPhrase == "No Content")
@@ -140,24 +110,21 @@ class HTTPResponseParserTests: XCTestCase {
                 XCTAssert(false)
             }
         }
+
+        let data1 = "HTTP/1.".bytes
+        let data2 = "1 204 No Content\r\nServer: Ze".bytes
+        let data3 = "wo/0.1\r\n\r".bytes
+        let data4 = "\n".bytes
+
+        parser.parse(data1)
+        parser.parse(data2)
+        parser.parse(data3)
+        parser.parse(data4)
     }
 
     func testCompleteResponse() {
-        struct HTTPStreamMock : HTTPStream {
-            let data = ("HTTP/1.1 204 No Content\r\n" +
-                        "Content-Length: 4\r\n" +
-                        "\r\n" +
-                        "Zewo").bytes
-
-            func readData(read: [Int8] -> Void, close: Void -> Void) throws {
-                read(data)
-                close()
-            }
-        }
-
-        HTTPResponseParser.parse(HTTPStreamMock()) { result in
+        let parser = HTTPResponseParser { result in
             result.success { response in
-                print(response)
                 XCTAssert(response.statusCode == 204)
                 XCTAssert(response.reasonPhrase == "No Content")
                 XCTAssert(response.version == "HTTP/1.1")
@@ -168,27 +135,18 @@ class HTTPResponseParserTests: XCTestCase {
                 XCTAssert(false)
             }
         }
+
+        let data = ("HTTP/1.1 204 No Content\r\n" +
+                    "Content-Length: 4\r\n" +
+                    "\r\n" +
+                    "Zewo").bytes
+
+        parser.parse(data)
     }
 
     func testDiscontinuousCompleteResponse() {
-        struct HTTPStreamMock : HTTPStream {
-            let data1 = "HTT".bytes
-            let data2 = "P/1.1 204 No C".bytes
-            let data3 = "ontent\r\nContent-".bytes
-            let data4 = "Length: 4\r\n\r\nZewo".bytes
-
-            func readData(read: [Int8] -> Void, close: Void -> Void) throws {
-                read(data1)
-                read(data2)
-                read(data3)
-                read(data4)
-                close()
-            }
-        }
-
-        HTTPResponseParser.parse(HTTPStreamMock()) { result in
+        let parser = HTTPResponseParser { result in
             result.success { response in
-                print(response)
                 XCTAssert(response.statusCode == 204)
                 XCTAssert(response.reasonPhrase == "No Content")
                 XCTAssert(response.version == "HTTP/1.1")
@@ -199,6 +157,15 @@ class HTTPResponseParserTests: XCTestCase {
                 XCTAssert(false)
             }
         }
-    }
 
+        let data1 = "HTT".bytes
+        let data2 = "P/1.1 204 No C".bytes
+        let data3 = "ontent\r\nContent-".bytes
+        let data4 = "Length: 4\r\n\r\nZewo".bytes
+
+        parser.parse(data1)
+        parser.parse(data2)
+        parser.parse(data3)
+        parser.parse(data4)
+    }
 }

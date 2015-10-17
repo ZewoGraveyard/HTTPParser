@@ -34,16 +34,7 @@ extension String {
     }
 }
 
-struct Stream : HTTPStream {
-    func readData(read: [Int8] -> Void, close: Void -> Void) throws {
-        // Here you'll probably get the real data from a socket, right?
-        let data = "GET / HTTP/1.1\r\n\r\n".bytes
-        read(data)
-        close()
-    }
-}
-
-HTTPRequestParser.parse(Stream()) { result in
+let parser = HTTPRequestParser { result in
     result.success { request in
         // here's your parsed request (RawHTTPRequest)
     }
@@ -51,6 +42,8 @@ HTTPRequestParser.parse(Stream()) { result in
         // something bad happened :(
     }
 }
+let data = "GET / HTTP/1.1\r\n\r\n".bytes
+parser.parse(data)
 ```
 
 `RawHTTPRequest `
@@ -78,16 +71,7 @@ extension String {
     }
 }
 
-struct Stream : HTTPStream {
-    func readData(read: [Int8] -> Void, close: Void -> Void) throws {
-        // Here you'll probably get the real data from a socket, right?
-        let data = "HTTP/1.1 204 No Content\r\n\r\n".bytes
-        read(data)
-        close()
-    }
-}
-
-HTTPResponseParser.parse(Stream()) { result in
+let parser = HTTPResponseParser { result in
     result.success { response in
         // here's your parsed response (RawHTTPResponse)
     }
@@ -95,6 +79,8 @@ HTTPResponseParser.parse(Stream()) { result in
         // something bad happened :(
     }
 }
+let data = "HTTP/1.1 204 No Content\r\n\r\n".bytes
+parser.parse(data)
 ```
 
 `RawHTTPResponse `
@@ -111,34 +97,46 @@ struct RawHTTPResponse {
 ```
 
 
-`HTTPStream `
--------------
+Chunked Data and Persistent Streams
+-----------------------------------
 
 ```swift
-struct Stream : HTTPStream {
-    func readData(read: [Int8] -> Void, close: Void -> Void) throws {
-        // You can call read as many times as you want
-        // passing pieces of the request or response
-        // once the parser completes it will spit the result
-        let data1 = "HTTP/1".bytes
-        let data2 = ".1 204 No Con".bytes
-        let data3 = "tent\r\n\r\n").bytes
-        read(data1)
-        read(data2)
-        read(data3)
-        // The parser supports persistent streams (keep-alive)
-        // so you can keep streaming requests or responses
-        // all you want
-        let data4 = "HTTP/1".bytes
-        let data5 = ".1 200 O".bytes
-        let data6 = "K\r\n\r\n").bytes
-        read(data1)
-        read(data2)
-        read(data3)
-        // After you're done, call close() to clean up
-        close()
+import HTTPParser
+
+extension String {
+    var bytes: [Int8] {
+        return self.utf8.map { Int8($0) }
     }
 }
+
+let parser = HTTPResponseParser { result in
+    result.success { response in
+        // here's your parsed response (RawHTTPResponse)
+    }
+    result.failure { error in
+        // something bad happened :(
+    }
+}
+
+// You can call parse as many times as you like
+// passing chunks of the request or response.
+// Once the parser completes it will spit the result
+let data1 = "HTTP/1".bytes
+let data2 = ".1 204 No Con".bytes
+let data3 = "tent\r\n\r\n").bytes
+parser.parse(data1)
+parser.parse(data2)
+parser.parse(data3)
+
+// The parser supports persistent streams (keep-alive)
+// so you can keep streaming requests or responses
+// all you want.
+let data4 = "HTTP/1".bytes
+let data5 = ".1 200 O".bytes
+let data6 = "K\r\n\r\n").bytes
+parser.parse(data1)
+parser.parse(data2)
+parser.parse(data3)
 ```
 
 ## Installation
