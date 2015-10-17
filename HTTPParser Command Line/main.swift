@@ -47,13 +47,12 @@ let numberOfRequests = 1000000
 let startTime = now()
 for _ in 0 ..< numberOfRequests {
     let parser = HTTPRequestParser { result in
-        result.success { _ in }
         result.failure { error in fatalError("\(error)") }
     }
     parser.parse(request)
 }
-let timeElapsed = now() - startTime
+let elapsedTime = now() - startTime
 
-print("Time elapsed: \(timeElapsed) s")
-print("Duration per request: \(timeElapsed/Double(numberOfRequests)) s")
-print("Requests per second: \(1/(timeElapsed/Double(numberOfRequests))) s")
+print("Elapsed time : \(elapsedTime) s")
+print("Request parse duration: \(elapsedTime / Double(numberOfRequests)) s")
+print("Requests per second: \(1/(elapsedTime / Double(numberOfRequests))) req/s")
