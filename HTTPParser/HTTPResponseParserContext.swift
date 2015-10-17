@@ -39,7 +39,8 @@ func onResponseStatus(parser: UnsafeMutablePointer<http_parser>, data: UnsafePoi
 
     var buffer: [Int8] = [Int8](count: length + 1, repeatedValue: 0)
     strncpy(&buffer, data, length)
-    context.memory.response.reasonPhrase = (context.memory.response.reasonPhrase ?? "") + String.fromCString(buffer)!
+    let previousReasonPhrase = context.memory.response.reasonPhrase ?? ""
+    context.memory.response.reasonPhrase = previousReasonPhrase + String.fromCString(buffer)!
 
     return 0
 
@@ -61,8 +62,8 @@ func onResponseHeaderValue(parser: UnsafeMutablePointer<http_parser>, data: Unsa
     var buffer: [Int8] = [Int8](count: length + 1, repeatedValue: 0)
     strncpy(&buffer, data, length)
     let headerField = context.memory.currentHeaderField
-    context.memory.response.headers[headerField] =
-        (context.memory.response.headers[headerField] ?? "") + String.fromCString(buffer)!
+    let previousHeaderValue = context.memory.response.headers[headerField] ?? ""
+    context.memory.response.headers[headerField] = previousHeaderValue + String.fromCString(buffer)!
 
     return 0
 }
@@ -86,6 +87,12 @@ func onResponseBody(parser: UnsafeMutablePointer<http_parser>, data: UnsafePoint
     var buffer: [Int8] = [Int8](count: length, repeatedValue: 0)
     memcpy(&buffer, data, length)
     context.memory.response.body += buffer
+
+    context.memory.response.body = []
+    context.memory.response.headers = [:]
+    context.memory.response.reasonPhrase = ""
+    context.memory.response.statusCode = 0
+    context.memory.response.version = ""
 
     return 0
 }

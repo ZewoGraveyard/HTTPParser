@@ -60,8 +60,8 @@ func onRequestHeaderValue(parser: UnsafeMutablePointer<http_parser>, data: Unsaf
     var buffer: [Int8] = [Int8](count: length + 1, repeatedValue: 0)
     strncpy(&buffer, data, length)
     let headerField = context.memory.currentHeaderField
-    context.memory.request.headers[headerField] =
-        (context.memory.request.headers[headerField] ?? "") + String.fromCString(buffer)!
+    let previousHeaderValue = context.memory.request.headers[headerField] ?? ""
+    context.memory.request.headers[headerField] = previousHeaderValue + String.fromCString(buffer)!
 
     return 0
 }
@@ -94,6 +94,12 @@ func onRequestMessageComplete(parser: UnsafeMutablePointer<http_parser>) -> Int3
 
     let result = HTTPParseResult.Success(context.memory.request)
     context.memory.completion(result)
+
+    context.memory.request.body = []
+    context.memory.request.headers = [:]
+    context.memory.request.method = ""
+    context.memory.request.uri = ""
+    context.memory.request.version = ""
 
     return 0
 }
