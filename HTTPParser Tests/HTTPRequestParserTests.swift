@@ -450,4 +450,16 @@ class HTTPRequestParserTests: XCTestCase {
         XCTAssert(URI.query == "foo=bar&for=baz")
         XCTAssert(URI.fragment == "yeah")
     }
+
+    func testRawURIIPv6WithZone() {
+        let URIString = "http://username:password@[2001:db8:a0b:12f0::1%eth0]:100/foo/bar?foo=bar&for=baz#yeah"
+        let URI = RawURI(string: URIString)
+        XCTAssert(URI.scheme == "http")
+        XCTAssert(URI.userInfo == "username:password")
+        XCTAssert(URI.host == "2001:db8:a0b:12f0::1%eth0")
+        XCTAssert(URI.port == 100)
+        XCTAssert(URI.path == "/foo/bar")
+        XCTAssert(URI.query == "foo=bar&for=baz")
+        XCTAssert(URI.fragment == "yeah")
+    }
 }
