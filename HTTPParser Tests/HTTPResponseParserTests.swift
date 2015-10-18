@@ -140,8 +140,8 @@ class HTTPResponseParserTests: XCTestCase {
     func testCompleteResponse() {
         let parser = HTTPResponseParser { result in
             result.success { response in
-                XCTAssert(response.statusCode == 204)
-                XCTAssert(response.reasonPhrase == "No Content")
+                XCTAssert(response.statusCode == 200)
+                XCTAssert(response.reasonPhrase == "OK")
                 XCTAssert(response.version == "HTTP/1.1")
                 XCTAssert(response.headers["Content-Length"] == "4")
                 XCTAssert(response.body == "Zewo".bytes)
@@ -151,7 +151,7 @@ class HTTPResponseParserTests: XCTestCase {
             }
         }
 
-        let data = ("HTTP/1.1 204 No Content\r\n" +
+        let data = ("HTTP/1.1 200 OK\r\n" +
                     "Content-Length: 4\r\n" +
                     "\r\n" +
                     "Zewo").bytes
@@ -162,8 +162,8 @@ class HTTPResponseParserTests: XCTestCase {
     func testDiscontinuousCompleteResponse() {
         let parser = HTTPResponseParser { result in
             result.success { response in
-                XCTAssert(response.statusCode == 204)
-                XCTAssert(response.reasonPhrase == "No Content")
+                XCTAssert(response.statusCode == 200)
+                XCTAssert(response.reasonPhrase == "OK")
                 XCTAssert(response.version == "HTTP/1.1")
                 XCTAssert(response.headers["Content-Length"] == "4")
                 XCTAssert(response.body == "Zewo".bytes)
@@ -174,8 +174,8 @@ class HTTPResponseParserTests: XCTestCase {
         }
 
         let data1 = "HTT".bytes
-        let data2 = "P/1.1 204 No C".bytes
-        let data3 = "ontent\r\nContent-".bytes
+        let data2 = "P/1.1 200 O".bytes
+        let data3 = "K\r\nContent-".bytes
         let data4 = "Length: 4\r\n\r\nZewo".bytes
 
         parser.parse(data1)
@@ -185,7 +185,7 @@ class HTTPResponseParserTests: XCTestCase {
     }
 
     func testManyResponses() {
-        let data = ("HTTP/1.1 204 No Content\r\n" +
+        let data = ("HTTP/1.1 200 OK\r\n" +
                     "Content-Length: 4\r\n" +
                     "\r\n" +
                     "Zewo").bytes
@@ -215,5 +215,105 @@ class HTTPResponseParserTests: XCTestCase {
                     "\r\n").bytes
 
         parser.parse(data)
+    }
+
+    func testChunkedEncoding() {
+        let parser = HTTPResponseParser { result in
+            result.success { response in
+                XCTAssert(response.statusCode == 200)
+                XCTAssert(response.reasonPhrase == "OK")
+                XCTAssert(response.version == "HTTP/1.1")
+                XCTAssert(response.headers["Transfer-Encoding"] == "chunked")
+                XCTAssert(response.body == "Zewo".bytes)
+            }
+            result.failure { error in
+                XCTAssert(false)
+            }
+        }
+
+        let data = ("HTTP/1.1 200 OK\r\n" +
+                    "Transfer-Encoding: chunked\r\n" +
+                    "\r\n" +
+                    "4\r\n" +
+                    "Zewo\r\n").bytes
+
+        parser.parse(data)
+    }
+
+    func testIncorrectContentLength() {
+        let parser = HTTPResponseParser { result in
+            result.success { response in
+                XCTAssert(false)
+            }
+            result.failure { error in
+                XCTAssert(true)
+            }
+        }
+
+        let data = ("HTTP/1.1 200 OK\r\n" +
+                    "Content-Length: 5\r\n" +
+                    "\r\n" +
+                    "Zewo").bytes
+
+        parser.parse(data)
+    }
+
+    func testIncorrectChunkSize() {
+        let parser = HTTPResponseParser { result in
+            result.success { request in
+                XCTAssert(false)
+            }
+            result.failure { error in
+                XCTAssert(true)
+            }
+        }
+
+        let data = ("HTTP/1.1 200 OK\r\n" +
+                    "Transfer-Encoding: chunked\r\n" +
+                    "\r\n" +
+                    "5\r\n" +
+                    "Zewo\r\n").bytes
+
+        parser.parse(data)
+    }
+
+    func testInvalidChunkSize() {
+        let parser = HTTPResponseParser { result in
+            result.success { request in
+                XCTAssert(false)
+            }
+            result.failure { error in
+                XCTAssert(true)
+            }
+        }
+
+        let data = ("HTTP/1.1 200 OK\r\n" +
+                    "Transfer-Encoding: chunked\r\n" +
+                    "\r\n" +
+                    "x\r\n" +
+                    "Zewo\r\n").bytes
+
+        parser.parse(data)
+    }
+
+    func testEOF() {
+        let parser = HTTPResponseParser { result in
+            result.success { response in
+                XCTAssert(response.statusCode == 200)
+                XCTAssert(response.reasonPhrase == "OK")
+                XCTAssert(response.version == "HTTP/1.1")
+                XCTAssert(response.body == "Zewo".bytes)
+            }
+            result.failure { error in
+                XCTAssert(true)
+            }
+        }
+
+        let data = ("HTTP/1.1 200 OK\r\n" +
+                    "\r\n" +
+                    "Zewo").bytes
+
+        parser.parse(data)
+        parser.eof()
     }
 }

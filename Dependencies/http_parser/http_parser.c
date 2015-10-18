@@ -2442,22 +2442,3 @@ http_parser_parse_url(const char *buf, size_t buflen, int is_connect,
 
   return 0;
 }
-
-void
-http_parser_pause(http_parser *parser, int paused) {
-  /* Users should only be pausing/unpausing a parser that is not in an error
-   * state. In non-debug builds, there's not much that we can do about this
-   * other than ignore it.
-   */
-  if (HTTP_PARSER_ERRNO(parser) == HPE_OK ||
-      HTTP_PARSER_ERRNO(parser) == HPE_PAUSED) {
-    SET_ERRNO((paused) ? HPE_PAUSED : HPE_OK);
-  } else {
-    assert(0 && "Attempting to pause parser in error state");
-  }
-}
-
-int
-http_body_is_final(const struct http_parser *parser) {
-    return parser->state == s_message_done;
-}

@@ -24,7 +24,7 @@
 
 import http_parser
 
-final class HTTPRequestParserContext {
+struct HTTPRequestParserContext {
     var request = RawHTTPRequest()
     var currentHeaderField = ""
     var completion: HTTPParseResult<RawHTTPRequest> -> Void
@@ -77,8 +77,9 @@ public final class HTTPRequestParser {
         }
 
         if bytesParsed != data.count {
-            let errorString = http_errno_name(http_errno(parser.http_errno))
-            let error = HTTPParseError(description: String.fromCString(errorString)!)
+            let errorName = http_errno_name(http_errno(parser.http_errno))
+            let errorDescription = http_errno_description(http_errno(parser.http_errno))
+            let error = HTTPParseError(description: "\(String.fromCString(errorName)!): \(String.fromCString(errorDescription)!)")
             completion(HTTPParseResult.Failure(error))
         }
     }

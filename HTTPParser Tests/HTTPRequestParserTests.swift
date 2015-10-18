@@ -239,4 +239,141 @@ class HTTPRequestParserTests: XCTestCase {
 
         parser.parse(data)
     }
+
+    func testChunkedEncoding() {
+        let parser = HTTPRequestParser { result in
+            result.success { request in
+                XCTAssert(request.method == "GET")
+                XCTAssert(request.uri == "/")
+                XCTAssert(request.version == "HTTP/1.1")
+                XCTAssert(request.headers["Transfer-Encoding"] == "chunked")
+                XCTAssert(request.body == "Zewo".bytes)
+            }
+            result.failure { error in
+                XCTAssert(false)
+            }
+        }
+
+        let data = ("GET / HTTP/1.1\r\n" +
+                    "Transfer-Encoding: chunked\r\n" +
+                    "\r\n" +
+                    "4\r\n" +
+                    "Zewo\r\n").bytes
+
+        parser.parse(data)
+    }
+
+    func testIncorrectContentLength() {
+        let parser = HTTPRequestParser { result in
+            result.success { request in
+                XCTAssert(false)
+            }
+            result.failure { error in
+                XCTAssert(true)
+            }
+        }
+
+        let data = ("POST / HTTP/1.1\r\n" +
+                    "Content-Length: 5\r\n" +
+                    "\r\n" +
+                    "Zewo").bytes
+
+        parser.parse(data)
+    }
+
+    func testIncorrectChunkSize() {
+        let parser = HTTPRequestParser { result in
+            result.success { request in
+                XCTAssert(false)
+            }
+            result.failure { error in
+                XCTAssert(true)
+            }
+        }
+
+        let data = ("GET / HTTP/1.1\r\n" +
+                    "Transfer-Encoding: chunked\r\n" +
+                    "\r\n" +
+                    "5\r\n" +
+                    "Zewo\r\n").bytes
+
+        parser.parse(data)
+    }
+
+    func testInvalidChunkSize() {
+        let parser = HTTPRequestParser { result in
+            result.success { request in
+                XCTAssert(false)
+            }
+            result.failure { error in
+                XCTAssert(true)
+            }
+        }
+
+        let data = ("GET / HTTP/1.1\r\n" +
+                    "Transfer-Encoding: chunked\r\n" +
+                    "\r\n" +
+                    "x\r\n" +
+                    "Zewo\r\n").bytes
+
+        parser.parse(data)
+    }
+
+    func testConnectionKeepAlive() {
+        let parser = HTTPRequestParser { result in
+            result.success { request in
+                XCTAssert(request.method == "GET")
+                XCTAssert(request.uri == "/")
+                XCTAssert(request.version == "HTTP/1.1")
+                XCTAssert(request.headers["Connection"] == "keep-alive")
+            }
+            result.failure { error in
+                XCTAssert(false)
+            }
+        }
+
+        let data = ("GET / HTTP/1.1\r\n" +
+                    "Connection: keep-alive\r\n" +
+                    "\r\n").bytes
+
+        parser.parse(data)
+    }
+
+    func testConnectionClose() {
+        let parser = HTTPRequestParser { result in
+            result.success { request in
+                XCTAssert(request.method == "GET")
+                XCTAssert(request.uri == "/")
+                XCTAssert(request.version == "HTTP/1.1")
+                XCTAssert(request.headers["Connection"] == "close")
+            }
+            result.failure { error in
+                XCTAssert(false)
+            }
+        }
+
+        let data = ("GET / HTTP/1.1\r\n" +
+            "Connection: close\r\n" +
+            "\r\n").bytes
+
+        parser.parse(data)
+    }
+
+    func testRequestHTTP1_0() {
+        let parser = HTTPRequestParser { result in
+            result.success { request in
+                XCTAssert(request.method == "GET")
+                XCTAssert(request.uri == "/")
+                XCTAssert(request.version == "HTTP/1.0")
+            }
+            result.failure { error in
+                XCTAssert(false)
+            }
+        }
+
+        let data = ("GET / HTTP/1.0\r\n" +
+                    "\r\n").bytes
+
+        parser.parse(data)
+    }
 }

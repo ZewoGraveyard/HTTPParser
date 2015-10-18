@@ -24,7 +24,7 @@
 
 import http_parser
 
-final class HTTPResponseParserContext {
+struct HTTPResponseParserContext {
     var response = RawHTTPResponse()
     var currentHeaderField = ""
     var completion: HTTPParseResult<RawHTTPResponse> -> Void
@@ -81,6 +81,10 @@ public final class HTTPResponseParser {
             let error = HTTPParseError(description: String.fromCString(errorString)!)
             completion(HTTPParseResult.Failure(error))
         }
+    }
+
+    public func eof() {
+        parse([])
     }
 }
 

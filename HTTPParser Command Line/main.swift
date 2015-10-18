@@ -53,6 +53,6 @@ for _ in 0 ..< numberOfRequests {
 }
 let elapsedTime = now() - startTime
 
-print("Elapsed time : \(elapsedTime) s")
-print("Request parse duration: \(elapsedTime / Double(numberOfRequests)) s")
-print("Requests per second: \(1/(elapsedTime / Double(numberOfRequests))) req/s")
+print("Elapsed time: \(elapsedTime) s")
+print("Parse duration per request: \(elapsedTime / Double(numberOfRequests)) s")
+print("Requests parsed per second: \(1/(elapsedTime / Double(numberOfRequests))) req/s")

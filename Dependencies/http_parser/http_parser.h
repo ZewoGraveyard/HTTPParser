@@ -279,19 +279,6 @@ struct http_parser_url {
   } field_data[UF_MAX];
 };
 
-
-/* Returns the library version. Bits 16-23 contain the major version number,
- * bits 8-15 the minor version number and bits 0-7 the patch level.
- * Usage example:
- *
- *   unsigned long version = http_parser_version();
- *   unsigned major = (version >> 16) & 255;
- *   unsigned minor = (version >> 8) & 255;
- *   unsigned patch = version & 255;
- *   printf("http_parser v%u.%u.%u\n", major, minor, patch);
- */
-unsigned long http_parser_version(void);
-
 void http_parser_init(http_parser *parser, enum http_parser_type type);
 
 
@@ -306,7 +293,6 @@ size_t http_parser_execute(http_parser *parser,
                            const http_parser_settings *settings,
                            const char *data,
                            size_t len);
-
 
 /* If http_should_keep_alive() in the on_headers_complete or
  * on_message_complete callback returns 0, then this should be
@@ -329,12 +315,6 @@ const char *http_errno_description(enum http_errno err);
 int http_parser_parse_url(const char *buf, size_t buflen,
                           int is_connect,
                           struct http_parser_url *u);
-
-/* Pause or un-pause the parser; a nonzero value pauses */
-void http_parser_pause(http_parser *parser, int paused);
-
-/* Checks if this is the final chunk of the body. */
-int http_body_is_final(const http_parser *parser);
 
 #ifdef __cplusplus
 }
