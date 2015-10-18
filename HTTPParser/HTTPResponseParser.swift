@@ -89,8 +89,7 @@ func onResponseStatus(parser: UnsafeMutablePointer<http_parser>, data: UnsafePoi
 
     var buffer: [Int8] = [Int8](count: length + 1, repeatedValue: 0)
     strncpy(&buffer, data, length)
-    let previousReasonPhrase = context.memory.response.reasonPhrase ?? ""
-    context.memory.response.reasonPhrase = previousReasonPhrase + String.fromCString(buffer)!
+    context.memory.response.reasonPhrase += String.fromCString(buffer)!
 
     return 0
 
