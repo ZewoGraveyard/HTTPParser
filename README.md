@@ -42,6 +42,7 @@ let parser = HTTPRequestParser { result in
         // something bad happened :(
     }
 }
+// Here you'll probably get the real data from a socket, right?
 let data = "GET / HTTP/1.1\r\n\r\n".bytes
 parser.parse(data)
 ```
@@ -79,6 +80,7 @@ let parser = HTTPResponseParser { result in
         // something bad happened :(
     }
 }
+// Here you'll probably get the real data from a socket, right?
 let data = "HTTP/1.1 204 No Content\r\n\r\n".bytes
 parser.parse(data)
 ```
