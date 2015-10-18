@@ -52,7 +52,7 @@ parser.parse(data)
 
 ```swift
 struct RawHTTPRequest {
-    var method: String
+    var method: RawHTTPMethod
     var uri: RawURI
     var majorVersion: Int
     var minorVersion: Int
@@ -62,7 +62,8 @@ struct RawHTTPRequest {
 ```
 
 `RawURI`
-----------------
+--------
+
 ```swift
 struct RawURI {
     let scheme: String?
@@ -72,12 +73,57 @@ struct RawURI {
     let path: String?
     let query: String?
     let fragment: String?
+}
+```
 
+`RawHTTPMethod`
+---------------
+
+```swift
+enum RawHTTPMethod : Int {
+    case DELETE      = 0
+    case GET         = 1
+    case HEAD        = 2
+    case POST        = 3
+    case PUT         = 4
+    case CONNECT     = 5
+    case OPTIONS     = 6
+    case TRACE       = 7
+    // WebDAV
+    case COPY        = 8
+    case LOCK        = 9
+    case MKCOL       = 10
+    case MOVE        = 11
+    case PROPFIND    = 12
+    case PROPPATCH   = 13
+    case SEARCH      = 14
+    case UNLOCK      = 15
+    case BIND        = 16
+    case REBIND      = 17
+    case UNBIND      = 18
+    case ACL         = 19
+    // Subversion
+    case REPORT      = 20
+    case MKACTIVITY  = 21
+    case CHECKOUT    = 22
+    case MERGE       = 23
+    // UPNP
+    case MSEARCH     = 24
+    case NOTIFY      = 25
+    case SUBSCRIBE   = 26
+    case UNSUBSCRIBE = 27
+    // RFC-5789
+    case PATCH       = 28
+    case PURGE       = 29
+    // CalDAV
+    case MKCALENDAR  = 30
+    
+    case UNKNOWN     = 100
 }
 ```
 
 `HTTPResponseParser`
--------------------
+--------------------
 
 ```swift
 import HTTPParser
@@ -102,7 +148,7 @@ parser.parse(data)
 ```
 
 `RawHTTPResponse`
-------------------
+-----------------
 
 ```swift
 struct RawHTTPResponse {

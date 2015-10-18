@@ -219,7 +219,7 @@
 			children = (
 				B0B94B141BD099AD00D297F3 /* HTTPParser.h */,
 				B0E25A241BD3F1A50059078E /* URI */,
-				B0E25A291BD4197B0059078E /* HTTPMethod */,
+				B0E25A291BD4197B0059078E /* Method */,
 				B06D3E3C1BD28D63004F750D /* Error */,
 				B06D3E3D1BD28D6C004F750D /* Result */,
 				B06D3E3A1BD28D41004F750D /* Request */,
@@ -268,12 +268,12 @@
 			name = URI;
 			sourceTree = "<group>";
 		};
-		B0E25A291BD4197B0059078E /* HTTPMethod */ = {
+		B0E25A291BD4197B0059078E /* Method */ = {
 			isa = PBXGroup;
 			children = (
 				B0E25A2A1BD4199D0059078E /* RawHTTPMethod.swift */,
 			);
-			name = HTTPMethod;
+			name = Method;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

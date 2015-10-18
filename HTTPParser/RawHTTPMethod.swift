@@ -28,7 +28,6 @@ public enum RawHTTPMethod : Int {
     case HEAD        = 2
     case POST        = 3
     case PUT         = 4
-    // Pathological
     case CONNECT     = 5
     case OPTIONS     = 6
     case TRACE       = 7
