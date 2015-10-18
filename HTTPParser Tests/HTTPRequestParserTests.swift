@@ -52,8 +52,9 @@ class HTTPRequestParserTests: XCTestCase {
         let parser = HTTPRequestParser { result in
             result.success { request in
                 XCTAssert(request.method == "GET")
-                XCTAssert(request.uri == "/")
-                XCTAssert(request.version == "HTTP/1.1")
+                XCTAssert(request.uri.path == "/")
+                XCTAssert(request.majorVersion == 1)
+                XCTAssert(request.minorVersion == 1)
                 XCTAssert(request.headers == [:])
                 XCTAssert(request.body == [])
             }
@@ -70,8 +71,9 @@ class HTTPRequestParserTests: XCTestCase {
         let parser = HTTPRequestParser { result in
             result.success { request in
                 XCTAssert(request.method == "GET")
-                XCTAssert(request.uri == "/")
-                XCTAssert(request.version == "HTTP/1.1")
+                XCTAssert(request.uri.path == "/")
+                XCTAssert(request.majorVersion == 1)
+                XCTAssert(request.minorVersion == 1)
                 XCTAssert(request.headers == [:])
                 XCTAssert(request.body == [])
             }
@@ -95,8 +97,9 @@ class HTTPRequestParserTests: XCTestCase {
         let parser = HTTPRequestParser { result in
             result.success { request in
                 XCTAssert(request.method == "GET")
-                XCTAssert(request.uri == "/")
-                XCTAssert(request.version == "HTTP/1.1")
+                XCTAssert(request.uri.path == "/")
+                XCTAssert(request.majorVersion == 1)
+                XCTAssert(request.minorVersion == 1)
                 XCTAssert(request.headers["Host"] == "zewo.co")
                 XCTAssert(request.body == [])
             }
@@ -116,8 +119,9 @@ class HTTPRequestParserTests: XCTestCase {
         let parser = HTTPRequestParser { result in
             result.success { request in
                 XCTAssert(request.method == "GET")
-                XCTAssert(request.uri == "/")
-                XCTAssert(request.version == "HTTP/1.1")
+                XCTAssert(request.uri.path == "/")
+                XCTAssert(request.majorVersion == 1)
+                XCTAssert(request.minorVersion == 1)
                 XCTAssert(request.headers["Host"] == "zewo.co")
                 XCTAssert(request.body == [])
             }
@@ -147,8 +151,9 @@ class HTTPRequestParserTests: XCTestCase {
         let parser = HTTPRequestParser { result in
             result.success { request in
                 XCTAssert(request.method == "POST")
-                XCTAssert(request.uri == "/")
-                XCTAssert(request.version == "HTTP/1.1")
+                XCTAssert(request.uri.path == "/")
+                XCTAssert(request.majorVersion == 1)
+                XCTAssert(request.minorVersion == 1)
                 XCTAssert(request.headers["Content-Length"] == "4")
                 XCTAssert(request.body == "Zewo".bytes)
             }
@@ -165,6 +170,46 @@ class HTTPRequestParserTests: XCTestCase {
         parser.parse(data)
     }
 
+    func testDiscontinuousCompleteRequest() {
+        let parser = HTTPRequestParser { result in
+            result.success { request in
+                XCTAssert(request.method == "POST")
+                XCTAssert(request.uri.path == "/profile")
+                XCTAssert(request.majorVersion == 1)
+                XCTAssert(request.minorVersion == 1)
+                XCTAssert(request.headers["Content-Length"] == "4")
+                XCTAssert(request.body == "Zewo".bytes)
+            }
+            result.failure { error in
+                XCTAssert(false)
+            }
+        }
+
+        let data1 = "PO".bytes
+        let data2 = "ST /pro".bytes
+        let data3 = "file HTT".bytes
+        let data4 = "P/1.1\r\n".bytes
+        let data5 = "Cont".bytes
+        let data6 = "ent-Length: 4".bytes
+        let data7 = "\r\n".bytes
+        let data8 = "\r".bytes
+        let data9 = "\n".bytes
+        let data10 = "Ze".bytes
+        let data11 = "wo".bytes
+
+        parser.parse(data1)
+        parser.parse(data2)
+        parser.parse(data3)
+        parser.parse(data4)
+        parser.parse(data5)
+        parser.parse(data6)
+        parser.parse(data7)
+        parser.parse(data8)
+        parser.parse(data9)
+        parser.parse(data10)
+        parser.parse(data11)
+    }
+
     func testMultipleShortRequestsInTheSameStream() {
         var requestCount = 0
 
@@ -173,12 +218,13 @@ class HTTPRequestParserTests: XCTestCase {
                 ++requestCount
                 if requestCount == 1 {
                     XCTAssert(request.method == "GET")
-                    XCTAssert(request.uri == "/")
+                    XCTAssert(request.uri.path == "/")
                 } else {
                     XCTAssert(request.method == "HEAD")
-                    XCTAssert(request.uri == "/profile")
+                    XCTAssert(request.uri.path == "/profile")
                 }
-                XCTAssert(request.version == "HTTP/1.1")
+                XCTAssert(request.majorVersion == 1)
+                XCTAssert(request.minorVersion == 1)
                 XCTAssert(request.headers == [:])
                 XCTAssert(request.body == [])
             }
@@ -244,8 +290,9 @@ class HTTPRequestParserTests: XCTestCase {
         let parser = HTTPRequestParser { result in
             result.success { request in
                 XCTAssert(request.method == "GET")
-                XCTAssert(request.uri == "/")
-                XCTAssert(request.version == "HTTP/1.1")
+                XCTAssert(request.uri.path == "/")
+                XCTAssert(request.majorVersion == 1)
+                XCTAssert(request.minorVersion == 1)
                 XCTAssert(request.headers["Transfer-Encoding"] == "chunked")
                 XCTAssert(request.body == "Zewo".bytes)
             }
@@ -323,8 +370,9 @@ class HTTPRequestParserTests: XCTestCase {
         let parser = HTTPRequestParser { result in
             result.success { request in
                 XCTAssert(request.method == "GET")
-                XCTAssert(request.uri == "/")
-                XCTAssert(request.version == "HTTP/1.1")
+                XCTAssert(request.uri.path == "/")
+                XCTAssert(request.majorVersion == 1)
+                XCTAssert(request.minorVersion == 1)
                 XCTAssert(request.headers["Connection"] == "keep-alive")
             }
             result.failure { error in
@@ -343,8 +391,9 @@ class HTTPRequestParserTests: XCTestCase {
         let parser = HTTPRequestParser { result in
             result.success { request in
                 XCTAssert(request.method == "GET")
-                XCTAssert(request.uri == "/")
-                XCTAssert(request.version == "HTTP/1.1")
+                XCTAssert(request.uri.path == "/")
+                XCTAssert(request.majorVersion == 1)
+                XCTAssert(request.minorVersion == 1)
                 XCTAssert(request.headers["Connection"] == "close")
             }
             result.failure { error in
@@ -363,8 +412,9 @@ class HTTPRequestParserTests: XCTestCase {
         let parser = HTTPRequestParser { result in
             result.success { request in
                 XCTAssert(request.method == "GET")
-                XCTAssert(request.uri == "/")
-                XCTAssert(request.version == "HTTP/1.0")
+                XCTAssert(request.uri.path == "/")
+                XCTAssert(request.majorVersion == 1)
+                XCTAssert(request.minorVersion == 0)
             }
             result.failure { error in
                 XCTAssert(false)
@@ -375,5 +425,17 @@ class HTTPRequestParserTests: XCTestCase {
                     "\r\n").bytes
 
         parser.parse(data)
+    }
+
+    func testRawURI() {
+        let URIString = "http://username:password@www.google.com:777/foo/bar?foo=bar&for=baz#yeah"
+        let URI = RawURI(string: URIString)
+        XCTAssert(URI.scheme == "http")
+        XCTAssert(URI.userInfo == "username:password")
+        XCTAssert(URI.host == "www.google.com")
+        XCTAssert(URI.port == 777)
+        XCTAssert(URI.path == "/foo/bar")
+        XCTAssert(URI.query == "foo=bar&for=baz")
+        XCTAssert(URI.fragment == "yeah")
     }
 }

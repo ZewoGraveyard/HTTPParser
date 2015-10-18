@@ -26,6 +26,7 @@ import http_parser
 
 struct HTTPRequestParserContext {
     var request = RawHTTPRequest()
+    var currentURI = ""
     var currentHeaderField = ""
     var completion: HTTPParseResult<RawHTTPRequest> -> Void
 
@@ -90,7 +91,7 @@ func onRequestURL(parser: UnsafeMutablePointer<http_parser>, data: UnsafePointer
 
     var buffer: [Int8] = [Int8](count: length + 1, repeatedValue: 0)
     strncpy(&buffer, data, length)
-    context.memory.request.uri = String.fromCString(buffer)!
+    context.memory.currentURI += String.fromCString(buffer)!
 
     return 0
 }
@@ -120,12 +121,14 @@ func onRequestHeaderValue(parser: UnsafeMutablePointer<http_parser>, data: Unsaf
 func onRequestHeadersComplete(parser: UnsafeMutablePointer<http_parser>) -> Int32 {
     let context = UnsafeMutablePointer<HTTPRequestParserContext>(parser.memory.data)
 
-    context.memory.currentHeaderField = ""
     let method = http_method_str(http_method(parser.memory.method))
     context.memory.request.method = String.fromCString(method)!
-    let major = parser.memory.http_major
-    let minor = parser.memory.http_minor
-    context.memory.request.version = "HTTP/\(major).\(minor)"
+    context.memory.request.majorVersion = Int(parser.memory.http_major)
+    context.memory.request.minorVersion = Int(parser.memory.http_minor)
+    context.memory.request.uri = RawURI(uri: parse_uri(context.memory.currentURI))
+
+    context.memory.currentURI = ""
+    context.memory.currentHeaderField = ""
 
     return 0
 }
@@ -149,8 +152,9 @@ func onRequestMessageComplete(parser: UnsafeMutablePointer<http_parser>) -> Int3
     context.memory.request.body = []
     context.memory.request.headers = [:]
     context.memory.request.method = ""
-    context.memory.request.uri = ""
-    context.memory.request.version = ""
+    context.memory.request.uri = RawURI()
+    context.memory.request.majorVersion = 0
+    context.memory.request.minorVersion = 0
     
     return 0
 }

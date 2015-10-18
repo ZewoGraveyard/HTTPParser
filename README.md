@@ -46,15 +46,30 @@ let parser = HTTPRequestParser { result in
 let data = "GET / HTTP/1.1\r\n\r\n".bytes
 parser.parse(data)
 ```
+`RawURI`
+----------------
+```swift
+struct RawURI {
+    let scheme: String?
+    let userInfo: String?
+    let host: String?
+    let port: Int?
+    let path: String?
+    let query: String?
+    let fragment: String?
 
-`RawHTTPRequest `
+}
+```
+
+`RawHTTPRequest`
 ----------------
 
 ```swift
 struct RawHTTPRequest {
     var method: String
-    var uri: String
-    var version: String
+    var uri: RawURI
+    var majorVersion: Int
+    var minorVersion: Int
     var headers: [String: String]
     var body: [Int8]
 }
@@ -85,14 +100,15 @@ let data = "HTTP/1.1 204 No Content\r\n\r\n".bytes
 parser.parse(data)
 ```
 
-`RawHTTPResponse `
+`RawHTTPResponse`
 ------------------
 
 ```swift
 struct RawHTTPResponse {
     var statusCode: Int
     var reasonPhrase: String
-    var version: String
+    var majorVersion: Int
+    var minorVersion: Int
     var headers: [String: String]
     var body: [Int8]
 }

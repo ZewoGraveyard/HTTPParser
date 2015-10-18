@@ -126,10 +126,8 @@ func onResponseHeadersComplete(parser: UnsafeMutablePointer<http_parser>) -> Int
 
     context.memory.currentHeaderField = ""
     context.memory.response.statusCode = Int(parser.memory.status_code)
-
-    let major = parser.memory.http_major
-    let minor = parser.memory.http_minor
-    context.memory.response.version = "HTTP/\(major).\(minor)"
+    context.memory.response.majorVersion = Int(parser.memory.http_major)
+    context.memory.response.minorVersion = Int(parser.memory.http_minor)
 
     return 0
 }
@@ -154,7 +152,8 @@ func onResponseMessageComplete(parser: UnsafeMutablePointer<http_parser>) -> Int
     context.memory.response.headers = [:]
     context.memory.response.reasonPhrase = ""
     context.memory.response.statusCode = 0
-    context.memory.response.version = ""
+    context.memory.response.majorVersion = 0
+    context.memory.response.minorVersion = 0
     
     return 0
 }

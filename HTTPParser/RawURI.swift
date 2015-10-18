@@ -26,23 +26,36 @@ import http_parser
 
 public struct RawURI {
     public let scheme: String?
+    public let userInfo: String?
     public let host: String?
     public let port: Int?
     public let path: String?
     public let query: String?
     public let fragment: String?
-    public let userInfo: String?
+
+}
+
+extension RawURI {
+    init() {
+        self.scheme = nil
+        self.userInfo = nil
+        self.host = nil
+        self.port = nil
+        self.path = nil
+        self.query = nil
+        self.fragment = nil
+    }
 }
 
 extension RawURI {
     init(uri: parsed_uri) {
-        scheme   = String.fromCString(uri.scheme)
-        host     = String.fromCString(uri.host)
-        port     = (uri.port != nil) ? Int(uri.port.memory) : nil
-        path     = String.fromCString(uri.path)
-        query    = String.fromCString(uri.query)
-        fragment = String.fromCString(uri.fragment)
-        userInfo = String.fromCString(uri.user_info)
+        self.scheme   = String.fromCString(uri.scheme)
+        self.userInfo = String.fromCString(uri.user_info)
+        self.host     = String.fromCString(uri.host)
+        self.port     = (uri.port != nil) ? Int(uri.port.memory) : nil
+        self.path     = String.fromCString(uri.path)
+        self.query    = String.fromCString(uri.query)
+        self.fragment = String.fromCString(uri.fragment)
     }
 }
 

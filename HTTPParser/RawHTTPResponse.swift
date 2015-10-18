@@ -25,7 +25,8 @@
 public struct RawHTTPResponse {
     public var statusCode: Int = 0
     public var reasonPhrase: String = ""
-    public var version: String = ""
+    public var majorVersion: Int = 0
+    public var minorVersion: Int = 0
     public var headers: [String: String] = [:]
     public var body: [Int8] = []
 }

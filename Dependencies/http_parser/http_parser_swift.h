@@ -29,12 +29,12 @@
 
 struct parsed_uri {
     const char *scheme;
+    const char *user_info;
     const char *host;
     const unsigned short *port;
     const char *path;
     const char *query;
     const char *fragment;
-    const char *user_info;
 };
 
 struct parsed_uri parse_uri(const char *uri_string);

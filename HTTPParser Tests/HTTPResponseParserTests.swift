@@ -47,7 +47,8 @@ class HTTPResponseParserTests: XCTestCase {
             result.success { response in
                 XCTAssert(response.statusCode == 204)
                 XCTAssert(response.reasonPhrase == "No Content")
-                XCTAssert(response.version == "HTTP/1.1")
+                XCTAssert(response.majorVersion == 1)
+                XCTAssert(response.minorVersion == 1)
                 XCTAssert(response.headers == [:])
                 XCTAssert(response.body == [])
             }
@@ -67,7 +68,8 @@ class HTTPResponseParserTests: XCTestCase {
             result.success { response in
                 XCTAssert(response.statusCode == 204)
                 XCTAssert(response.reasonPhrase == "No Content")
-                XCTAssert(response.version == "HTTP/1.1")
+                XCTAssert(response.majorVersion == 1)
+                XCTAssert(response.minorVersion == 1)
                 XCTAssert(response.headers == [:])
                 XCTAssert(response.body == [])
             }
@@ -96,7 +98,8 @@ class HTTPResponseParserTests: XCTestCase {
             result.success { response in
                 XCTAssert(response.statusCode == 204)
                 XCTAssert(response.reasonPhrase == "No Content")
-                XCTAssert(response.version == "HTTP/1.1")
+                XCTAssert(response.majorVersion == 1)
+                XCTAssert(response.minorVersion == 1)
                 XCTAssert(response.headers["Server"] == "Zewo/0.1")
                 XCTAssert(response.body == [])
             }
@@ -117,7 +120,8 @@ class HTTPResponseParserTests: XCTestCase {
             result.success { response in
                 XCTAssert(response.statusCode == 204)
                 XCTAssert(response.reasonPhrase == "No Content")
-                XCTAssert(response.version == "HTTP/1.1")
+                XCTAssert(response.majorVersion == 1)
+                XCTAssert(response.minorVersion == 1)
                 XCTAssert(response.headers["Server"] == "Zewo/0.1")
                 XCTAssert(response.body == [])
             }
@@ -142,7 +146,8 @@ class HTTPResponseParserTests: XCTestCase {
             result.success { response in
                 XCTAssert(response.statusCode == 200)
                 XCTAssert(response.reasonPhrase == "OK")
-                XCTAssert(response.version == "HTTP/1.1")
+                XCTAssert(response.majorVersion == 1)
+                XCTAssert(response.minorVersion == 1)
                 XCTAssert(response.headers["Content-Length"] == "4")
                 XCTAssert(response.body == "Zewo".bytes)
             }
@@ -164,7 +169,8 @@ class HTTPResponseParserTests: XCTestCase {
             result.success { response in
                 XCTAssert(response.statusCode == 200)
                 XCTAssert(response.reasonPhrase == "OK")
-                XCTAssert(response.version == "HTTP/1.1")
+                XCTAssert(response.majorVersion == 1)
+                XCTAssert(response.minorVersion == 1)
                 XCTAssert(response.headers["Content-Length"] == "4")
                 XCTAssert(response.body == "Zewo".bytes)
             }
@@ -222,7 +228,8 @@ class HTTPResponseParserTests: XCTestCase {
             result.success { response in
                 XCTAssert(response.statusCode == 200)
                 XCTAssert(response.reasonPhrase == "OK")
-                XCTAssert(response.version == "HTTP/1.1")
+                XCTAssert(response.majorVersion == 1)
+                XCTAssert(response.minorVersion == 1)
                 XCTAssert(response.headers["Transfer-Encoding"] == "chunked")
                 XCTAssert(response.body == "Zewo".bytes)
             }
@@ -301,7 +308,8 @@ class HTTPResponseParserTests: XCTestCase {
             result.success { response in
                 XCTAssert(response.statusCode == 200)
                 XCTAssert(response.reasonPhrase == "OK")
-                XCTAssert(response.version == "HTTP/1.1")
+                XCTAssert(response.majorVersion == 1)
+                XCTAssert(response.minorVersion == 1)
                 XCTAssert(response.body == "Zewo".bytes)
             }
             result.failure { error in

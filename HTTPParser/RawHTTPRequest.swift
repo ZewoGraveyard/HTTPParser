@@ -24,8 +24,9 @@
 
 public struct RawHTTPRequest {
     public var method: String = ""
-    public var uri: String = ""
-    public var version: String = ""
+    public var uri: RawURI = RawURI()
+    public var majorVersion: Int = 0
+    public var minorVersion: Int = 0
     public var headers: [String: String] = [:]
     public var body: [Int8] = []
 }
