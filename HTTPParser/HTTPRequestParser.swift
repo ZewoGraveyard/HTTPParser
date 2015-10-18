@@ -121,8 +121,7 @@ func onRequestHeaderValue(parser: UnsafeMutablePointer<http_parser>, data: Unsaf
 func onRequestHeadersComplete(parser: UnsafeMutablePointer<http_parser>) -> Int32 {
     let context = UnsafeMutablePointer<HTTPRequestParserContext>(parser.memory.data)
 
-    let method = http_method_str(http_method(parser.memory.method))
-    context.memory.request.method = String.fromCString(method)!
+    context.memory.request.method = RawHTTPMethod(rawValue: Int(parser.memory.method)) ?? .UNKNOWN
     context.memory.request.majorVersion = Int(parser.memory.http_major)
     context.memory.request.minorVersion = Int(parser.memory.http_minor)
     context.memory.request.URI = RawURI(uri: parse_uri(context.memory.currentURI))
@@ -151,7 +150,7 @@ func onRequestMessageComplete(parser: UnsafeMutablePointer<http_parser>) -> Int3
 
     context.memory.request.body = []
     context.memory.request.headers = [:]
-    context.memory.request.method = ""
+    context.memory.request.method = .UNKNOWN
     context.memory.request.URI = RawURI()
     context.memory.request.majorVersion = 0
     context.memory.request.minorVersion = 0

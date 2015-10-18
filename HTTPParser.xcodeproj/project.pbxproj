@@ -47,6 +47,9 @@
 		B0E25A261BD3F1B70059078E /* RawURI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E25A251BD3F1B70059078E /* RawURI.swift */; settings = {ASSET_TAGS = (); }; };
 		B0E25A271BD3F1B70059078E /* RawURI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E25A251BD3F1B70059078E /* RawURI.swift */; settings = {ASSET_TAGS = (); }; };
 		B0E25A281BD3F1B70059078E /* RawURI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E25A251BD3F1B70059078E /* RawURI.swift */; settings = {ASSET_TAGS = (); }; };
+		B0E25A2B1BD4199D0059078E /* RawHTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E25A2A1BD4199D0059078E /* RawHTTPMethod.swift */; settings = {ASSET_TAGS = (); }; };
+		B0E25A2C1BD4199D0059078E /* RawHTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E25A2A1BD4199D0059078E /* RawHTTPMethod.swift */; settings = {ASSET_TAGS = (); }; };
+		B0E25A2D1BD4199D0059078E /* RawHTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E25A2A1BD4199D0059078E /* RawHTTPMethod.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +105,7 @@
 		B0E25A1D1BD3D66C0059078E /* http_parser_swift.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = http_parser_swift.c; sourceTree = "<group>"; };
 		B0E25A1E1BD3D66C0059078E /* http_parser_swift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = http_parser_swift.h; sourceTree = "<group>"; };
 		B0E25A251BD3F1B70059078E /* RawURI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RawURI.swift; sourceTree = "<group>"; };
+		B0E25A2A1BD4199D0059078E /* RawHTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RawHTTPMethod.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,6 +219,7 @@
 			children = (
 				B0B94B141BD099AD00D297F3 /* HTTPParser.h */,
 				B0E25A241BD3F1A50059078E /* URI */,
+				B0E25A291BD4197B0059078E /* HTTPMethod */,
 				B06D3E3C1BD28D63004F750D /* Error */,
 				B06D3E3D1BD28D6C004F750D /* Result */,
 				B06D3E3A1BD28D41004F750D /* Request */,
@@ -261,6 +266,14 @@
 				B0E25A251BD3F1B70059078E /* RawURI.swift */,
 			);
 			name = URI;
+			sourceTree = "<group>";
+		};
+		B0E25A291BD4197B0059078E /* HTTPMethod */ = {
+			isa = PBXGroup;
+			children = (
+				B0E25A2A1BD4199D0059078E /* RawHTTPMethod.swift */,
+			);
+			name = HTTPMethod;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -471,6 +484,7 @@
 				B0B94B6E1BD18BCB00D297F3 /* RawHTTPResponse.swift in Sources */,
 				B0E25A211BD3D66C0059078E /* http_parser_swift.c in Sources */,
 				B0B94B6A1BD18B9600D297F3 /* HTTPResponseParser.swift in Sources */,
+				B0E25A2D1BD4199D0059078E /* RawHTTPMethod.swift in Sources */,
 				B0E25A281BD3F1B70059078E /* RawURI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -488,6 +502,7 @@
 				B0B94B691BD18B9600D297F3 /* HTTPResponseParser.swift in Sources */,
 				B0B94B301BD09BF500D297F3 /* http_parser.c in Sources */,
 				B0B94B411BD0A51300D297F3 /* HTTPParseError.swift in Sources */,
+				B0E25A2C1BD4199D0059078E /* RawHTTPMethod.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -513,6 +528,7 @@
 				B0B94B681BD18B9600D297F3 /* HTTPResponseParser.swift in Sources */,
 				B0B94B631BD0C48F00D297F3 /* RawHTTPRequest.swift in Sources */,
 				B0B94B651BD0C48F00D297F3 /* HTTPParseError.swift in Sources */,
+				B0E25A2B1BD4199D0059078E /* RawHTTPMethod.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

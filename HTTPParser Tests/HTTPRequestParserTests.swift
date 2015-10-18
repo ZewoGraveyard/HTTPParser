@@ -33,7 +33,7 @@ extension String {
 
 class HTTPRequestParserTests: XCTestCase {
 
-    func testMalformedRequest() {
+    func testInvalidMethod() {
         let parser = HTTPRequestParser { result in
             result.success { request in
                 XCTAssert(false)
@@ -42,16 +42,34 @@ class HTTPRequestParserTests: XCTestCase {
                 XCTAssert(true)
             }
         }
-
-        let data = ("howdy ho!").bytes
-
+        let data = ("INVALID / HTTP/1.1\r\n" +
+                    "\r\n").bytes
         parser.parse(data)
     }
 
-    func testShortRequest() {
+    func testShortDELETERequest() {
         let parser = HTTPRequestParser { result in
             result.success { request in
-                XCTAssert(request.method == "GET")
+                XCTAssert(request.method == .DELETE)
+                XCTAssert(request.URI.path == "/")
+                XCTAssert(request.majorVersion == 1)
+                XCTAssert(request.minorVersion == 1)
+                XCTAssert(request.headers == [:])
+                XCTAssert(request.body == [])
+            }
+            result.failure { error in
+                XCTAssert(false)
+            }
+        }
+        let data = ("DELETE / HTTP/1.1\r\n" +
+                    "\r\n").bytes
+        parser.parse(data)
+    }
+
+    func testShortGETRequest() {
+        let parser = HTTPRequestParser { result in
+            result.success { request in
+                XCTAssert(request.method == .GET)
                 XCTAssert(request.URI.path == "/")
                 XCTAssert(request.majorVersion == 1)
                 XCTAssert(request.minorVersion == 1)
@@ -67,10 +85,124 @@ class HTTPRequestParserTests: XCTestCase {
         parser.parse(data)
     }
 
+    func testShortHEADRequest() {
+        let parser = HTTPRequestParser { result in
+            result.success { request in
+                XCTAssert(request.method == .HEAD)
+                XCTAssert(request.URI.path == "/")
+                XCTAssert(request.majorVersion == 1)
+                XCTAssert(request.minorVersion == 1)
+                XCTAssert(request.headers == [:])
+                XCTAssert(request.body == [])
+            }
+            result.failure { error in
+                XCTAssert(false)
+            }
+        }
+        let data = ("HEAD / HTTP/1.1\r\n" +
+                    "\r\n").bytes
+        parser.parse(data)
+    }
+
+    func testShortPOSTRequest() {
+        let parser = HTTPRequestParser { result in
+            result.success { request in
+                XCTAssert(request.method == .POST)
+                XCTAssert(request.URI.path == "/")
+                XCTAssert(request.majorVersion == 1)
+                XCTAssert(request.minorVersion == 1)
+                XCTAssert(request.headers == [:])
+                XCTAssert(request.body == [])
+            }
+            result.failure { error in
+                XCTAssert(false)
+            }
+        }
+        let data = ("POST / HTTP/1.1\r\n" +
+                    "\r\n").bytes
+        parser.parse(data)
+    }
+
+    func testShortPUTRequest() {
+        let parser = HTTPRequestParser { result in
+            result.success { request in
+                XCTAssert(request.method == .PUT)
+                XCTAssert(request.URI.path == "/")
+                XCTAssert(request.majorVersion == 1)
+                XCTAssert(request.minorVersion == 1)
+                XCTAssert(request.headers == [:])
+                XCTAssert(request.body == [])
+            }
+            result.failure { error in
+                XCTAssert(false)
+            }
+        }
+        let data = ("PUT / HTTP/1.1\r\n" +
+                    "\r\n").bytes
+        parser.parse(data)
+    }
+
+    func testShortCONNECTRequest() {
+        let parser = HTTPRequestParser { result in
+            result.success { request in
+                XCTAssert(request.method == .CONNECT)
+                XCTAssert(request.URI.path == "/")
+                XCTAssert(request.majorVersion == 1)
+                XCTAssert(request.minorVersion == 1)
+                XCTAssert(request.headers == [:])
+                XCTAssert(request.body == [])
+            }
+            result.failure { error in
+                XCTAssert(true) // Upgrade related
+            }
+        }
+        let data = ("CONNECT / HTTP/1.1\r\n" +
+                    "\r\n").bytes
+        parser.parse(data)
+    }
+
+    func testShortOPTIONSRequest() {
+        let parser = HTTPRequestParser { result in
+            result.success { request in
+                XCTAssert(request.method == .OPTIONS)
+                XCTAssert(request.URI.path == "/")
+                XCTAssert(request.majorVersion == 1)
+                XCTAssert(request.minorVersion == 1)
+                XCTAssert(request.headers == [:])
+                XCTAssert(request.body == [])
+            }
+            result.failure { error in
+                XCTAssert(false)
+            }
+        }
+        let data = ("OPTIONS / HTTP/1.1\r\n" +
+                    "\r\n").bytes
+        parser.parse(data)
+    }
+
+    func testShortTRACERequest() {
+        let parser = HTTPRequestParser { result in
+            result.success { request in
+                XCTAssert(request.method == .TRACE)
+                XCTAssert(request.URI.path == "/")
+                XCTAssert(request.majorVersion == 1)
+                XCTAssert(request.minorVersion == 1)
+                XCTAssert(request.headers == [:])
+                XCTAssert(request.body == [])
+            }
+            result.failure { error in
+                XCTAssert(false)
+            }
+        }
+        let data = ("TRACE / HTTP/1.1\r\n" +
+                    "\r\n").bytes
+        parser.parse(data)
+    }
+
     func testDiscontinuousShortRequest() {
         let parser = HTTPRequestParser { result in
             result.success { request in
-                XCTAssert(request.method == "GET")
+                XCTAssert(request.method == .GET)
                 XCTAssert(request.URI.path == "/")
                 XCTAssert(request.majorVersion == 1)
                 XCTAssert(request.minorVersion == 1)
@@ -96,7 +228,7 @@ class HTTPRequestParserTests: XCTestCase {
     func testMediumRequest() {
         let parser = HTTPRequestParser { result in
             result.success { request in
-                XCTAssert(request.method == "GET")
+                XCTAssert(request.method == .GET)
                 XCTAssert(request.URI.path == "/")
                 XCTAssert(request.majorVersion == 1)
                 XCTAssert(request.minorVersion == 1)
@@ -118,7 +250,7 @@ class HTTPRequestParserTests: XCTestCase {
     func testDiscontinuousMediumRequest() {
         let parser = HTTPRequestParser { result in
             result.success { request in
-                XCTAssert(request.method == "GET")
+                XCTAssert(request.method == .GET)
                 XCTAssert(request.URI.path == "/")
                 XCTAssert(request.majorVersion == 1)
                 XCTAssert(request.minorVersion == 1)
@@ -150,7 +282,7 @@ class HTTPRequestParserTests: XCTestCase {
     func testCompleteRequest() {
         let parser = HTTPRequestParser { result in
             result.success { request in
-                XCTAssert(request.method == "POST")
+                XCTAssert(request.method == .POST)
                 XCTAssert(request.URI.path == "/")
                 XCTAssert(request.majorVersion == 1)
                 XCTAssert(request.minorVersion == 1)
@@ -173,7 +305,7 @@ class HTTPRequestParserTests: XCTestCase {
     func testDiscontinuousCompleteRequest() {
         let parser = HTTPRequestParser { result in
             result.success { request in
-                XCTAssert(request.method == "POST")
+                XCTAssert(request.method == .POST)
                 XCTAssert(request.URI.path == "/profile")
                 XCTAssert(request.majorVersion == 1)
                 XCTAssert(request.minorVersion == 1)
@@ -217,10 +349,10 @@ class HTTPRequestParserTests: XCTestCase {
             result.success { request in
                 ++requestCount
                 if requestCount == 1 {
-                    XCTAssert(request.method == "GET")
+                    XCTAssert(request.method == .GET)
                     XCTAssert(request.URI.path == "/")
                 } else {
-                    XCTAssert(request.method == "HEAD")
+                    XCTAssert(request.method == .HEAD)
                     XCTAssert(request.URI.path == "/profile")
                 }
                 XCTAssert(request.majorVersion == 1)
@@ -289,7 +421,7 @@ class HTTPRequestParserTests: XCTestCase {
     func testChunkedEncoding() {
         let parser = HTTPRequestParser { result in
             result.success { request in
-                XCTAssert(request.method == "GET")
+                XCTAssert(request.method == .GET)
                 XCTAssert(request.URI.path == "/")
                 XCTAssert(request.majorVersion == 1)
                 XCTAssert(request.minorVersion == 1)
@@ -369,7 +501,7 @@ class HTTPRequestParserTests: XCTestCase {
     func testConnectionKeepAlive() {
         let parser = HTTPRequestParser { result in
             result.success { request in
-                XCTAssert(request.method == "GET")
+                XCTAssert(request.method == .GET)
                 XCTAssert(request.URI.path == "/")
                 XCTAssert(request.majorVersion == 1)
                 XCTAssert(request.minorVersion == 1)
@@ -390,7 +522,7 @@ class HTTPRequestParserTests: XCTestCase {
     func testConnectionClose() {
         let parser = HTTPRequestParser { result in
             result.success { request in
-                XCTAssert(request.method == "GET")
+                XCTAssert(request.method == .GET)
                 XCTAssert(request.URI.path == "/")
                 XCTAssert(request.majorVersion == 1)
                 XCTAssert(request.minorVersion == 1)
@@ -411,7 +543,7 @@ class HTTPRequestParserTests: XCTestCase {
     func testRequestHTTP1_0() {
         let parser = HTTPRequestParser { result in
             result.success { request in
-                XCTAssert(request.method == "GET")
+                XCTAssert(request.method == .GET)
                 XCTAssert(request.URI.path == "/")
                 XCTAssert(request.majorVersion == 1)
                 XCTAssert(request.minorVersion == 0)
