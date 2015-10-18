@@ -125,7 +125,7 @@ func onRequestHeadersComplete(parser: UnsafeMutablePointer<http_parser>) -> Int3
     context.memory.request.method = String.fromCString(method)!
     context.memory.request.majorVersion = Int(parser.memory.http_major)
     context.memory.request.minorVersion = Int(parser.memory.http_minor)
-    context.memory.request.uri = RawURI(uri: parse_uri(context.memory.currentURI))
+    context.memory.request.URI = RawURI(uri: parse_uri(context.memory.currentURI))
 
     context.memory.currentURI = ""
     context.memory.currentHeaderField = ""
@@ -152,7 +152,7 @@ func onRequestMessageComplete(parser: UnsafeMutablePointer<http_parser>) -> Int3
     context.memory.request.body = []
     context.memory.request.headers = [:]
     context.memory.request.method = ""
-    context.memory.request.uri = RawURI()
+    context.memory.request.URI = RawURI()
     context.memory.request.majorVersion = 0
     context.memory.request.minorVersion = 0
     

@@ -52,7 +52,7 @@ class HTTPRequestParserTests: XCTestCase {
         let parser = HTTPRequestParser { result in
             result.success { request in
                 XCTAssert(request.method == "GET")
-                XCTAssert(request.uri.path == "/")
+                XCTAssert(request.URI.path == "/")
                 XCTAssert(request.majorVersion == 1)
                 XCTAssert(request.minorVersion == 1)
                 XCTAssert(request.headers == [:])
@@ -71,7 +71,7 @@ class HTTPRequestParserTests: XCTestCase {
         let parser = HTTPRequestParser { result in
             result.success { request in
                 XCTAssert(request.method == "GET")
-                XCTAssert(request.uri.path == "/")
+                XCTAssert(request.URI.path == "/")
                 XCTAssert(request.majorVersion == 1)
                 XCTAssert(request.minorVersion == 1)
                 XCTAssert(request.headers == [:])
@@ -97,7 +97,7 @@ class HTTPRequestParserTests: XCTestCase {
         let parser = HTTPRequestParser { result in
             result.success { request in
                 XCTAssert(request.method == "GET")
-                XCTAssert(request.uri.path == "/")
+                XCTAssert(request.URI.path == "/")
                 XCTAssert(request.majorVersion == 1)
                 XCTAssert(request.minorVersion == 1)
                 XCTAssert(request.headers["Host"] == "zewo.co")
@@ -119,7 +119,7 @@ class HTTPRequestParserTests: XCTestCase {
         let parser = HTTPRequestParser { result in
             result.success { request in
                 XCTAssert(request.method == "GET")
-                XCTAssert(request.uri.path == "/")
+                XCTAssert(request.URI.path == "/")
                 XCTAssert(request.majorVersion == 1)
                 XCTAssert(request.minorVersion == 1)
                 XCTAssert(request.headers["Host"] == "zewo.co")
@@ -151,7 +151,7 @@ class HTTPRequestParserTests: XCTestCase {
         let parser = HTTPRequestParser { result in
             result.success { request in
                 XCTAssert(request.method == "POST")
-                XCTAssert(request.uri.path == "/")
+                XCTAssert(request.URI.path == "/")
                 XCTAssert(request.majorVersion == 1)
                 XCTAssert(request.minorVersion == 1)
                 XCTAssert(request.headers["Content-Length"] == "4")
@@ -174,7 +174,7 @@ class HTTPRequestParserTests: XCTestCase {
         let parser = HTTPRequestParser { result in
             result.success { request in
                 XCTAssert(request.method == "POST")
-                XCTAssert(request.uri.path == "/profile")
+                XCTAssert(request.URI.path == "/profile")
                 XCTAssert(request.majorVersion == 1)
                 XCTAssert(request.minorVersion == 1)
                 XCTAssert(request.headers["Content-Length"] == "4")
@@ -218,10 +218,10 @@ class HTTPRequestParserTests: XCTestCase {
                 ++requestCount
                 if requestCount == 1 {
                     XCTAssert(request.method == "GET")
-                    XCTAssert(request.uri.path == "/")
+                    XCTAssert(request.URI.path == "/")
                 } else {
                     XCTAssert(request.method == "HEAD")
-                    XCTAssert(request.uri.path == "/profile")
+                    XCTAssert(request.URI.path == "/profile")
                 }
                 XCTAssert(request.majorVersion == 1)
                 XCTAssert(request.minorVersion == 1)
@@ -290,7 +290,7 @@ class HTTPRequestParserTests: XCTestCase {
         let parser = HTTPRequestParser { result in
             result.success { request in
                 XCTAssert(request.method == "GET")
-                XCTAssert(request.uri.path == "/")
+                XCTAssert(request.URI.path == "/")
                 XCTAssert(request.majorVersion == 1)
                 XCTAssert(request.minorVersion == 1)
                 XCTAssert(request.headers["Transfer-Encoding"] == "chunked")
@@ -370,7 +370,7 @@ class HTTPRequestParserTests: XCTestCase {
         let parser = HTTPRequestParser { result in
             result.success { request in
                 XCTAssert(request.method == "GET")
-                XCTAssert(request.uri.path == "/")
+                XCTAssert(request.URI.path == "/")
                 XCTAssert(request.majorVersion == 1)
                 XCTAssert(request.minorVersion == 1)
                 XCTAssert(request.headers["Connection"] == "keep-alive")
@@ -391,7 +391,7 @@ class HTTPRequestParserTests: XCTestCase {
         let parser = HTTPRequestParser { result in
             result.success { request in
                 XCTAssert(request.method == "GET")
-                XCTAssert(request.uri.path == "/")
+                XCTAssert(request.URI.path == "/")
                 XCTAssert(request.majorVersion == 1)
                 XCTAssert(request.minorVersion == 1)
                 XCTAssert(request.headers["Connection"] == "close")
@@ -412,7 +412,7 @@ class HTTPRequestParserTests: XCTestCase {
         let parser = HTTPRequestParser { result in
             result.success { request in
                 XCTAssert(request.method == "GET")
-                XCTAssert(request.uri.path == "/")
+                XCTAssert(request.URI.path == "/")
                 XCTAssert(request.majorVersion == 1)
                 XCTAssert(request.minorVersion == 0)
             }
