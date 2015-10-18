@@ -438,4 +438,16 @@ class HTTPRequestParserTests: XCTestCase {
         XCTAssert(URI.query == "foo=bar&for=baz")
         XCTAssert(URI.fragment == "yeah")
     }
+
+    func testRawURIIPv6() {
+        let URIString = "http://username:password@[2001:db8:1f70::999:de8:7648:6e8]:100/foo/bar?foo=bar&for=baz#yeah"
+        let URI = RawURI(string: URIString)
+        XCTAssert(URI.scheme == "http")
+        XCTAssert(URI.userInfo == "username:password")
+        XCTAssert(URI.host == "2001:db8:1f70::999:de8:7648:6e8")
+        XCTAssert(URI.port == 100)
+        XCTAssert(URI.path == "/foo/bar")
+        XCTAssert(URI.query == "foo=bar&for=baz")
+        XCTAssert(URI.fragment == "yeah")
+    }
 }
