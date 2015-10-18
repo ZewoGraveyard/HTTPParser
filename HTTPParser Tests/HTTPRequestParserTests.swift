@@ -228,12 +228,13 @@ class HTTPRequestParserTests: XCTestCase {
     func testUpgradeRequests() {
         let parser = HTTPRequestParser { result in
             result.failure { _ in
-                XCTAssert(false)
+                XCTAssert(true)
             }
         }
 
         let data = ("GET / HTTP/1.1\r\n" +
                     "Upgrade: WebSocket\r\n" +
+                    "Connection: Upgrade\r\n" +
                     "\r\n").bytes
 
         parser.parse(data)
