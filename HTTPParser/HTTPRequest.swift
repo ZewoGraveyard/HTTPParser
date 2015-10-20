@@ -1,4 +1,4 @@
-// RawHTTPRequest.swift
+// HTTPRequest.swift
 //
 // The MIT License (MIT)
 //
@@ -22,9 +22,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-public struct RawHTTPRequest {
-    public var method: RawHTTPMethod = .UNKNOWN
-    public var URI: RawURI = RawURI()
+public struct HTTPRequest {
+    public var method: HTTPMethod = .UNKNOWN
+    public var uri: URI = URI()
     public var majorVersion: Int = 0
     public var minorVersion: Int = 0
     public var headers: [String: String] = [:]

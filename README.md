@@ -28,32 +28,26 @@ HTTPParser
 ```swift
 import HTTPParser
 
-extension String {
-    var bytes: [Int8] {
-        return self.utf8.map { Int8($0) }
-    }
+let parser = HTTPRequestParser { request in
+    // Here you get your parsed requests (HTTPRequest)
 }
 
-let parser = HTTPRequestParser { result in
-    result.success { request in
-        // here's your parsed request (RawHTTPRequest)
-    }
-    result.failure { error in
-        // something bad happened :(
-    }
+do {
+    // Here you'll probably get the real data from a socket, right?
+    let data = "GET / HTTP/1.1\r\n\r\n"
+    try parser.parse(data)
+} catch {
+    // Something bad happened :(
 }
-// Here you'll probably get the real data from a socket, right?
-let data = "GET / HTTP/1.1\r\n\r\n".bytes
-parser.parse(data)
 ```
 
-`RawHTTPRequest`
+`HTTPRequest`
 ----------------
 
 ```swift
-struct RawHTTPRequest {
-    var method: RawHTTPMethod
-    var uri: RawURI
+struct HTTPRequest {
+    var method: HTTPMethod
+    var uri: URI
     var majorVersion: Int
     var minorVersion: Int
     var headers: [String: String]
@@ -61,64 +55,45 @@ struct RawHTTPRequest {
 }
 ```
 
-`RawURI`
+`HTTPMethod`
+---------------
+
+```swift
+enum HTTPMethod {
+    case DELETE
+    case GET
+    case HEAD
+    case POST
+    case PUT
+    case CONNECT
+    case OPTIONS
+    case TRACE
+    ...
+}
+```
+
+`URI`
 --------
 
 ```swift
-struct RawURI {
+struct URI {
     let scheme: String?
-    let userInfo: String?
+    let userInfo: URIUserInfo?
     let host: String?
     let port: Int?
     let path: String?
-    let query: String?
+    let query: [String: String]
     let fragment: String?
 }
 ```
 
-`RawHTTPMethod`
----------------
+`URIUserInfo`
+--------
 
 ```swift
-enum RawHTTPMethod : Int {
-    case DELETE      = 0
-    case GET         = 1
-    case HEAD        = 2
-    case POST        = 3
-    case PUT         = 4
-    case CONNECT     = 5
-    case OPTIONS     = 6
-    case TRACE       = 7
-    // WebDAV
-    case COPY        = 8
-    case LOCK        = 9
-    case MKCOL       = 10
-    case MOVE        = 11
-    case PROPFIND    = 12
-    case PROPPATCH   = 13
-    case SEARCH      = 14
-    case UNLOCK      = 15
-    case BIND        = 16
-    case REBIND      = 17
-    case UNBIND      = 18
-    case ACL         = 19
-    // Subversion
-    case REPORT      = 20
-    case MKACTIVITY  = 21
-    case CHECKOUT    = 22
-    case MERGE       = 23
-    // UPNP
-    case MSEARCH     = 24
-    case NOTIFY      = 25
-    case SUBSCRIBE   = 26
-    case UNSUBSCRIBE = 27
-    // RFC-5789
-    case PATCH       = 28
-    case PURGE       = 29
-    // CalDAV
-    case MKCALENDAR  = 30
-    
-    case UNKNOWN     = 100
+struct URI {
+    let username: String
+    let password: String
 }
 ```
 
@@ -128,30 +103,24 @@ enum RawHTTPMethod : Int {
 ```swift
 import HTTPParser
 
-extension String {
-    var bytes: [Int8] {
-        return self.utf8.map { Int8($0) }
-    }
+let parser = HTTPResponseParser { response in
+    // Here you get your parsed responses (HTTPResponse)
 }
 
-let parser = HTTPResponseParser { result in
-    result.success { response in
-        // here's your parsed response (RawHTTPResponse)
-    }
-    result.failure { error in
-        // something bad happened :(
-    }
+do {
+    // Here you'll probably get the real data from a socket, right?
+    let data = "HTTP/1.1 204 No Content\r\n\r\n".bytes
+    try parser.parse(data)
+} catch {
+    // Something bad happened :(
 }
-// Here you'll probably get the real data from a socket, right?
-let data = "HTTP/1.1 204 No Content\r\n\r\n".bytes
-parser.parse(data)
 ```
 
-`RawHTTPResponse`
+`HTTPResponse`
 -----------------
 
 ```swift
-struct RawHTTPResponse {
+struct HTTPResponse {
     var statusCode: Int
     var reasonPhrase: String
     var majorVersion: Int
@@ -161,49 +130,45 @@ struct RawHTTPResponse {
 }
 ```
 
-
 Chunked Data and Persistent Streams
 -----------------------------------
 
 ```swift
 import HTTPParser
 
-extension String {
-    var bytes: [Int8] {
-        return self.utf8.map { Int8($0) }
-    }
+let parser = HTTPResponseParser { response in
+    // Here you get your parsed responses (HTTPResponse)
 }
 
-let parser = HTTPResponseParser { result in
-    result.success { response in
-        // here's your parsed response (RawHTTPResponse)
-    }
-    result.failure { error in
-        // something bad happened :(
-    }
+do {
+    // You can call parse as many times as you like
+    // passing chunks of the request or response.
+    // Once the parser completes it will spit the result
+
+    let data1 = "HTTP/1"
+    let data2 = ".1 204 No Con"
+    let data3 = "tent\r\n\r\n")
+
+    try parser.parse(data1)
+    try parser.parse(data2)
+    try parser.parse(data3)
+
+    // The parser supports persistent streams (keep-alive)
+    // so you can keep streaming requests or responses
+    // all you want.
+
+    let data4 = "HTTP/1"
+    let data5 = ".1 200 O"
+    let data6 = "K\r\n\r\n")
+
+    try parser.parse(data1)
+    try parser.parse(data2)
+    try parser.parse(data3)
+} catch {
+    // Something bad happened :(
 }
-
-// You can call parse as many times as you like
-// passing chunks of the request or response.
-// Once the parser completes it will spit the result
-let data1 = "HTTP/1".bytes
-let data2 = ".1 204 No Con".bytes
-let data3 = "tent\r\n\r\n").bytes
-parser.parse(data1)
-parser.parse(data2)
-parser.parse(data3)
-
-// The parser supports persistent streams (keep-alive)
-// so you can keep streaming requests or responses
-// all you want.
-let data4 = "HTTP/1".bytes
-let data5 = ".1 200 O".bytes
-let data6 = "K\r\n\r\n").bytes
-parser.parse(data1)
-parser.parse(data2)
-parser.parse(data3)
 ```
-
+	
 ## Installation
 
 ### Carthage

@@ -25,12 +25,12 @@
 import http_parser
 
 struct HTTPRequestParserContext {
-    var request = RawHTTPRequest()
+    var request = HTTPRequest()
     var currentURI = ""
     var currentHeaderField = ""
-    var completion: HTTPParseResult<RawHTTPRequest> -> Void
+    var completion: HTTPRequest -> Void
 
-    init(completion: HTTPParseResult<RawHTTPRequest> -> Void) {
+    init(completion: HTTPRequest -> Void) {
         self.completion = completion
     }
 }
@@ -50,11 +50,11 @@ var requestSettings: http_parser_settings = {
 }()
 
 public final class HTTPRequestParser {
-    let completion: HTTPParseResult<RawHTTPRequest> -> Void
+    let completion: HTTPRequest -> Void
     let context: UnsafeMutablePointer<HTTPRequestParserContext>
     var parser = http_parser()
 
-    public init(completion: HTTPParseResult<RawHTTPRequest> -> Void) {
+    public init(completion: HTTPRequest -> Void) {
         self.completion = completion
 
         self.context = UnsafeMutablePointer<HTTPRequestParserContext>.alloc(1)
@@ -69,31 +69,31 @@ public final class HTTPRequestParser {
         context.dealloc(1)
     }
 
-    public func parseData(data: UnsafeMutablePointer<Void>, length: Int) {
+    public func parseData(data: UnsafeMutablePointer<Void>, length: Int) throws {
         let bytesParsed = http_parser_execute(&parser, &requestSettings, UnsafeMutablePointer<Int8>(data), length)
 
         if parser.upgrade == 1 {
             let error = HTTPParseError(description: "Upgrade not supported")
-            completion(HTTPParseResult.Failure(error))
+            throw error
         }
 
         if bytesParsed != length {
             let errorName = http_errno_name(http_errno(parser.http_errno))
             let errorDescription = http_errno_description(http_errno(parser.http_errno))
             let error = HTTPParseError(description: "\(String.fromCString(errorName)!): \(String.fromCString(errorDescription)!)")
-            completion(HTTPParseResult.Failure(error))
+            throw error
         }
     }
 }
 
 extension HTTPRequestParser {
-    public func parse(var data: [Int8]) {
-        parseData(&data, length: data.count)
+    public func parse(var data: [Int8]) throws {
+        try parseData(&data, length: data.count)
     }
 
-    public func parse(string: String) {
+    public func parse(string: String) throws {
         var data = string.utf8.map { Int8($0) }
-        parseData(&data, length: data.count)
+        try parseData(&data, length: data.count)
     }
 }
 
@@ -132,10 +132,10 @@ func onRequestHeaderValue(parser: UnsafeMutablePointer<http_parser>, data: Unsaf
 func onRequestHeadersComplete(parser: UnsafeMutablePointer<http_parser>) -> Int32 {
     let context = UnsafeMutablePointer<HTTPRequestParserContext>(parser.memory.data)
 
-    context.memory.request.method = RawHTTPMethod(rawValue: Int(parser.memory.method))!
+    context.memory.request.method = HTTPMethod(code: Int(parser.memory.method))
     context.memory.request.majorVersion = Int(parser.memory.http_major)
     context.memory.request.minorVersion = Int(parser.memory.http_minor)
-    context.memory.request.URI = RawURI(string: context.memory.currentURI)
+    context.memory.request.uri = URI(string: context.memory.currentURI)
 
     context.memory.currentURI = ""
     context.memory.currentHeaderField = ""
@@ -156,13 +156,12 @@ func onRequestBody(parser: UnsafeMutablePointer<http_parser>, data: UnsafePointe
 func onRequestMessageComplete(parser: UnsafeMutablePointer<http_parser>) -> Int32 {
     let context = UnsafeMutablePointer<HTTPRequestParserContext>(parser.memory.data)
 
-    let result = HTTPParseResult.Success(context.memory.request)
-    context.memory.completion(result)
+    context.memory.completion(context.memory.request)
 
     context.memory.request.body = []
     context.memory.request.headers = [:]
     context.memory.request.method = .UNKNOWN
-    context.memory.request.URI = RawURI()
+    context.memory.request.uri = URI()
     context.memory.request.majorVersion = 0
     context.memory.request.minorVersion = 0
     

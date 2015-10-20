@@ -25,11 +25,11 @@
 import http_parser
 
 struct HTTPResponseParserContext {
-    var response = RawHTTPResponse()
+    var response = HTTPResponse()
     var currentHeaderField = ""
-    var completion: HTTPParseResult<RawHTTPResponse> -> Void
+    var completion: HTTPResponse -> Void
 
-    init(completion: HTTPParseResult<RawHTTPResponse> -> Void) {
+    init(completion: HTTPResponse -> Void) {
         self.completion = completion
     }
 }
@@ -49,11 +49,11 @@ var responseSettings: http_parser_settings = {
 }()
 
 public final class HTTPResponseParser {
-    let completion: HTTPParseResult<RawHTTPResponse> -> Void
+    let completion: HTTPResponse -> Void
     let context: UnsafeMutablePointer<HTTPResponseParserContext>
     var parser = http_parser()
 
-    public init(completion: HTTPParseResult<RawHTTPResponse> -> Void) {
+    public init(completion: HTTPResponse -> Void) {
         self.completion = completion
 
         self.context = UnsafeMutablePointer<HTTPResponseParserContext>.alloc(1)
@@ -68,34 +68,35 @@ public final class HTTPResponseParser {
         context.dealloc(1)
     }
 
-    public func parseData(data: UnsafeMutablePointer<Void>, length: Int) {
+    public func parseData(data: UnsafeMutablePointer<Void>, length: Int) throws {
         let bytesParsed = http_parser_execute(&parser, &responseSettings, UnsafeMutablePointer<Int8>(data), length)
 
         if parser.upgrade == 1 {
             let error = HTTPParseError(description: "Upgrade not supported")
-            completion(HTTPParseResult.Failure(error))
+            throw error
         }
 
         if bytesParsed != length {
-            let errorString = http_errno_name(http_errno(parser.http_errno))
-            let error = HTTPParseError(description: String.fromCString(errorString)!)
-            completion(HTTPParseResult.Failure(error))
+            let errorName = http_errno_name(http_errno(parser.http_errno))
+            let errorDescription = http_errno_description(http_errno(parser.http_errno))
+            let error = HTTPParseError(description: "\(String.fromCString(errorName)!): \(String.fromCString(errorDescription)!)")
+            throw error
         }
     }
 }
 
 extension HTTPResponseParser {
-    public func parse(var data: [Int8]) {
-        parseData(&data, length: data.count)
+    public func parse(var data: [Int8]) throws {
+        try parseData(&data, length: data.count)
     }
 
-    public func parse(string: String) {
+    public func parse(string: String) throws {
         var data = string.utf8.map { Int8($0) }
-        parseData(&data, length: data.count)
+        try parseData(&data, length: data.count)
     }
     
-    public func eof() {
-        parseData(nil, length: 0)
+    public func eof() throws {
+        try parseData(nil, length: 0)
     }
 }
 
@@ -156,9 +157,8 @@ func onResponseBody(parser: UnsafeMutablePointer<http_parser>, data: UnsafePoint
 func onResponseMessageComplete(parser: UnsafeMutablePointer<http_parser>) -> Int32 {
     let context = UnsafeMutablePointer<HTTPResponseParserContext>(parser.memory.data)
 
-    let result = HTTPParseResult.Success(context.memory.response)
-    context.memory.completion(result)
-
+    context.memory.completion(context.memory.response)
+    
     context.memory.response.body = []
     context.memory.response.headers = [:]
     context.memory.response.reasonPhrase = ""

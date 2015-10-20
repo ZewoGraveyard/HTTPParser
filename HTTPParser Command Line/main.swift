@@ -46,10 +46,12 @@ var request = ("POST / HTTP/1.1\r\n" +
 let numberOfRequests = 1000000
 let startTime = now()
 for _ in 0 ..< numberOfRequests {
-    let parser = HTTPRequestParser { result in
-        result.failure { error in fatalError("\(error)") }
+    let parser = HTTPRequestParser { _ in }
+    do {
+        try parser.parse(request)
+    } catch {
+        fatalError("\(error)")
     }
-    parser.parse(request)
 }
 let elapsedTime = now() - startTime
 
