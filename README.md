@@ -46,12 +46,12 @@ do {
 
 ```swift
 struct HTTPRequest {
-    var method: HTTPMethod
-    var uri: URI
-    var majorVersion: Int
-    var minorVersion: Int
-    var headers: [String: String]
-    var body: [Int8]
+    let method: HTTPMethod
+    let uri: URI
+    let majorVersion: Int
+    let minorVersion: Int
+    let headers: [String: String]
+    let body: [Int8]
 }
 ```
 
@@ -121,12 +121,12 @@ do {
 
 ```swift
 struct HTTPResponse {
-    var statusCode: Int
-    var reasonPhrase: String
-    var majorVersion: Int
-    var minorVersion: Int
-    var headers: [String: String]
-    var body: [Int8]
+    let statusCode: Int
+    let reasonPhrase: String
+    let majorVersion: Int
+    let minorVersion: Int
+    let headers: [String: String]
+    let body: [Int8]
 }
 ```
 
@@ -136,8 +136,8 @@ Chunked Data and Persistent Streams
 ```swift
 import HTTPParser
 
-let parser = HTTPResponseParser { response in
-    // Here you get your parsed responses (HTTPResponse)
+let parser = HTTPRequestParser { request in
+    // Here you get your parsed requests (HTTPRequest)
 }
 
 do {
@@ -145,9 +145,9 @@ do {
     // passing chunks of the request or response.
     // Once the parser completes it will spit the result
 
-    let data1 = "HTTP/1"
-    let data2 = ".1 204 No Con"
-    let data3 = "tent\r\n\r\n")
+    let data1 = "GE"
+    let data2 = "T / HTT"
+    let data3 = "P/1.1\r\n\r\n")
 
     try parser.parse(data1)
     try parser.parse(data2)
@@ -157,13 +157,36 @@ do {
     // so you can keep streaming requests or responses
     // all you want.
 
-    let data4 = "HTTP/1"
-    let data5 = ".1 200 O"
-    let data6 = "K\r\n\r\n")
+    let data4 = "POS"
+    let data5 = "T / H"
+    let data6 = "TTP/1.1\r\n\r\n")
 
-    try parser.parse(data1)
-    try parser.parse(data2)
-    try parser.parse(data3)
+    try parser.parse(data4)
+    try parser.parse(data5)
+    try parser.parse(data6)
+} catch {
+    // Something bad happened :(
+}
+```
+
+Using EOF
+---------
+
+```swift
+import HTTPParser
+
+let parser = HTTPResponseParser { response in
+    // Here you get your parsed responses (HTTPResponse)
+}
+
+do {
+	// Sometimes servers return a response without Content-Length
+	// to close the stream you can call eof()
+    let data = ("HTTP/1.1 200 OK\r\n" +
+                "\r\n" +
+                "Zewo")
+	try parser.parse(data)
+	try parser.eof()
 } catch {
     // Something bad happened :(
 }

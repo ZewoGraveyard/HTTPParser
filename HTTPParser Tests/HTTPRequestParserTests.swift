@@ -23,7 +23,7 @@
 // SOFTWARE.
 
 import XCTest
-import HTTPParser
+@testable import HTTPParser
 
 extension String {
     var bytes: [Int8] {
@@ -192,6 +192,443 @@ class HTTPRequestParserTests: XCTestCase {
 
         do {
             let data = ("TRACE / HTTP/1.1\r\n" +
+                        "\r\n")
+            try parser.parse(data)
+        } catch {
+            XCTAssert(false)
+        }
+    }
+    
+    func testShortCOPYRequest() {
+        let parser = HTTPRequestParser { request in
+            XCTAssert(request.method == .COPY)
+            XCTAssert(request.uri.path == "/")
+            XCTAssert(request.majorVersion == 1)
+            XCTAssert(request.minorVersion == 1)
+            XCTAssert(request.headers == [:])
+            XCTAssert(request.body == [])
+        }
+        
+        do {
+            let data = ("COPY / HTTP/1.1\r\n" +
+                        "\r\n")
+            try parser.parse(data)
+        } catch {
+            XCTAssert(false)
+        }
+    }
+    
+    func testShortLOCKRequest() {
+        let parser = HTTPRequestParser { request in
+            XCTAssert(request.method == .LOCK)
+            XCTAssert(request.uri.path == "/")
+            XCTAssert(request.majorVersion == 1)
+            XCTAssert(request.minorVersion == 1)
+            XCTAssert(request.headers == [:])
+            XCTAssert(request.body == [])
+        }
+        
+        do {
+            let data = ("LOCK / HTTP/1.1\r\n" +
+                        "\r\n")
+            try parser.parse(data)
+        } catch {
+            XCTAssert(false)
+        }
+    }
+    
+    func testShortMKCOLRequest() {
+        let parser = HTTPRequestParser { request in
+            XCTAssert(request.method == .MKCOL)
+            XCTAssert(request.uri.path == "/")
+            XCTAssert(request.majorVersion == 1)
+            XCTAssert(request.minorVersion == 1)
+            XCTAssert(request.headers == [:])
+            XCTAssert(request.body == [])
+        }
+        
+        do {
+            let data = ("MKCOL / HTTP/1.1\r\n" +
+                        "\r\n")
+            try parser.parse(data)
+        } catch {
+            XCTAssert(false)
+        }
+    }
+    
+    func testShortMOVERequest() {
+        let parser = HTTPRequestParser { request in
+            XCTAssert(request.method == .MOVE)
+            XCTAssert(request.uri.path == "/")
+            XCTAssert(request.majorVersion == 1)
+            XCTAssert(request.minorVersion == 1)
+            XCTAssert(request.headers == [:])
+            XCTAssert(request.body == [])
+        }
+        
+        do {
+            let data = ("MOVE / HTTP/1.1\r\n" +
+                        "\r\n")
+            try parser.parse(data)
+        } catch {
+            XCTAssert(false)
+        }
+    }
+    
+    func testShortPROPFINDRequest() {
+        let parser = HTTPRequestParser { request in
+            XCTAssert(request.method == .PROPFIND)
+            XCTAssert(request.uri.path == "/")
+            XCTAssert(request.majorVersion == 1)
+            XCTAssert(request.minorVersion == 1)
+            XCTAssert(request.headers == [:])
+            XCTAssert(request.body == [])
+        }
+        
+        do {
+            let data = ("PROPFIND / HTTP/1.1\r\n" +
+                        "\r\n")
+            try parser.parse(data)
+        } catch {
+            XCTAssert(false)
+        }
+    }
+    
+    func testShortPROPPATCHRequest() {
+        let parser = HTTPRequestParser { request in
+            XCTAssert(request.method == .PROPPATCH)
+            XCTAssert(request.uri.path == "/")
+            XCTAssert(request.majorVersion == 1)
+            XCTAssert(request.minorVersion == 1)
+            XCTAssert(request.headers == [:])
+            XCTAssert(request.body == [])
+        }
+        
+        do {
+            let data = ("PROPPATCH / HTTP/1.1\r\n" +
+                        "\r\n")
+            try parser.parse(data)
+        } catch {
+            XCTAssert(false)
+        }
+    }
+    
+    func testShortSEARCHRequest() {
+        let parser = HTTPRequestParser { request in
+            XCTAssert(request.method == .SEARCH)
+            XCTAssert(request.uri.path == "/")
+            XCTAssert(request.majorVersion == 1)
+            XCTAssert(request.minorVersion == 1)
+            XCTAssert(request.headers == [:])
+            XCTAssert(request.body == [])
+        }
+        
+        do {
+            let data = ("SEARCH / HTTP/1.1\r\n" +
+                "\r\n")
+            try parser.parse(data)
+        } catch {
+            XCTAssert(false)
+        }
+    }
+    
+    func testShortUNLOCKRequest() {
+        let parser = HTTPRequestParser { request in
+            XCTAssert(request.method == .UNLOCK)
+            XCTAssert(request.uri.path == "/")
+            XCTAssert(request.majorVersion == 1)
+            XCTAssert(request.minorVersion == 1)
+            XCTAssert(request.headers == [:])
+            XCTAssert(request.body == [])
+        }
+        
+        do {
+            let data = ("UNLOCK / HTTP/1.1\r\n" +
+                        "\r\n")
+            try parser.parse(data)
+        } catch {
+            XCTAssert(false)
+        }
+    }
+    
+    func testShortBINDRequest() {
+        let parser = HTTPRequestParser { request in
+            XCTAssert(request.method == .BIND)
+            XCTAssert(request.uri.path == "/")
+            XCTAssert(request.majorVersion == 1)
+            XCTAssert(request.minorVersion == 1)
+            XCTAssert(request.headers == [:])
+            XCTAssert(request.body == [])
+        }
+        
+        do {
+            let data = ("BIND / HTTP/1.1\r\n" +
+                        "\r\n")
+            try parser.parse(data)
+        } catch {
+            XCTAssert(false)
+        }
+    }
+    
+    func testShortREBINDRequest() {
+        let parser = HTTPRequestParser { request in
+            XCTAssert(request.method == .REBIND)
+            XCTAssert(request.uri.path == "/")
+            XCTAssert(request.majorVersion == 1)
+            XCTAssert(request.minorVersion == 1)
+            XCTAssert(request.headers == [:])
+            XCTAssert(request.body == [])
+        }
+        
+        do {
+            let data = ("REBIND / HTTP/1.1\r\n" +
+                "\r\n")
+            try parser.parse(data)
+        } catch {
+            XCTAssert(false)
+        }
+    }
+    
+    func testShortUNBINDRequest() {
+        let parser = HTTPRequestParser { request in
+            XCTAssert(request.method == .UNBIND)
+            XCTAssert(request.uri.path == "/")
+            XCTAssert(request.majorVersion == 1)
+            XCTAssert(request.minorVersion == 1)
+            XCTAssert(request.headers == [:])
+            XCTAssert(request.body == [])
+        }
+        
+        do {
+            let data = ("UNBIND / HTTP/1.1\r\n" +
+                        "\r\n")
+            try parser.parse(data)
+        } catch {
+            XCTAssert(false)
+        }
+    }
+    
+    func testShortACLRequest() {
+        let parser = HTTPRequestParser { request in
+            XCTAssert(request.method == .ACL)
+            XCTAssert(request.uri.path == "/")
+            XCTAssert(request.majorVersion == 1)
+            XCTAssert(request.minorVersion == 1)
+            XCTAssert(request.headers == [:])
+            XCTAssert(request.body == [])
+        }
+        
+        do {
+            let data = ("ACL / HTTP/1.1\r\n" +
+                        "\r\n")
+            try parser.parse(data)
+        } catch {
+            XCTAssert(false)
+        }
+    }
+    
+    func testShortREPORTRequest() {
+        let parser = HTTPRequestParser { request in
+            XCTAssert(request.method == .REPORT)
+            XCTAssert(request.uri.path == "/")
+            XCTAssert(request.majorVersion == 1)
+            XCTAssert(request.minorVersion == 1)
+            XCTAssert(request.headers == [:])
+            XCTAssert(request.body == [])
+        }
+        
+        do {
+            let data = ("REPORT / HTTP/1.1\r\n" +
+                "\r\n")
+            try parser.parse(data)
+        } catch {
+            XCTAssert(false)
+        }
+    }
+    
+    func testShortMKACTIVITYRequest() {
+        let parser = HTTPRequestParser { request in
+            XCTAssert(request.method == .MKACTIVITY)
+            XCTAssert(request.uri.path == "/")
+            XCTAssert(request.majorVersion == 1)
+            XCTAssert(request.minorVersion == 1)
+            XCTAssert(request.headers == [:])
+            XCTAssert(request.body == [])
+        }
+        
+        do {
+            let data = ("MKACTIVITY / HTTP/1.1\r\n" +
+                        "\r\n")
+            try parser.parse(data)
+        } catch {
+            XCTAssert(false)
+        }
+    }
+    
+    func testShortCHECKOUTRequest() {
+        let parser = HTTPRequestParser { request in
+            XCTAssert(request.method == .CHECKOUT)
+            XCTAssert(request.uri.path == "/")
+            XCTAssert(request.majorVersion == 1)
+            XCTAssert(request.minorVersion == 1)
+            XCTAssert(request.headers == [:])
+            XCTAssert(request.body == [])
+        }
+        
+        do {
+            let data = ("CHECKOUT / HTTP/1.1\r\n" +
+                        "\r\n")
+            try parser.parse(data)
+        } catch {
+            XCTAssert(false)
+        }
+    }
+    
+    func testShortMERGERequest() {
+        let parser = HTTPRequestParser { request in
+            XCTAssert(request.method == .MERGE)
+            XCTAssert(request.uri.path == "/")
+            XCTAssert(request.majorVersion == 1)
+            XCTAssert(request.minorVersion == 1)
+            XCTAssert(request.headers == [:])
+            XCTAssert(request.body == [])
+        }
+        
+        do {
+            let data = ("MERGE / HTTP/1.1\r\n" +
+                        "\r\n")
+            try parser.parse(data)
+        } catch {
+            XCTAssert(false)
+        }
+    }
+    
+    func testShortMSEARCHRequest() {
+        let parser = HTTPRequestParser { request in
+            XCTAssert(request.method == .MSEARCH)
+            XCTAssert(request.uri.path == "/")
+            XCTAssert(request.majorVersion == 1)
+            XCTAssert(request.minorVersion == 1)
+            XCTAssert(request.headers == [:])
+            XCTAssert(request.body == [])
+        }
+        
+        do {
+            let data = ("M-SEARCH / HTTP/1.1\r\n" +
+                        "\r\n")
+            try parser.parse(data)
+        } catch {
+            XCTAssert(false)
+        }
+    }
+    
+    func testShortNOTIFYRequest() {
+        let parser = HTTPRequestParser { request in
+            XCTAssert(request.method == .NOTIFY)
+            XCTAssert(request.uri.path == "/")
+            XCTAssert(request.majorVersion == 1)
+            XCTAssert(request.minorVersion == 1)
+            XCTAssert(request.headers == [:])
+            XCTAssert(request.body == [])
+        }
+        
+        do {
+            let data = ("NOTIFY / HTTP/1.1\r\n" +
+                        "\r\n")
+            try parser.parse(data)
+        } catch {
+            XCTAssert(false)
+        }
+    }
+    
+    func testShortSUBSCRIBERequest() {
+        let parser = HTTPRequestParser { request in
+            XCTAssert(request.method == .SUBSCRIBE)
+            XCTAssert(request.uri.path == "/")
+            XCTAssert(request.majorVersion == 1)
+            XCTAssert(request.minorVersion == 1)
+            XCTAssert(request.headers == [:])
+            XCTAssert(request.body == [])
+        }
+        
+        do {
+            let data = ("SUBSCRIBE / HTTP/1.1\r\n" +
+                        "\r\n")
+            try parser.parse(data)
+        } catch {
+            XCTAssert(false)
+        }
+    }
+    
+    func testShortUNSUBSCRIBERequest() {
+        let parser = HTTPRequestParser { request in
+            XCTAssert(request.method == .UNSUBSCRIBE)
+            XCTAssert(request.uri.path == "/")
+            XCTAssert(request.majorVersion == 1)
+            XCTAssert(request.minorVersion == 1)
+            XCTAssert(request.headers == [:])
+            XCTAssert(request.body == [])
+        }
+        
+        do {
+            let data = ("UNSUBSCRIBE / HTTP/1.1\r\n" +
+                        "\r\n")
+            try parser.parse(data)
+        } catch {
+            XCTAssert(false)
+        }
+    }
+    
+    func testShortPATCHRequest() {
+        let parser = HTTPRequestParser { request in
+            XCTAssert(request.method == .PATCH)
+            XCTAssert(request.uri.path == "/")
+            XCTAssert(request.majorVersion == 1)
+            XCTAssert(request.minorVersion == 1)
+            XCTAssert(request.headers == [:])
+            XCTAssert(request.body == [])
+        }
+        
+        do {
+            let data = ("PATCH / HTTP/1.1\r\n" +
+                        "\r\n")
+            try parser.parse(data)
+        } catch {
+            XCTAssert(false)
+        }
+    }
+    
+    func testShortPURGERequest() {
+        let parser = HTTPRequestParser { request in
+            XCTAssert(request.method == .PURGE)
+            XCTAssert(request.uri.path == "/")
+            XCTAssert(request.majorVersion == 1)
+            XCTAssert(request.minorVersion == 1)
+            XCTAssert(request.headers == [:])
+            XCTAssert(request.body == [])
+        }
+        
+        do {
+            let data = ("PURGE / HTTP/1.1\r\n" +
+                        "\r\n")
+            try parser.parse(data)
+        } catch {
+            XCTAssert(false)
+        }
+    }
+    
+    func testShortMKCALENDARRequest() {
+        let parser = HTTPRequestParser { request in
+            XCTAssert(request.method == .MKCALENDAR)
+            XCTAssert(request.uri.path == "/")
+            XCTAssert(request.majorVersion == 1)
+            XCTAssert(request.minorVersion == 1)
+            XCTAssert(request.headers == [:])
+            XCTAssert(request.body == [])
+        }
+        
+        do {
+            let data = ("MKCALENDAR / HTTP/1.1\r\n" +
                         "\r\n")
             try parser.parse(data)
         } catch {
@@ -578,5 +1015,24 @@ class HTTPRequestParserTests: XCTestCase {
         XCTAssert(uri.query["foo"] == "bar")
         XCTAssert(uri.query["for"] == "baz")
         XCTAssert(uri.fragment == "yeah")
+    }
+    
+    func testQueryElementWitoutValue() {
+        let URIString = "http://username:password@[2001:db8:a0b:12f0::1%eth0]:100/foo/bar?foo=&for#yeah"
+        let uri = URI(string: URIString)
+        XCTAssert(uri.scheme == "http")
+        XCTAssert(uri.userInfo?.username == "username")
+        XCTAssert(uri.userInfo?.password == "password")
+        XCTAssert(uri.host == "2001:db8:a0b:12f0::1%eth0")
+        XCTAssert(uri.port == 100)
+        XCTAssert(uri.path == "/foo/bar")
+        XCTAssert(uri.query["foo"] == "")
+        XCTAssert(uri.query["for"] == "")
+        XCTAssert(uri.fragment == "yeah")
+    }
+    
+    func testUnknownMethod() {
+        let method = HTTPMethod(code: 654)
+        XCTAssert(method == .UNKNOWN)
     }
 }

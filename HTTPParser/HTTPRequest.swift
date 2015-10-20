@@ -23,10 +23,10 @@
 // SOFTWARE.
 
 public struct HTTPRequest {
-    public var method: HTTPMethod = .UNKNOWN
-    public var uri: URI = URI()
-    public var majorVersion: Int = 0
-    public var minorVersion: Int = 0
-    public var headers: [String: String] = [:]
-    public var body: [Int8] = []
+    public let method: HTTPMethod
+    public let uri: URI
+    public let majorVersion: Int
+    public let minorVersion: Int
+    public let headers: [String: String]
+    public let body: [Int8]
 }

@@ -25,7 +25,13 @@
 import http_parser
 
 struct HTTPRequestParserContext {
-    var request = HTTPRequest()
+    var method: HTTPMethod = .UNKNOWN
+    var uri: URI = URI()
+    var majorVersion: Int = 0
+    var minorVersion: Int = 0
+    var headers: [String: String] = [:]
+    var body: [Int8] = []
+    
     var currentURI = ""
     var currentHeaderField = ""
     var completion: HTTPRequest -> Void
@@ -123,8 +129,8 @@ func onRequestHeaderValue(parser: UnsafeMutablePointer<http_parser>, data: Unsaf
     var buffer: [Int8] = [Int8](count: length + 1, repeatedValue: 0)
     strncpy(&buffer, data, length)
     let headerField = context.memory.currentHeaderField
-    let previousHeaderValue = context.memory.request.headers[headerField] ?? ""
-    context.memory.request.headers[headerField] = previousHeaderValue + String.fromCString(buffer)!
+    let previousHeaderValue = context.memory.headers[headerField] ?? ""
+    context.memory.headers[headerField] = previousHeaderValue + String.fromCString(buffer)!
 
     return 0
 }
@@ -132,10 +138,10 @@ func onRequestHeaderValue(parser: UnsafeMutablePointer<http_parser>, data: Unsaf
 func onRequestHeadersComplete(parser: UnsafeMutablePointer<http_parser>) -> Int32 {
     let context = UnsafeMutablePointer<HTTPRequestParserContext>(parser.memory.data)
 
-    context.memory.request.method = HTTPMethod(code: Int(parser.memory.method))
-    context.memory.request.majorVersion = Int(parser.memory.http_major)
-    context.memory.request.minorVersion = Int(parser.memory.http_minor)
-    context.memory.request.uri = URI(string: context.memory.currentURI)
+    context.memory.method = HTTPMethod(code: Int(parser.memory.method))
+    context.memory.majorVersion = Int(parser.memory.http_major)
+    context.memory.minorVersion = Int(parser.memory.http_minor)
+    context.memory.uri = URI(string: context.memory.currentURI)
 
     context.memory.currentURI = ""
     context.memory.currentHeaderField = ""
@@ -148,7 +154,7 @@ func onRequestBody(parser: UnsafeMutablePointer<http_parser>, data: UnsafePointe
 
     var buffer: [Int8] = [Int8](count: length, repeatedValue: 0)
     memcpy(&buffer, data, length)
-    context.memory.request.body += buffer
+    context.memory.body += buffer
 
     return 0
 }
@@ -156,14 +162,23 @@ func onRequestBody(parser: UnsafeMutablePointer<http_parser>, data: UnsafePointe
 func onRequestMessageComplete(parser: UnsafeMutablePointer<http_parser>) -> Int32 {
     let context = UnsafeMutablePointer<HTTPRequestParserContext>(parser.memory.data)
 
-    context.memory.completion(context.memory.request)
+    let request = HTTPRequest(
+        method: context.memory.method,
+        uri: context.memory.uri,
+        majorVersion: context.memory.majorVersion,
+        minorVersion: context.memory.minorVersion,
+        headers: context.memory.headers,
+        body: context.memory.body
+    )
+    
+    context.memory.completion(request)
 
-    context.memory.request.body = []
-    context.memory.request.headers = [:]
-    context.memory.request.method = .UNKNOWN
-    context.memory.request.uri = URI()
-    context.memory.request.majorVersion = 0
-    context.memory.request.minorVersion = 0
+    context.memory.method = .UNKNOWN
+    context.memory.uri = URI()
+    context.memory.majorVersion = 0
+    context.memory.minorVersion = 0
+    context.memory.headers = [:]
+    context.memory.body = []
     
     return 0
 }

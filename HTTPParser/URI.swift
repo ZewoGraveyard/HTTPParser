@@ -70,13 +70,10 @@ extension URI {
             return nil
         }
         let userInfoElements = userInfoString.characters.split{$0 == ":"}.map(String.init)
-        if userInfoElements.count == 2 {
-            return URIUserInfo(
-                username: userInfoElements[0],
-                password: userInfoElements[1]
-            )
-        }
-        return nil
+        return URIUserInfo(
+            username: userInfoElements[0],
+            password: userInfoElements[1]
+        )
     }
 
     private static func parseQueryString(queryString: String?) -> [String: String] {

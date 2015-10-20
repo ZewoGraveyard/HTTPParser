@@ -23,10 +23,10 @@
 // SOFTWARE.
 
 public struct HTTPResponse {
-    public var statusCode: Int = 0
-    public var reasonPhrase: String = ""
-    public var majorVersion: Int = 0
-    public var minorVersion: Int = 0
-    public var headers: [String: String] = [:]
-    public var body: [Int8] = []
+    public let statusCode: Int
+    public let reasonPhrase: String
+    public let majorVersion: Int
+    public let minorVersion: Int
+    public let headers: [String: String]
+    public let body: [Int8]
 }
