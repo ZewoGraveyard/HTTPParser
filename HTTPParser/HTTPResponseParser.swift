@@ -68,23 +68,34 @@ public final class HTTPResponseParser {
         context.dealloc(1)
     }
 
-    public func parse(var data: [Int8]) {
-        let bytesParsed = http_parser_execute(&parser, &responseSettings, &data, data.count)
+    public func parseData(data: UnsafeMutablePointer<Void>, length: Int) {
+        let bytesParsed = http_parser_execute(&parser, &responseSettings, UnsafeMutablePointer<Int8>(data), length)
 
         if parser.upgrade == 1 {
             let error = HTTPParseError(description: "Upgrade not supported")
             completion(HTTPParseResult.Failure(error))
         }
 
-        if bytesParsed != data.count {
+        if bytesParsed != length {
             let errorString = http_errno_name(http_errno(parser.http_errno))
             let error = HTTPParseError(description: String.fromCString(errorString)!)
             completion(HTTPParseResult.Failure(error))
         }
     }
+}
 
+extension HTTPResponseParser {
+    public func parse(var data: [Int8]) {
+        parseData(&data, length: data.count)
+    }
+
+    public func parse(string: String) {
+        var data = string.utf8.map { Int8($0) }
+        parseData(&data, length: data.count)
+    }
+    
     public func eof() {
-        parse([])
+        parseData(nil, length: 0)
     }
 }
 

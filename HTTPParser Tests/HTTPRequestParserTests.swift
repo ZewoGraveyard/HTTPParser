@@ -43,7 +43,7 @@ class HTTPRequestParserTests: XCTestCase {
             }
         }
         let data = ("INVALID / HTTP/1.1\r\n" +
-                    "\r\n").bytes
+                    "\r\n")
         parser.parse(data)
     }
 
@@ -62,7 +62,7 @@ class HTTPRequestParserTests: XCTestCase {
             }
         }
         let data = ("DELETE / HTTP/1.1\r\n" +
-                    "\r\n").bytes
+                    "\r\n")
         parser.parse(data)
     }
 
@@ -81,7 +81,7 @@ class HTTPRequestParserTests: XCTestCase {
             }
         }
         let data = ("GET / HTTP/1.1\r\n" +
-                    "\r\n").bytes
+                    "\r\n")
         parser.parse(data)
     }
 
@@ -100,7 +100,7 @@ class HTTPRequestParserTests: XCTestCase {
             }
         }
         let data = ("HEAD / HTTP/1.1\r\n" +
-                    "\r\n").bytes
+                    "\r\n")
         parser.parse(data)
     }
 
@@ -119,7 +119,7 @@ class HTTPRequestParserTests: XCTestCase {
             }
         }
         let data = ("POST / HTTP/1.1\r\n" +
-                    "\r\n").bytes
+                    "\r\n")
         parser.parse(data)
     }
 
@@ -138,7 +138,7 @@ class HTTPRequestParserTests: XCTestCase {
             }
         }
         let data = ("PUT / HTTP/1.1\r\n" +
-                    "\r\n").bytes
+                    "\r\n")
         parser.parse(data)
     }
 
@@ -157,7 +157,7 @@ class HTTPRequestParserTests: XCTestCase {
             }
         }
         let data = ("CONNECT / HTTP/1.1\r\n" +
-                    "\r\n").bytes
+                    "\r\n")
         parser.parse(data)
     }
 
@@ -176,7 +176,7 @@ class HTTPRequestParserTests: XCTestCase {
             }
         }
         let data = ("OPTIONS / HTTP/1.1\r\n" +
-                    "\r\n").bytes
+                    "\r\n")
         parser.parse(data)
     }
 
@@ -195,7 +195,7 @@ class HTTPRequestParserTests: XCTestCase {
             }
         }
         let data = ("TRACE / HTTP/1.1\r\n" +
-                    "\r\n").bytes
+                    "\r\n")
         parser.parse(data)
     }
 
@@ -214,10 +214,10 @@ class HTTPRequestParserTests: XCTestCase {
             }
         }
 
-        let data1 = "GET / HT".bytes
-        let data2 = "TP/1.".bytes
-        let data3 = "1\r\n".bytes
-        let data4 = "\r\n".bytes
+        let data1 = "GET / HT"
+        let data2 = "TP/1."
+        let data3 = "1\r\n"
+        let data4 = "\r\n"
 
         parser.parse(data1)
         parser.parse(data2)
@@ -242,7 +242,7 @@ class HTTPRequestParserTests: XCTestCase {
 
         let data = ("GET / HTTP/1.1\r\n" +
                     "Host: zewo.co\r\n" +
-                    "\r\n").bytes
+                    "\r\n")
 
         parser.parse(data)
     }
@@ -262,13 +262,13 @@ class HTTPRequestParserTests: XCTestCase {
             }
         }
 
-        let data1 = "GET / HTT".bytes
-        let data2 = "P/1.1\r\n".bytes
-        let data3 = "Hos".bytes
-        let data4 = "t: zewo.c".bytes
-        let data5 = "o\r\n".bytes
-        let data6 = "\r".bytes
-        let data7 = "\n".bytes
+        let data1 = "GET / HTT"
+        let data2 = "P/1.1\r\n"
+        let data3 = "Hos"
+        let data4 = "t: zewo.c"
+        let data5 = "o\r\n"
+        let data6 = "\r"
+        let data7 = "\n"
 
         parser.parse(data1)
         parser.parse(data2)
@@ -297,7 +297,7 @@ class HTTPRequestParserTests: XCTestCase {
         let data = ("POST / HTTP/1.1\r\n" +
                     "Content-Length: 4\r\n" +
                     "\r\n" +
-                    "Zewo").bytes
+                    "Zewo")
 
         parser.parse(data)
     }
@@ -317,17 +317,17 @@ class HTTPRequestParserTests: XCTestCase {
             }
         }
 
-        let data1 = "PO".bytes
-        let data2 = "ST /pro".bytes
-        let data3 = "file HTT".bytes
-        let data4 = "P/1.1\r\n".bytes
-        let data5 = "Cont".bytes
-        let data6 = "ent-Length: 4".bytes
-        let data7 = "\r\n".bytes
-        let data8 = "\r".bytes
-        let data9 = "\n".bytes
-        let data10 = "Ze".bytes
-        let data11 = "wo".bytes
+        let data1 = "PO"
+        let data2 = "ST /pro"
+        let data3 = "file HTT"
+        let data4 = "P/1.1\r\n"
+        let data5 = "Cont"
+        let data6 = "ent-Length: 4"
+        let data7 = "\r\n"
+        let data8 = "\r"
+        let data9 = "\n"
+        let data10 = "Ze"
+        let data11 = "wo"
 
         parser.parse(data1)
         parser.parse(data2)
@@ -365,15 +365,15 @@ class HTTPRequestParserTests: XCTestCase {
             }
         }
 
-        let data1 = "GET / HT".bytes
-        let data2 = "TP/1.".bytes
-        let data3 = "1\r\n".bytes
-        let data4 = "\r\n".bytes
+        let data1 = "GET / HT"
+        let data2 = "TP/1."
+        let data3 = "1\r\n"
+        let data4 = "\r\n"
 
-        let data5 = "HEAD /profile HT".bytes
-        let data6 = "TP/1.".bytes
-        let data7 = "1\r\n".bytes
-        let data8 = "\r\n".bytes
+        let data5 = "HEAD /profile HT"
+        let data6 = "TP/1."
+        let data7 = "1\r\n"
+        let data8 = "\r\n"
 
         parser.parse(data1)
         parser.parse(data2)
@@ -413,7 +413,7 @@ class HTTPRequestParserTests: XCTestCase {
         let data = ("GET / HTTP/1.1\r\n" +
                     "Upgrade: WebSocket\r\n" +
                     "Connection: Upgrade\r\n" +
-                    "\r\n").bytes
+                    "\r\n")
 
         parser.parse(data)
     }
@@ -437,7 +437,7 @@ class HTTPRequestParserTests: XCTestCase {
                     "Transfer-Encoding: chunked\r\n" +
                     "\r\n" +
                     "4\r\n" +
-                    "Zewo\r\n").bytes
+                    "Zewo\r\n")
 
         parser.parse(data)
     }
@@ -455,7 +455,7 @@ class HTTPRequestParserTests: XCTestCase {
         let data = ("POST / HTTP/1.1\r\n" +
                     "Content-Length: 5\r\n" +
                     "\r\n" +
-                    "Zewo").bytes
+                    "Zewo")
 
         parser.parse(data)
     }
@@ -474,7 +474,7 @@ class HTTPRequestParserTests: XCTestCase {
                     "Transfer-Encoding: chunked\r\n" +
                     "\r\n" +
                     "5\r\n" +
-                    "Zewo\r\n").bytes
+                    "Zewo\r\n")
 
         parser.parse(data)
     }
@@ -493,7 +493,7 @@ class HTTPRequestParserTests: XCTestCase {
                     "Transfer-Encoding: chunked\r\n" +
                     "\r\n" +
                     "x\r\n" +
-                    "Zewo\r\n").bytes
+                    "Zewo\r\n")
 
         parser.parse(data)
     }
@@ -514,7 +514,7 @@ class HTTPRequestParserTests: XCTestCase {
 
         let data = ("GET / HTTP/1.1\r\n" +
                     "Connection: keep-alive\r\n" +
-                    "\r\n").bytes
+                    "\r\n")
 
         parser.parse(data)
     }
@@ -535,7 +535,7 @@ class HTTPRequestParserTests: XCTestCase {
 
         let data = ("GET / HTTP/1.1\r\n" +
             "Connection: close\r\n" +
-            "\r\n").bytes
+            "\r\n")
 
         parser.parse(data)
     }
@@ -554,7 +554,7 @@ class HTTPRequestParserTests: XCTestCase {
         }
 
         let data = ("GET / HTTP/1.0\r\n" +
-                    "\r\n").bytes
+                    "\r\n")
 
         parser.parse(data)
     }

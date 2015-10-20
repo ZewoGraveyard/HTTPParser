@@ -37,7 +37,7 @@ class HTTPResponseParserTests: XCTestCase {
             }
         }
 
-        let data = ("howdy ho!").bytes
+        let data = ("howdy ho!")
 
         parser.parse(data)
     }
@@ -58,7 +58,7 @@ class HTTPResponseParserTests: XCTestCase {
         }
 
         let data = ("HTTP/1.1 204 No Content\r\n" +
-                    "\r\n").bytes
+                    "\r\n")
 
         parser.parse(data)
     }
@@ -78,12 +78,12 @@ class HTTPResponseParserTests: XCTestCase {
             }
         }
 
-        let data1 = "HTTP/".bytes
-        let data2 = "1.1 2".bytes
-        let data3 = "04 No Co".bytes
-        let data4 = "ntent\r".bytes
-        let data5 = "\n".bytes
-        let data6 = "\r\n".bytes
+        let data1 = "HTTP/"
+        let data2 = "1.1 2"
+        let data3 = "04 No Co"
+        let data4 = "ntent\r"
+        let data5 = "\n"
+        let data6 = "\r\n"
 
         parser.parse(data1)
         parser.parse(data2)
@@ -110,7 +110,7 @@ class HTTPResponseParserTests: XCTestCase {
 
         let data = ("HTTP/1.1 204 No Content\r\n" +
                     "Server: Zewo/0.1\r\n" +
-                    "\r\n").bytes
+                    "\r\n")
 
         parser.parse(data)
     }
@@ -130,10 +130,10 @@ class HTTPResponseParserTests: XCTestCase {
             }
         }
 
-        let data1 = "HTTP/1.".bytes
-        let data2 = "1 204 No Content\r\nServer: Ze".bytes
-        let data3 = "wo/0.1\r\n\r".bytes
-        let data4 = "\n".bytes
+        let data1 = "HTTP/1."
+        let data2 = "1 204 No Content\r\nServer: Ze"
+        let data3 = "wo/0.1\r\n\r"
+        let data4 = "\n"
 
         parser.parse(data1)
         parser.parse(data2)
@@ -159,7 +159,7 @@ class HTTPResponseParserTests: XCTestCase {
         let data = ("HTTP/1.1 200 OK\r\n" +
                     "Content-Length: 4\r\n" +
                     "\r\n" +
-                    "Zewo").bytes
+                    "Zewo")
 
         parser.parse(data)
     }
@@ -179,10 +179,10 @@ class HTTPResponseParserTests: XCTestCase {
             }
         }
 
-        let data1 = "HTT".bytes
-        let data2 = "P/1.1 200 O".bytes
-        let data3 = "K\r\nContent-".bytes
-        let data4 = "Length: 4\r\n\r\nZewo".bytes
+        let data1 = "HTT"
+        let data2 = "P/1.1 200 O"
+        let data3 = "K\r\nContent-"
+        let data4 = "Length: 4\r\n\r\nZewo"
 
         parser.parse(data1)
         parser.parse(data2)
@@ -218,7 +218,7 @@ class HTTPResponseParserTests: XCTestCase {
         let data = ("HTTP/1.1 204 No Content\r\n" +
                     "Upgrade: WebSocket\r\n" +
                     "Connection: Upgrade\r\n" +
-                    "\r\n").bytes
+                    "\r\n")
 
         parser.parse(data)
     }
@@ -242,7 +242,7 @@ class HTTPResponseParserTests: XCTestCase {
                     "Transfer-Encoding: chunked\r\n" +
                     "\r\n" +
                     "4\r\n" +
-                    "Zewo\r\n").bytes
+                    "Zewo\r\n")
 
         parser.parse(data)
     }
@@ -260,7 +260,7 @@ class HTTPResponseParserTests: XCTestCase {
         let data = ("HTTP/1.1 200 OK\r\n" +
                     "Content-Length: 5\r\n" +
                     "\r\n" +
-                    "Zewo").bytes
+                    "Zewo")
 
         parser.parse(data)
     }
@@ -279,7 +279,7 @@ class HTTPResponseParserTests: XCTestCase {
                     "Transfer-Encoding: chunked\r\n" +
                     "\r\n" +
                     "5\r\n" +
-                    "Zewo\r\n").bytes
+                    "Zewo\r\n")
 
         parser.parse(data)
     }
@@ -298,7 +298,7 @@ class HTTPResponseParserTests: XCTestCase {
                     "Transfer-Encoding: chunked\r\n" +
                     "\r\n" +
                     "x\r\n" +
-                    "Zewo\r\n").bytes
+                    "Zewo\r\n")
 
         parser.parse(data)
     }
@@ -319,7 +319,7 @@ class HTTPResponseParserTests: XCTestCase {
 
         let data = ("HTTP/1.1 200 OK\r\n" +
                     "\r\n" +
-                    "Zewo").bytes
+                    "Zewo")
 
         parser.parse(data)
         parser.eof()
