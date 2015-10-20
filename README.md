@@ -109,7 +109,7 @@ let parser = HTTPResponseParser { response in
 
 do {
     // Here you'll probably get the real data from a socket, right?
-    let data = "HTTP/1.1 204 No Content\r\n\r\n".bytes
+    let data = "HTTP/1.1 204 No Content\r\n\r\n"
     try parser.parse(data)
 } catch {
     // Something bad happened :(
