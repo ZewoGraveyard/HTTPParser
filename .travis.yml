@@ -19,8 +19,5 @@ script:
   - xcodebuild -project HTTPParser.xcodeproj -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION"
     -configuration Debug ONLY_ACTIVE_ARCH=NO GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES
     GCC_GENERATE_TEST_COVERAGE_FILES=YES test | xcpretty -c
-  - xcodebuild -project HTTPParser.xcodeproj -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION"
-    -configuration Release ONLY_ACTIVE_ARCH=NO GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES
-    GCC_GENERATE_TEST_COVERAGE_FILES=YES test | xcpretty -c
 after_success:
   - bash <(curl -s https://codecov.io/bash)
