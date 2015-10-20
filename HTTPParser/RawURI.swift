@@ -61,6 +61,8 @@ extension RawURI {
 
 extension RawURI {
     public init(string: String) {
-        self = RawURI(uri: parse_uri(string))
+        let parsedURI = parse_uri(string)
+        self = RawURI(uri: parsedURI)
+        free_parsed_uri(parsedURI)
     }
 }

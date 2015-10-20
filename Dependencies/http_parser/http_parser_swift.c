@@ -110,3 +110,13 @@ struct parsed_uri parse_uri(const char *uri_string) {
 
     return uri;
 }
+
+void free_parsed_uri(struct parsed_uri uri) {
+    free((void *) uri.scheme);
+    free((void *) uri.user_info);
+    free((void *) uri.host);
+    free((void *) uri.port);
+    free((void *) uri.path);
+    free((void *) uri.query);
+    free((void *) uri.fragment);
+}

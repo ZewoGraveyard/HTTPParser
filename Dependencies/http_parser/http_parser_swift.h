@@ -38,5 +38,6 @@ struct parsed_uri {
 };
 
 struct parsed_uri parse_uri(const char *uri_string);
+void free_parsed_uri(struct parsed_uri uri);
 
 #endif /* http_parser_swift_h */
