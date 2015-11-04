@@ -8,45 +8,45 @@
 
 /* Begin PBXBuildFile section */
 		3AB633811BD1354500579B74 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB633801BD1354500579B74 /* main.swift */; };
-		3AB633851BD135E900579B74 /* HTTPRequestParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B321BD09C2600D297F3 /* HTTPRequestParser.swift */; settings = {ASSET_TAGS = (); }; };
-		3AB633871BD135E900579B74 /* HTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B361BD0A04100D297F3 /* HTTPRequest.swift */; settings = {ASSET_TAGS = (); }; };
-		3AB633891BD135E900579B74 /* HTTPParseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B401BD0A51300D297F3 /* HTTPParseError.swift */; settings = {ASSET_TAGS = (); }; };
-		3AB6338A1BD135EF00579B74 /* http_parser.c in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B2D1BD09BF500D297F3 /* http_parser.c */; settings = {ASSET_TAGS = (); }; };
-		B0B94B151BD099AD00D297F3 /* HTTPParser.h in Headers */ = {isa = PBXBuildFile; fileRef = B0B94B141BD099AD00D297F3 /* HTTPParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B0B94B1C1BD099AE00D297F3 /* HTTPParser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0B94B111BD099AD00D297F3 /* HTTPParser.framework */; settings = {ASSET_TAGS = (); }; };
-		B0B94B301BD09BF500D297F3 /* http_parser.c in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B2D1BD09BF500D297F3 /* http_parser.c */; settings = {ASSET_TAGS = (); }; };
-		B0B94B311BD09BF500D297F3 /* http_parser.h in Headers */ = {isa = PBXBuildFile; fileRef = B0B94B2E1BD09BF500D297F3 /* http_parser.h */; settings = {ASSET_TAGS = (); }; };
-		B0B94B331BD09C2600D297F3 /* HTTPRequestParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B321BD09C2600D297F3 /* HTTPRequestParser.swift */; settings = {ASSET_TAGS = (); }; };
-		B0B94B371BD0A04100D297F3 /* HTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B361BD0A04100D297F3 /* HTTPRequest.swift */; settings = {ASSET_TAGS = (); }; };
-		B0B94B3B1BD0A1EC00D297F3 /* HTTPRequestParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B391BD0A1EC00D297F3 /* HTTPRequestParserTests.swift */; settings = {ASSET_TAGS = (); }; };
-		B0B94B411BD0A51300D297F3 /* HTTPParseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B401BD0A51300D297F3 /* HTTPParseError.swift */; settings = {ASSET_TAGS = (); }; };
-		B0B94B511BD0C40100D297F3 /* HTTPParser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0B94B471BD0C40100D297F3 /* HTTPParser.framework */; settings = {ASSET_TAGS = (); }; };
-		B0B94B5E1BD0C47900D297F3 /* HTTPParser.h in Headers */ = {isa = PBXBuildFile; fileRef = B0B94B141BD099AD00D297F3 /* HTTPParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3AB633851BD135E900579B74 /* HTTPRequestParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B321BD09C2600D297F3 /* HTTPRequestParser.swift */; };
+		3AB633871BD135E900579B74 /* HTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B361BD0A04100D297F3 /* HTTPRequest.swift */; };
+		3AB633891BD135E900579B74 /* HTTPParseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B401BD0A51300D297F3 /* HTTPParseError.swift */; };
+		3AB6338A1BD135EF00579B74 /* http_parser.c in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B2D1BD09BF500D297F3 /* http_parser.c */; };
+		B0B94B151BD099AD00D297F3 /* Luminescence.h in Headers */ = {isa = PBXBuildFile; fileRef = B0B94B141BD099AD00D297F3 /* Luminescence.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B0B94B1C1BD099AE00D297F3 /* Luminescence.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0B94B111BD099AD00D297F3 /* Luminescence.framework */; };
+		B0B94B301BD09BF500D297F3 /* http_parser.c in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B2D1BD09BF500D297F3 /* http_parser.c */; };
+		B0B94B311BD09BF500D297F3 /* http_parser.h in Headers */ = {isa = PBXBuildFile; fileRef = B0B94B2E1BD09BF500D297F3 /* http_parser.h */; };
+		B0B94B331BD09C2600D297F3 /* HTTPRequestParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B321BD09C2600D297F3 /* HTTPRequestParser.swift */; };
+		B0B94B371BD0A04100D297F3 /* HTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B361BD0A04100D297F3 /* HTTPRequest.swift */; };
+		B0B94B3B1BD0A1EC00D297F3 /* HTTPRequestParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B391BD0A1EC00D297F3 /* HTTPRequestParserTests.swift */; };
+		B0B94B411BD0A51300D297F3 /* HTTPParseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B401BD0A51300D297F3 /* HTTPParseError.swift */; };
+		B0B94B511BD0C40100D297F3 /* Luminescence.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0B94B471BD0C40100D297F3 /* Luminescence.framework */; };
+		B0B94B5E1BD0C47900D297F3 /* Luminescence.h in Headers */ = {isa = PBXBuildFile; fileRef = B0B94B141BD099AD00D297F3 /* Luminescence.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0B94B5F1BD0C48200D297F3 /* http_parser.h in Headers */ = {isa = PBXBuildFile; fileRef = B0B94B2E1BD09BF500D297F3 /* http_parser.h */; };
-		B0B94B601BD0C48F00D297F3 /* http_parser.c in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B2D1BD09BF500D297F3 /* http_parser.c */; settings = {ASSET_TAGS = (); }; };
-		B0B94B611BD0C48F00D297F3 /* HTTPRequestParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B321BD09C2600D297F3 /* HTTPRequestParser.swift */; settings = {ASSET_TAGS = (); }; };
-		B0B94B631BD0C48F00D297F3 /* HTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B361BD0A04100D297F3 /* HTTPRequest.swift */; settings = {ASSET_TAGS = (); }; };
-		B0B94B651BD0C48F00D297F3 /* HTTPParseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B401BD0A51300D297F3 /* HTTPParseError.swift */; settings = {ASSET_TAGS = (); }; };
-		B0B94B661BD0C58300D297F3 /* HTTPRequestParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B391BD0A1EC00D297F3 /* HTTPRequestParserTests.swift */; settings = {ASSET_TAGS = (); }; };
-		B0B94B681BD18B9600D297F3 /* HTTPResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B671BD18B9600D297F3 /* HTTPResponseParser.swift */; settings = {ASSET_TAGS = (); }; };
-		B0B94B691BD18B9600D297F3 /* HTTPResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B671BD18B9600D297F3 /* HTTPResponseParser.swift */; settings = {ASSET_TAGS = (); }; };
-		B0B94B6A1BD18B9600D297F3 /* HTTPResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B671BD18B9600D297F3 /* HTTPResponseParser.swift */; settings = {ASSET_TAGS = (); }; };
-		B0B94B6C1BD18BCB00D297F3 /* HTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B6B1BD18BCB00D297F3 /* HTTPResponse.swift */; settings = {ASSET_TAGS = (); }; };
-		B0B94B6D1BD18BCB00D297F3 /* HTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B6B1BD18BCB00D297F3 /* HTTPResponse.swift */; settings = {ASSET_TAGS = (); }; };
-		B0B94B6E1BD18BCB00D297F3 /* HTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B6B1BD18BCB00D297F3 /* HTTPResponse.swift */; settings = {ASSET_TAGS = (); }; };
-		B0B94B701BD18D8F00D297F3 /* HTTPResponseParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B6F1BD18D8F00D297F3 /* HTTPResponseParserTests.swift */; settings = {ASSET_TAGS = (); }; };
-		B0B94B711BD18D8F00D297F3 /* HTTPResponseParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B6F1BD18D8F00D297F3 /* HTTPResponseParserTests.swift */; settings = {ASSET_TAGS = (); }; };
-		B0E25A1F1BD3D66C0059078E /* http_parser_swift.c in Sources */ = {isa = PBXBuildFile; fileRef = B0E25A1D1BD3D66C0059078E /* http_parser_swift.c */; settings = {ASSET_TAGS = (); }; };
-		B0E25A201BD3D66C0059078E /* http_parser_swift.c in Sources */ = {isa = PBXBuildFile; fileRef = B0E25A1D1BD3D66C0059078E /* http_parser_swift.c */; settings = {ASSET_TAGS = (); }; };
-		B0E25A211BD3D66C0059078E /* http_parser_swift.c in Sources */ = {isa = PBXBuildFile; fileRef = B0E25A1D1BD3D66C0059078E /* http_parser_swift.c */; settings = {ASSET_TAGS = (); }; };
-		B0E25A221BD3D66C0059078E /* http_parser_swift.h in Headers */ = {isa = PBXBuildFile; fileRef = B0E25A1E1BD3D66C0059078E /* http_parser_swift.h */; settings = {ASSET_TAGS = (); }; };
-		B0E25A231BD3D66C0059078E /* http_parser_swift.h in Headers */ = {isa = PBXBuildFile; fileRef = B0E25A1E1BD3D66C0059078E /* http_parser_swift.h */; settings = {ASSET_TAGS = (); }; };
-		B0E25A261BD3F1B70059078E /* URI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E25A251BD3F1B70059078E /* URI.swift */; settings = {ASSET_TAGS = (); }; };
-		B0E25A271BD3F1B70059078E /* URI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E25A251BD3F1B70059078E /* URI.swift */; settings = {ASSET_TAGS = (); }; };
-		B0E25A281BD3F1B70059078E /* URI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E25A251BD3F1B70059078E /* URI.swift */; settings = {ASSET_TAGS = (); }; };
-		B0E25A2B1BD4199D0059078E /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E25A2A1BD4199D0059078E /* HTTPMethod.swift */; settings = {ASSET_TAGS = (); }; };
-		B0E25A2C1BD4199D0059078E /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E25A2A1BD4199D0059078E /* HTTPMethod.swift */; settings = {ASSET_TAGS = (); }; };
-		B0E25A2D1BD4199D0059078E /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E25A2A1BD4199D0059078E /* HTTPMethod.swift */; settings = {ASSET_TAGS = (); }; };
+		B0B94B601BD0C48F00D297F3 /* http_parser.c in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B2D1BD09BF500D297F3 /* http_parser.c */; };
+		B0B94B611BD0C48F00D297F3 /* HTTPRequestParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B321BD09C2600D297F3 /* HTTPRequestParser.swift */; };
+		B0B94B631BD0C48F00D297F3 /* HTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B361BD0A04100D297F3 /* HTTPRequest.swift */; };
+		B0B94B651BD0C48F00D297F3 /* HTTPParseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B401BD0A51300D297F3 /* HTTPParseError.swift */; };
+		B0B94B661BD0C58300D297F3 /* HTTPRequestParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B391BD0A1EC00D297F3 /* HTTPRequestParserTests.swift */; };
+		B0B94B681BD18B9600D297F3 /* HTTPResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B671BD18B9600D297F3 /* HTTPResponseParser.swift */; };
+		B0B94B691BD18B9600D297F3 /* HTTPResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B671BD18B9600D297F3 /* HTTPResponseParser.swift */; };
+		B0B94B6A1BD18B9600D297F3 /* HTTPResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B671BD18B9600D297F3 /* HTTPResponseParser.swift */; };
+		B0B94B6C1BD18BCB00D297F3 /* HTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B6B1BD18BCB00D297F3 /* HTTPResponse.swift */; };
+		B0B94B6D1BD18BCB00D297F3 /* HTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B6B1BD18BCB00D297F3 /* HTTPResponse.swift */; };
+		B0B94B6E1BD18BCB00D297F3 /* HTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B6B1BD18BCB00D297F3 /* HTTPResponse.swift */; };
+		B0B94B701BD18D8F00D297F3 /* HTTPResponseParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B6F1BD18D8F00D297F3 /* HTTPResponseParserTests.swift */; };
+		B0B94B711BD18D8F00D297F3 /* HTTPResponseParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B6F1BD18D8F00D297F3 /* HTTPResponseParserTests.swift */; };
+		B0E25A1F1BD3D66C0059078E /* incandescence_swift.c in Sources */ = {isa = PBXBuildFile; fileRef = B0E25A1D1BD3D66C0059078E /* incandescence_swift.c */; };
+		B0E25A201BD3D66C0059078E /* incandescence_swift.c in Sources */ = {isa = PBXBuildFile; fileRef = B0E25A1D1BD3D66C0059078E /* incandescence_swift.c */; };
+		B0E25A211BD3D66C0059078E /* incandescence_swift.c in Sources */ = {isa = PBXBuildFile; fileRef = B0E25A1D1BD3D66C0059078E /* incandescence_swift.c */; };
+		B0E25A221BD3D66C0059078E /* incandescence_swift.h in Headers */ = {isa = PBXBuildFile; fileRef = B0E25A1E1BD3D66C0059078E /* incandescence_swift.h */; };
+		B0E25A231BD3D66C0059078E /* incandescence_swift.h in Headers */ = {isa = PBXBuildFile; fileRef = B0E25A1E1BD3D66C0059078E /* incandescence_swift.h */; };
+		B0E25A261BD3F1B70059078E /* URI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E25A251BD3F1B70059078E /* URI.swift */; };
+		B0E25A271BD3F1B70059078E /* URI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E25A251BD3F1B70059078E /* URI.swift */; };
+		B0E25A281BD3F1B70059078E /* URI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E25A251BD3F1B70059078E /* URI.swift */; };
+		B0E25A2B1BD4199D0059078E /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E25A2A1BD4199D0059078E /* HTTPMethod.swift */; };
+		B0E25A2C1BD4199D0059078E /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E25A2A1BD4199D0059078E /* HTTPMethod.swift */; };
+		B0E25A2D1BD4199D0059078E /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E25A2A1BD4199D0059078E /* HTTPMethod.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,27 +79,27 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3AB6337E1BD1354500579B74 /* HTTPParser Command Line */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "HTTPParser Command Line"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3AB6337E1BD1354500579B74 /* HTTPParser Command Line */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "HTTPParser Command Line"; path = Luminescence; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AB633801BD1354500579B74 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		B0B94B111BD099AD00D297F3 /* HTTPParser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HTTPParser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B0B94B141BD099AD00D297F3 /* HTTPParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTTPParser.h; sourceTree = "<group>"; };
+		B0B94B111BD099AD00D297F3 /* Luminescence.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Luminescence.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0B94B141BD099AD00D297F3 /* Luminescence.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Luminescence.h; sourceTree = "<group>"; };
 		B0B94B161BD099AD00D297F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B0B94B1B1BD099AE00D297F3 /* HTTPParser iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "HTTPParser iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0B94B1B1BD099AE00D297F3 /* LuminescenceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LuminescenceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0B94B2D1BD09BF500D297F3 /* http_parser.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = http_parser.c; sourceTree = "<group>"; };
 		B0B94B2E1BD09BF500D297F3 /* http_parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = http_parser.h; sourceTree = "<group>"; };
-		B0B94B2F1BD09BF500D297F3 /* module.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.map; sourceTree = "<group>"; };
+		B0B94B2F1BD09BF500D297F3 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		B0B94B321BD09C2600D297F3 /* HTTPRequestParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = HTTPRequestParser.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		B0B94B361BD0A04100D297F3 /* HTTPRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = HTTPRequest.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		B0B94B391BD0A1EC00D297F3 /* HTTPRequestParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = HTTPRequestParserTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		B0B94B3A1BD0A1EC00D297F3 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B0B94B401BD0A51300D297F3 /* HTTPParseError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPParseError.swift; sourceTree = "<group>"; };
-		B0B94B471BD0C40100D297F3 /* HTTPParser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HTTPParser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B0B94B501BD0C40100D297F3 /* HTTPParser OSX Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "HTTPParser OSX Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0B94B471BD0C40100D297F3 /* Luminescence.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Luminescence.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0B94B501BD0C40100D297F3 /* HTTPParser OSX Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "HTTPParser OSX Tests.xctest"; path = Luminescence.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0B94B671BD18B9600D297F3 /* HTTPResponseParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = HTTPResponseParser.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		B0B94B6B1BD18BCB00D297F3 /* HTTPResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = HTTPResponse.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		B0B94B6F1BD18D8F00D297F3 /* HTTPResponseParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPResponseParserTests.swift; sourceTree = "<group>"; };
-		B0E25A1D1BD3D66C0059078E /* http_parser_swift.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = http_parser_swift.c; sourceTree = "<group>"; };
-		B0E25A1E1BD3D66C0059078E /* http_parser_swift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = http_parser_swift.h; sourceTree = "<group>"; };
+		B0E25A1D1BD3D66C0059078E /* incandescence_swift.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = incandescence_swift.c; sourceTree = "<group>"; };
+		B0E25A1E1BD3D66C0059078E /* incandescence_swift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = incandescence_swift.h; sourceTree = "<group>"; };
 		B0E25A251BD3F1B70059078E /* URI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = URI.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		B0E25A2A1BD4199D0059078E /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = HTTPMethod.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
@@ -123,7 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B0B94B1C1BD099AE00D297F3 /* HTTPParser.framework in Frameworks */,
+				B0B94B1C1BD099AE00D297F3 /* Luminescence.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,19 +138,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B0B94B511BD0C40100D297F3 /* HTTPParser.framework in Frameworks */,
+				B0B94B511BD0C40100D297F3 /* Luminescence.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3AB6337F1BD1354500579B74 /* HTTPParser Command Line */ = {
+		3AB6337F1BD1354500579B74 /* Luminescence Command Line */ = {
 			isa = PBXGroup;
 			children = (
 				3AB633801BD1354500579B74 /* main.swift */,
 			);
-			path = "HTTPParser Command Line";
+			path = "Luminescence Command Line";
 			sourceTree = "<group>";
 		};
 		B06D3E3A1BD28D41004F750D /* Request */ = {
@@ -159,7 +159,7 @@
 				B0B94B361BD0A04100D297F3 /* HTTPRequest.swift */,
 				B0B94B321BD09C2600D297F3 /* HTTPRequestParser.swift */,
 			);
-			name = Request;
+			path = Request;
 			sourceTree = "<group>";
 		};
 		B06D3E3B1BD28D4A004F750D /* Response */ = {
@@ -168,7 +168,7 @@
 				B0B94B6B1BD18BCB00D297F3 /* HTTPResponse.swift */,
 				B0B94B671BD18B9600D297F3 /* HTTPResponseParser.swift */,
 			);
-			name = Response;
+			path = Response;
 			sourceTree = "<group>";
 		};
 		B06D3E3C1BD28D63004F750D /* Error */ = {
@@ -176,16 +176,16 @@
 			children = (
 				B0B94B401BD0A51300D297F3 /* HTTPParseError.swift */,
 			);
-			name = Error;
+			path = Error;
 			sourceTree = "<group>";
 		};
 		B0B94B071BD099AD00D297F3 = {
 			isa = PBXGroup;
 			children = (
 				B0B94B2B1BD09B6D00D297F3 /* Dependencies */,
-				B0B94B131BD099AD00D297F3 /* HTTPParser */,
-				B0B94B381BD0A1EC00D297F3 /* HTTPParser Tests */,
-				3AB6337F1BD1354500579B74 /* HTTPParser Command Line */,
+				B0B94B131BD099AD00D297F3 /* Luminescence */,
+				3AB6337F1BD1354500579B74 /* Luminescence Command Line */,
+				B0B94B381BD0A1EC00D297F3 /* Luminescence Tests */,
 				B0B94B121BD099AD00D297F3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -193,66 +193,65 @@
 		B0B94B121BD099AD00D297F3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B0B94B111BD099AD00D297F3 /* HTTPParser.framework */,
-				B0B94B1B1BD099AE00D297F3 /* HTTPParser iOS Tests.xctest */,
-				B0B94B471BD0C40100D297F3 /* HTTPParser.framework */,
+				B0B94B111BD099AD00D297F3 /* Luminescence.framework */,
+				B0B94B1B1BD099AE00D297F3 /* LuminescenceTests.xctest */,
+				B0B94B471BD0C40100D297F3 /* Luminescence.framework */,
 				B0B94B501BD0C40100D297F3 /* HTTPParser OSX Tests.xctest */,
 				3AB6337E1BD1354500579B74 /* HTTPParser Command Line */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B0B94B131BD099AD00D297F3 /* HTTPParser */ = {
+		B0B94B131BD099AD00D297F3 /* Luminescence */ = {
 			isa = PBXGroup;
 			children = (
-				B0E25A241BD3F1A50059078E /* URI */,
-				B0E25A291BD4197B0059078E /* Method */,
 				B06D3E3C1BD28D63004F750D /* Error */,
+				B0E25A291BD4197B0059078E /* Method */,
 				B06D3E3A1BD28D41004F750D /* Request */,
 				B06D3E3B1BD28D4A004F750D /* Response */,
-				B0B94B141BD099AD00D297F3 /* HTTPParser.h */,
+				B0E25A241BD3F1A50059078E /* URI */,
 				B0B94B161BD099AD00D297F3 /* Info.plist */,
+				B0B94B141BD099AD00D297F3 /* Luminescence.h */,
 			);
-			path = HTTPParser;
+			path = Luminescence;
 			sourceTree = "<group>";
 		};
 		B0B94B2B1BD09B6D00D297F3 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				B0B94B2C1BD09BF500D297F3 /* http_parser */,
+				B0B94B2F1BD09BF500D297F3 /* module.modulemap */,
+				B0B94B2C1BD09BF500D297F3 /* Incandescence */,
 			);
-			name = Dependencies;
+			path = Dependencies;
 			sourceTree = "<group>";
 		};
-		B0B94B2C1BD09BF500D297F3 /* http_parser */ = {
+		B0B94B2C1BD09BF500D297F3 /* Incandescence */ = {
 			isa = PBXGroup;
 			children = (
-				B0B94B2E1BD09BF500D297F3 /* http_parser.h */,
 				B0B94B2D1BD09BF500D297F3 /* http_parser.c */,
-				B0B94B2F1BD09BF500D297F3 /* module.map */,
-				B0E25A1E1BD3D66C0059078E /* http_parser_swift.h */,
-				B0E25A1D1BD3D66C0059078E /* http_parser_swift.c */,
+				B0B94B2E1BD09BF500D297F3 /* http_parser.h */,
+				B0E25A1D1BD3D66C0059078E /* incandescence_swift.c */,
+				B0E25A1E1BD3D66C0059078E /* incandescence_swift.h */,
 			);
-			name = http_parser;
-			path = Dependencies/http_parser;
+			path = Incandescence;
 			sourceTree = "<group>";
 		};
-		B0B94B381BD0A1EC00D297F3 /* HTTPParser Tests */ = {
+		B0B94B381BD0A1EC00D297F3 /* Luminescence Tests */ = {
 			isa = PBXGroup;
 			children = (
 				B0B94B391BD0A1EC00D297F3 /* HTTPRequestParserTests.swift */,
 				B0B94B6F1BD18D8F00D297F3 /* HTTPResponseParserTests.swift */,
 				B0B94B3A1BD0A1EC00D297F3 /* Info.plist */,
 			);
-			path = "HTTPParser Tests";
-			sourceTree = SOURCE_ROOT;
+			path = "Luminescence Tests";
+			sourceTree = "<group>";
 		};
 		B0E25A241BD3F1A50059078E /* URI */ = {
 			isa = PBXGroup;
 			children = (
 				B0E25A251BD3F1B70059078E /* URI.swift */,
 			);
-			name = URI;
+			path = URI;
 			sourceTree = "<group>";
 		};
 		B0E25A291BD4197B0059078E /* Method */ = {
@@ -260,7 +259,7 @@
 			children = (
 				B0E25A2A1BD4199D0059078E /* HTTPMethod.swift */,
 			);
-			name = Method;
+			path = Method;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,8 +269,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B0B94B151BD099AD00D297F3 /* HTTPParser.h in Headers */,
-				B0E25A231BD3D66C0059078E /* http_parser_swift.h in Headers */,
+				B0B94B151BD099AD00D297F3 /* Luminescence.h in Headers */,
+				B0E25A231BD3D66C0059078E /* incandescence_swift.h in Headers */,
 				B0B94B311BD09BF500D297F3 /* http_parser.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -280,8 +279,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B0B94B5E1BD0C47900D297F3 /* HTTPParser.h in Headers */,
-				B0E25A221BD3D66C0059078E /* http_parser_swift.h in Headers */,
+				B0B94B5E1BD0C47900D297F3 /* Luminescence.h in Headers */,
+				B0E25A221BD3D66C0059078E /* incandescence_swift.h in Headers */,
 				B0B94B5F1BD0C48200D297F3 /* http_parser.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -289,9 +288,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		3AB6337D1BD1354500579B74 /* HTTPParser Command Line */ = {
+		3AB6337D1BD1354500579B74 /* Luminescence Command Line */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3AB633841BD1354500579B74 /* Build configuration list for PBXNativeTarget "HTTPParser Command Line" */;
+			buildConfigurationList = 3AB633841BD1354500579B74 /* Build configuration list for PBXNativeTarget "Luminescence Command Line" */;
 			buildPhases = (
 				3AB6337A1BD1354500579B74 /* Sources */,
 				3AB6337B1BD1354500579B74 /* Frameworks */,
@@ -301,14 +300,14 @@
 			);
 			dependencies = (
 			);
-			name = "HTTPParser Command Line";
+			name = "Luminescence Command Line";
 			productName = "HTTPParser Command Line";
 			productReference = 3AB6337E1BD1354500579B74 /* HTTPParser Command Line */;
 			productType = "com.apple.product-type.tool";
 		};
-		B0B94B101BD099AD00D297F3 /* HTTPParser iOS */ = {
+		B0B94B101BD099AD00D297F3 /* Luminescence iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B0B94B251BD099AE00D297F3 /* Build configuration list for PBXNativeTarget "HTTPParser iOS" */;
+			buildConfigurationList = B0B94B251BD099AE00D297F3 /* Build configuration list for PBXNativeTarget "Luminescence iOS" */;
 			buildPhases = (
 				B0B94B0C1BD099AD00D297F3 /* Sources */,
 				B0B94B0D1BD099AD00D297F3 /* Frameworks */,
@@ -319,14 +318,14 @@
 			);
 			dependencies = (
 			);
-			name = "HTTPParser iOS";
+			name = "Luminescence iOS";
 			productName = HTTPParser;
-			productReference = B0B94B111BD099AD00D297F3 /* HTTPParser.framework */;
+			productReference = B0B94B111BD099AD00D297F3 /* Luminescence.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		B0B94B1A1BD099AE00D297F3 /* HTTPParser iOS Tests */ = {
+		B0B94B1A1BD099AE00D297F3 /* Luminescence iOS Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B0B94B281BD099AE00D297F3 /* Build configuration list for PBXNativeTarget "HTTPParser iOS Tests" */;
+			buildConfigurationList = B0B94B281BD099AE00D297F3 /* Build configuration list for PBXNativeTarget "Luminescence iOS Tests" */;
 			buildPhases = (
 				B0B94B171BD099AE00D297F3 /* Sources */,
 				B0B94B181BD099AE00D297F3 /* Frameworks */,
@@ -337,14 +336,14 @@
 			dependencies = (
 				B0B94B1E1BD099AE00D297F3 /* PBXTargetDependency */,
 			);
-			name = "HTTPParser iOS Tests";
+			name = "Luminescence iOS Tests";
 			productName = HTTPParserTests;
-			productReference = B0B94B1B1BD099AE00D297F3 /* HTTPParser iOS Tests.xctest */;
+			productReference = B0B94B1B1BD099AE00D297F3 /* LuminescenceTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		B0B94B461BD0C40100D297F3 /* HTTPParser OSX */ = {
+		B0B94B461BD0C40100D297F3 /* Luminescence OSX */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B0B94B581BD0C40100D297F3 /* Build configuration list for PBXNativeTarget "HTTPParser OSX" */;
+			buildConfigurationList = B0B94B581BD0C40100D297F3 /* Build configuration list for PBXNativeTarget "Luminescence OSX" */;
 			buildPhases = (
 				B0B94B421BD0C40100D297F3 /* Sources */,
 				B0B94B431BD0C40100D297F3 /* Frameworks */,
@@ -355,14 +354,14 @@
 			);
 			dependencies = (
 			);
-			name = "HTTPParser OSX";
+			name = "Luminescence OSX";
 			productName = "HTTPParser OSX";
-			productReference = B0B94B471BD0C40100D297F3 /* HTTPParser.framework */;
+			productReference = B0B94B471BD0C40100D297F3 /* Luminescence.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		B0B94B4F1BD0C40100D297F3 /* HTTPParser OSX Tests */ = {
+		B0B94B4F1BD0C40100D297F3 /* Luminescence OSX Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B0B94B5B1BD0C40100D297F3 /* Build configuration list for PBXNativeTarget "HTTPParser OSX Tests" */;
+			buildConfigurationList = B0B94B5B1BD0C40100D297F3 /* Build configuration list for PBXNativeTarget "Luminescence OSX Tests" */;
 			buildPhases = (
 				B0B94B4C1BD0C40100D297F3 /* Sources */,
 				B0B94B4D1BD0C40100D297F3 /* Frameworks */,
@@ -373,7 +372,7 @@
 			dependencies = (
 				B0B94B531BD0C40100D297F3 /* PBXTargetDependency */,
 			);
-			name = "HTTPParser OSX Tests";
+			name = "Luminescence OSX Tests";
 			productName = "HTTPParser OSXTests";
 			productReference = B0B94B501BD0C40100D297F3 /* HTTPParser OSX Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -405,7 +404,7 @@
 					};
 				};
 			};
-			buildConfigurationList = B0B94B0B1BD099AD00D297F3 /* Build configuration list for PBXProject "HTTPParser" */;
+			buildConfigurationList = B0B94B0B1BD099AD00D297F3 /* Build configuration list for PBXProject "Luminescence" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -417,11 +416,11 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B0B94B461BD0C40100D297F3 /* HTTPParser OSX */,
-				B0B94B101BD099AD00D297F3 /* HTTPParser iOS */,
-				B0B94B4F1BD0C40100D297F3 /* HTTPParser OSX Tests */,
-				B0B94B1A1BD099AE00D297F3 /* HTTPParser iOS Tests */,
-				3AB6337D1BD1354500579B74 /* HTTPParser Command Line */,
+				B0B94B461BD0C40100D297F3 /* Luminescence OSX */,
+				B0B94B101BD099AD00D297F3 /* Luminescence iOS */,
+				B0B94B4F1BD0C40100D297F3 /* Luminescence OSX Tests */,
+				B0B94B1A1BD099AE00D297F3 /* Luminescence iOS Tests */,
+				3AB6337D1BD1354500579B74 /* Luminescence Command Line */,
 			);
 		};
 /* End PBXProject section */
@@ -468,7 +467,7 @@
 				3AB633871BD135E900579B74 /* HTTPRequest.swift in Sources */,
 				3AB633891BD135E900579B74 /* HTTPParseError.swift in Sources */,
 				B0B94B6E1BD18BCB00D297F3 /* HTTPResponse.swift in Sources */,
-				B0E25A211BD3D66C0059078E /* http_parser_swift.c in Sources */,
+				B0E25A211BD3D66C0059078E /* incandescence_swift.c in Sources */,
 				B0B94B6A1BD18B9600D297F3 /* HTTPResponseParser.swift in Sources */,
 				B0E25A2D1BD4199D0059078E /* HTTPMethod.swift in Sources */,
 				B0E25A281BD3F1B70059078E /* URI.swift in Sources */,
@@ -483,7 +482,7 @@
 				B0B94B6D1BD18BCB00D297F3 /* HTTPResponse.swift in Sources */,
 				B0B94B331BD09C2600D297F3 /* HTTPRequestParser.swift in Sources */,
 				B0B94B371BD0A04100D297F3 /* HTTPRequest.swift in Sources */,
-				B0E25A201BD3D66C0059078E /* http_parser_swift.c in Sources */,
+				B0E25A201BD3D66C0059078E /* incandescence_swift.c in Sources */,
 				B0B94B691BD18B9600D297F3 /* HTTPResponseParser.swift in Sources */,
 				B0B94B301BD09BF500D297F3 /* http_parser.c in Sources */,
 				B0B94B411BD0A51300D297F3 /* HTTPParseError.swift in Sources */,
@@ -508,7 +507,7 @@
 				B0B94B6C1BD18BCB00D297F3 /* HTTPResponse.swift in Sources */,
 				B0B94B611BD0C48F00D297F3 /* HTTPRequestParser.swift in Sources */,
 				B0B94B601BD0C48F00D297F3 /* http_parser.c in Sources */,
-				B0E25A1F1BD3D66C0059078E /* http_parser_swift.c in Sources */,
+				B0E25A1F1BD3D66C0059078E /* incandescence_swift.c in Sources */,
 				B0B94B681BD18B9600D297F3 /* HTTPResponseParser.swift in Sources */,
 				B0B94B631BD0C48F00D297F3 /* HTTPRequest.swift in Sources */,
 				B0B94B651BD0C48F00D297F3 /* HTTPParseError.swift in Sources */,
@@ -530,12 +529,12 @@
 /* Begin PBXTargetDependency section */
 		B0B94B1E1BD099AE00D297F3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B0B94B101BD099AD00D297F3 /* HTTPParser iOS */;
+			target = B0B94B101BD099AD00D297F3 /* Luminescence iOS */;
 			targetProxy = B0B94B1D1BD099AE00D297F3 /* PBXContainerItemProxy */;
 		};
 		B0B94B531BD0C40100D297F3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B0B94B461BD0C40100D297F3 /* HTTPParser OSX */;
+			target = B0B94B461BD0C40100D297F3 /* Luminescence OSX */;
 			targetProxy = B0B94B521BD0C40100D297F3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -545,7 +544,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Luminescence;
 				SDKROOT = macosx;
 				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Dependencies";
 			};
@@ -555,7 +554,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Luminescence;
 				SDKROOT = macosx;
 				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Dependencies";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -659,12 +658,12 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = HTTPParser/Info.plist;
+				INFOPLIST_FILE = Luminescence/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zewo.HTTPParser;
-				PRODUCT_NAME = HTTPParser;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zewo.LuminescenceiOS;
+				PRODUCT_NAME = Luminescence;
 				SKIP_INSTALL = YES;
 				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Dependencies";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -679,12 +678,12 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = HTTPParser/Info.plist;
+				INFOPLIST_FILE = Luminescence/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zewo.HTTPParser;
-				PRODUCT_NAME = HTTPParser;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zewo.LuminescenceiOS;
+				PRODUCT_NAME = Luminescence;
 				SKIP_INSTALL = YES;
 				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Dependencies";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -694,20 +693,20 @@
 		B0B94B291BD099AE00D297F3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = "HTTPParser Tests/Info.plist";
+				INFOPLIST_FILE = "Luminescence Tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zewo.HTTPParserTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.zewo.LuminescenceiOSTests;
+				PRODUCT_NAME = LuminescenceTests;
 			};
 			name = Debug;
 		};
 		B0B94B2A1BD099AE00D297F3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = "HTTPParser Tests/Info.plist";
+				INFOPLIST_FILE = "Luminescence Tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zewo.HTTPParserTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.zewo.LuminescenceiOSTests;
+				PRODUCT_NAME = LuminescenceTests;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
@@ -721,12 +720,12 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = HTTPParser/Info.plist;
+				INFOPLIST_FILE = Luminescence/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.zewo.HTTPParser-OSX";
-				PRODUCT_NAME = HTTPParser;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zewo.LuminescenceOSX;
+				PRODUCT_NAME = Luminescence;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Dependencies";
@@ -742,12 +741,12 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = HTTPParser/Info.plist;
+				INFOPLIST_FILE = Luminescence/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.zewo.HTTPParser-OSX";
-				PRODUCT_NAME = HTTPParser;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zewo.LuminescenceOSX;
+				PRODUCT_NAME = Luminescence;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Dependencies";
@@ -759,11 +758,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = "HTTPParser Tests/Info.plist";
+				INFOPLIST_FILE = "Luminescence Tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.zewo.HTTPParser-OSXTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.zewo.LuminescenceOSXTests;
+				PRODUCT_NAME = LuminescenceTests;
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -772,11 +771,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = "HTTPParser Tests/Info.plist";
+				INFOPLIST_FILE = "Luminescence Tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.zewo.HTTPParser-OSXTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.zewo.LuminescenceOSXTests;
+				PRODUCT_NAME = LuminescenceTests;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
@@ -785,7 +784,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3AB633841BD1354500579B74 /* Build configuration list for PBXNativeTarget "HTTPParser Command Line" */ = {
+		3AB633841BD1354500579B74 /* Build configuration list for PBXNativeTarget "Luminescence Command Line" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3AB633821BD1354500579B74 /* Debug */,
@@ -794,7 +793,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B0B94B0B1BD099AD00D297F3 /* Build configuration list for PBXProject "HTTPParser" */ = {
+		B0B94B0B1BD099AD00D297F3 /* Build configuration list for PBXProject "Luminescence" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B0B94B231BD099AE00D297F3 /* Debug */,
@@ -803,7 +802,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B0B94B251BD099AE00D297F3 /* Build configuration list for PBXNativeTarget "HTTPParser iOS" */ = {
+		B0B94B251BD099AE00D297F3 /* Build configuration list for PBXNativeTarget "Luminescence iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B0B94B261BD099AE00D297F3 /* Debug */,
@@ -812,7 +811,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B0B94B281BD099AE00D297F3 /* Build configuration list for PBXNativeTarget "HTTPParser iOS Tests" */ = {
+		B0B94B281BD099AE00D297F3 /* Build configuration list for PBXNativeTarget "Luminescence iOS Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B0B94B291BD099AE00D297F3 /* Debug */,
@@ -821,7 +820,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B0B94B581BD0C40100D297F3 /* Build configuration list for PBXNativeTarget "HTTPParser OSX" */ = {
+		B0B94B581BD0C40100D297F3 /* Build configuration list for PBXNativeTarget "Luminescence OSX" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B0B94B591BD0C40100D297F3 /* Debug */,
@@ -830,7 +829,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B0B94B5B1BD0C40100D297F3 /* Build configuration list for PBXNativeTarget "HTTPParser OSX Tests" */ = {
+		B0B94B5B1BD0C40100D297F3 /* Build configuration list for PBXNativeTarget "Luminescence OSX Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B0B94B5C1BD0C40100D297F3 /* Debug */,

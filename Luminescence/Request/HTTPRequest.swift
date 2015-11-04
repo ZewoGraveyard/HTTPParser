@@ -29,4 +29,5 @@ public struct HTTPRequest {
     public let minorVersion: Int
     public let headers: [String: String]
     public let body: [Int8]
+    public let keepAlive: Bool
 }

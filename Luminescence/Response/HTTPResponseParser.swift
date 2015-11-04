@@ -22,7 +22,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import http_parser
+import Incandescence
 
 struct HTTPResponseParserContext {
     var statusCode: Int = 0
@@ -74,7 +74,7 @@ public final class HTTPResponseParser {
         context.dealloc(1)
     }
 
-    public func parseData(data: UnsafeMutablePointer<Void>, length: Int) throws {
+    public func parse(data: UnsafeMutablePointer<Void>, length: Int) throws {
         let bytesParsed = http_parser_execute(&parser, &responseSettings, UnsafeMutablePointer<Int8>(data), length)
 
         if parser.upgrade == 1 {
@@ -93,16 +93,16 @@ public final class HTTPResponseParser {
 
 extension HTTPResponseParser {
     public func parse(var data: [Int8]) throws {
-        try parseData(&data, length: data.count)
+        try parse(&data, length: data.count)
     }
 
     public func parse(string: String) throws {
         var data = string.utf8.map { Int8($0) }
-        try parseData(&data, length: data.count)
+        try parse(&data, length: data.count)
     }
     
     public func eof() throws {
-        try parseData(nil, length: 0)
+        try parse(nil, length: 0)
     }
 }
 

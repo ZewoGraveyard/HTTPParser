@@ -23,7 +23,7 @@
 // SOFTWARE.
 
 import XCTest
-@testable import HTTPParser
+import Luminescence
 
 extension String {
     var bytes: [Int8] {
@@ -1029,10 +1029,5 @@ class HTTPRequestParserTests: XCTestCase {
         XCTAssert(uri.query["foo"] == "")
         XCTAssert(uri.query["for"] == "")
         XCTAssert(uri.fragment == "yeah")
-    }
-    
-    func testUnknownMethod() {
-        let method = HTTPMethod(code: 654)
-        XCTAssert(method == .UNKNOWN)
     }
 }

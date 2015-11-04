@@ -22,7 +22,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import http_parser
+import Incandescence
 
 struct HTTPRequestParserContext {
     var method: HTTPMethod = .UNKNOWN
@@ -75,7 +75,7 @@ public final class HTTPRequestParser {
         context.dealloc(1)
     }
 
-    public func parseData(data: UnsafeMutablePointer<Void>, length: Int) throws {
+    public func parse(data: UnsafeMutablePointer<Void>, length: Int) throws {
         let bytesParsed = http_parser_execute(&parser, &requestSettings, UnsafeMutablePointer<Int8>(data), length)
 
         if parser.upgrade == 1 {
@@ -94,12 +94,12 @@ public final class HTTPRequestParser {
 
 extension HTTPRequestParser {
     public func parse(var data: [Int8]) throws {
-        try parseData(&data, length: data.count)
+        try parse(&data, length: data.count)
     }
 
     public func parse(string: String) throws {
         var data = string.utf8.map { Int8($0) }
-        try parseData(&data, length: data.count)
+        try parse(&data, length: data.count)
     }
 }
 
@@ -168,7 +168,8 @@ func onRequestMessageComplete(parser: UnsafeMutablePointer<http_parser>) -> Int3
         majorVersion: context.memory.majorVersion,
         minorVersion: context.memory.minorVersion,
         headers: context.memory.headers,
-        body: context.memory.body
+        body: context.memory.body,
+        keepAlive: http_should_keep_alive(parser) != 0
     )
     
     context.memory.completion(request)

@@ -965,7 +965,7 @@ reexecute:
           case 'D': parser->method = HTTP_DELETE; break;
           case 'G': parser->method = HTTP_GET; break;
           case 'H': parser->method = HTTP_HEAD; break;
-          case 'L': parser->method = HTTP_LOCK; break;
+          case 'L': parser->method = HTTP_LOCK; /* or LINK */ break;
           case 'M': parser->method = HTTP_MKCOL; /* or MOVE, MKACTIVITY, MERGE, M-SEARCH, MKCALENDAR */ break;
           case 'N': parser->method = HTTP_NOTIFY; break;
           case 'O': parser->method = HTTP_OPTIONS; break;
@@ -975,7 +975,7 @@ reexecute:
           case 'R': parser->method = HTTP_REPORT; /* or REBIND */ break;
           case 'S': parser->method = HTTP_SUBSCRIBE; /* or SEARCH */ break;
           case 'T': parser->method = HTTP_TRACE; break;
-          case 'U': parser->method = HTTP_UNLOCK; /* or UNSUBSCRIBE, UNBIND */ break;
+          case 'U': parser->method = HTTP_UNLOCK; /* or UNSUBSCRIBE, UNBIND, UNLINK */ break;
           default:
             SET_ERRNO(HPE_INVALID_METHOD);
             goto error;
@@ -1038,16 +1038,25 @@ reexecute:
               SET_ERRNO(HPE_INVALID_METHOD);
               goto error;
             }
-        } else if (parser->index == 1 && parser->method == HTTP_POST) {
-          if (ch == 'R') {
-            parser->method = HTTP_PROPFIND; /* or HTTP_PROPPATCH */
-          } else if (ch == 'U') {
-            parser->method = HTTP_PUT; /* or HTTP_PURGE */
-          } else if (ch == 'A') {
-            parser->method = HTTP_PATCH;
-          } else {
-            SET_ERRNO(HPE_INVALID_METHOD);
-            goto error;
+        } else if (parser->index == 1) {
+          if (parser->method == HTTP_POST) {
+            if (ch == 'R') {
+              parser->method = HTTP_PROPFIND; /* or HTTP_PROPPATCH */
+            } else if (ch == 'U') {
+              parser->method = HTTP_PUT; /* or HTTP_PURGE */
+            } else if (ch == 'A') {
+              parser->method = HTTP_PATCH;
+            } else {
+              SET_ERRNO(HPE_INVALID_METHOD);
+              goto error;
+            }
+          } else if (parser->method == HTTP_LOCK) {
+            if (ch == 'I') {
+              parser->method = HTTP_LINK;
+            } else {
+              SET_ERRNO(HPE_INVALID_METHOD);
+              goto error;
+            }
           }
         } else if (parser->index == 2) {
           if (parser->method == HTTP_PUT) {
@@ -1072,6 +1081,8 @@ reexecute:
           }
         } else if (parser->index == 4 && parser->method == HTTP_PROPFIND && ch == 'P') {
           parser->method = HTTP_PROPPATCH;
+        } else if (parser->index == 3 && parser->method == HTTP_UNLOCK && ch == 'I') {
+          parser->method = HTTP_UNLINK;
         } else {
           SET_ERRNO(HPE_INVALID_METHOD);
           goto error;
@@ -2139,6 +2150,14 @@ http_should_keep_alive (const http_parser *parser)
   return !http_message_needs_eof(parser);
 }
 
+
+const char *
+http_method_str (enum http_method m)
+{
+  return ELEM_AT(method_strings, m, "<unknown>");
+}
+
+
 void
 http_parser_init (http_parser *parser, enum http_parser_type t)
 {
@@ -2331,6 +2350,11 @@ http_parse_host(const char * buf, struct http_parser_url *u, int found_at) {
   return 0;
 }
 
+void
+http_parser_url_init(struct http_parser_url *u) {
+  memset(u, 0, sizeof(*u));
+}
+
 int
 http_parser_parse_url(const char *buf, size_t buflen, int is_connect,
                       struct http_parser_url *u)
@@ -2433,4 +2457,30 @@ http_parser_parse_url(const char *buf, size_t buflen, int is_connect,
   }
 
   return 0;
+}
+
+void
+http_parser_pause(http_parser *parser, int paused) {
+  /* Users should only be pausing/unpausing a parser that is not in an error
+   * state. In non-debug builds, there's not much that we can do about this
+   * other than ignore it.
+   */
+  if (HTTP_PARSER_ERRNO(parser) == HPE_OK ||
+      HTTP_PARSER_ERRNO(parser) == HPE_PAUSED) {
+    SET_ERRNO((paused) ? HPE_PAUSED : HPE_OK);
+  } else {
+    assert(0 && "Attempting to pause parser in error state");
+  }
+}
+
+int
+http_body_is_final(const struct http_parser *parser) {
+    return parser->state == s_message_done;
+}
+
+unsigned long
+http_parser_version(void) {
+  return HTTP_PARSER_VERSION_MAJOR * 0x10000 |
+         HTTP_PARSER_VERSION_MINOR * 0x00100 |
+         HTTP_PARSER_VERSION_PATCH * 0x00001;
 }
