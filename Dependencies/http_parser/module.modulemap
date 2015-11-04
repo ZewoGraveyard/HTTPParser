@@ -1,4 +1,0 @@
-module http_parser [system] {
-    header "http_parser_swift.h"
-    export *
-}
