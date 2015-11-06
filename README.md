@@ -12,7 +12,7 @@ Luminescence
 
 ## Features
 
-- [x] No `Foundation` depency (**Linux ready**)
+- [x] No `Foundation` dependency (**Linux ready**)
 - [x] Asynchronous parsing
 - [x] Handles persistent streams (keep-alive)
 - [x] Decodes chunked encoding
