@@ -20,6 +20,12 @@ Luminescence
 
 **Luminescence** wraps the C library [http_parser](https://github.com/nodejs/http-parser) used in [node.js](https://github.com/nodejs/node).
 
+## Products
+
+**Luminescence** is the base for the HTTP servers
+- [Aeon](https://github.com/Zewo/Aeon) - GCD based HTTP server
+- [Epoch](https://github.com/Zewo/Epoch) - Venice based HTTP server
+
 ##Usage
 
 `HTTPRequestParser`
