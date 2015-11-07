@@ -25,8 +25,8 @@
 import Incandescence
 
 struct HTTPRequestParserContext {
-    var method: HTTPMethod = .UNKNOWN
-    var uri: URI = URI()
+    var method: HTTPMethod! = nil
+    var uri: URI! = nil
     var majorVersion: Int = 0
     var minorVersion: Int = 0
     var headers: [String: String] = [:]
@@ -174,8 +174,8 @@ func onRequestMessageComplete(parser: UnsafeMutablePointer<http_parser>) -> Int3
     
     context.memory.completion(request)
 
-    context.memory.method = .UNKNOWN
-    context.memory.uri = URI()
+    context.memory.method = nil
+    context.memory.uri = nil
     context.memory.majorVersion = 0
     context.memory.minorVersion = 0
     context.memory.headers = [:]
