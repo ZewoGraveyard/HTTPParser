@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
   s.version = '0.1'
   s.license = 'MIT'
   s.summary = 'HTTP parser for Swift 2 (Linux ready)'
-  s.homepage = 'https://github.com/Zewo/Kalopsia'
+  s.homepage = 'https://github.com/Zewo/Luminescence'
   s.authors = { 'Paulo Faria' => 'paulo.faria.rl@gmail.com' }
   s.source = { :git => 'https://github.com/Zewo/Luminescence.git', :tag => 'v0.1' }
 
