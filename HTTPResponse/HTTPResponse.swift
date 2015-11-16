@@ -29,4 +29,13 @@ public struct HTTPResponse {
     public let minorVersion: Int
     public let headers: [String: String]
     public let body: [Int8]
+
+    public init(statusCode: Int, reasonPhrase: String, majorVersion: Int = 1, minorVersion: Int = 1, headers: [String: String] = [:], body: [Int8] = []) {
+        self.statusCode = statusCode
+        self.reasonPhrase = reasonPhrase
+        self.majorVersion = majorVersion
+        self.minorVersion = minorVersion
+        self.headers = headers
+        self.body = body
+    }
 }

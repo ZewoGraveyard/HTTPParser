@@ -1,4 +1,4 @@
-// HTTPRequest.swift
+// URI.swift
 //
 // The MIT License (MIT)
 //
@@ -22,12 +22,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-public struct HTTPRequest {
-    public let method: HTTPMethod
-    public let uri: URI
-    public let majorVersion: Int
-    public let minorVersion: Int
-    public let headers: [String: String]
-    public let body: [Int8]
-    public let keepAlive: Bool
+public struct URI {
+    public struct UserInfo {
+        public let username: String
+        public let password: String
+    }
+
+    public let scheme: String?
+    public let userInfo: UserInfo?
+    public let host: String?
+    public let port: Int?
+    public let path: String?
+    public let query: [String : String]
+    public let fragment: String?
 }

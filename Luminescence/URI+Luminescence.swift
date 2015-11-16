@@ -1,4 +1,4 @@
-// URI.swift
+// URI+Luminescence.swift
 //
 // The MIT License (MIT)
 //
@@ -23,22 +23,6 @@
 // SOFTWARE.
 
 import Incandescence
-
-public struct URIUserInfo {
-    public let username: String
-    public let password: String
-}
-
-public struct URI {
-    public let scheme: String?
-    public let userInfo: URIUserInfo?
-    public let host: String?
-    public let port: Int?
-    public let path: String?
-    public let query: [String: String]
-    public let fragment: String?
-
-}
 
 extension URI {
     public init(string: String) {
@@ -93,9 +77,9 @@ extension URI {
         return string[string.startIndex.advancedBy(Int(start)) ..< string.startIndex.advancedBy(Int(end))]
     }
 
-    @inline(__always) private static func parseUserInfoString(userInfoString: String) -> URIUserInfo? {
+    @inline(__always) private static func parseUserInfoString(userInfoString: String) -> URI.UserInfo? {
         let userInfoElements = userInfoString.characters.split{$0 == ":"}.map(String.init)
-        return URIUserInfo(
+        return URI.UserInfo(
             username: userInfoElements[0],
             password: userInfoElements[1]
         )
