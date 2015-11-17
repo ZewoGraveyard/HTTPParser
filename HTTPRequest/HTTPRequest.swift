@@ -29,7 +29,10 @@ public struct HTTPRequest {
     public let minorVersion: Int
     public let headers: [String: String]
     public let body: [Int8]
+
     public let keepAlive: Bool
+    public var parameters: [String : String] = [:]
+    public var data: [String : String] = [:]
 
     public init(method: HTTPMethod, uri: URI, majorVersion: Int = 1, minorVersion: Int = 1, headers: [String: String] = [:], body: [Int8] = [], keepAlive: Bool = false) {
         self.method = method
@@ -41,3 +44,26 @@ public struct HTTPRequest {
         self.keepAlive = keepAlive
     }
 }
+
+extension HTTPRequest : CustomStringConvertible {
+    public var description: String {
+        var string = "\(method) \(uri) HTTP/1.1\n"
+
+        for (header, value) in headers {
+            string += "\(header): \(value)\n"
+        }
+
+        if body.count > 500 {
+            string += "Request body too big to be printed."
+        } else if body.count > 0 {
+            if let bodyString = String.fromCString(self.body + [0]) where self.body.count > 0 {
+                string += "\n" + bodyString + "\n"
+            } else  {
+                string += "\n" + body.reduce("", combine: {$0.0 + String($0.1)}) + "\n"
+            }
+        }
+
+        return string
+    }
+}
+

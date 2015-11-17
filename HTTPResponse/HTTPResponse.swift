@@ -39,3 +39,25 @@ public struct HTTPResponse {
         self.body = body
     }
 }
+
+extension HTTPResponse : CustomStringConvertible {
+    public var description: String {
+        var string = "HTTP/1.1 \(statusCode) \(reasonPhrase)\n"
+
+        for (header, value) in headers {
+            string += "\(header): \(value)\n"
+        }
+
+        if body.count > 500 {
+            string += "Request body too big to be printed."
+        } else if body.count > 0 {
+            if let bodyString = String.fromCString(self.body + [0]) where self.body.count > 0 {
+                string += "\n" + bodyString
+            } else  {
+                string += "\n" + body.reduce("", combine: {$0.0 + String($0.1)})
+            }
+        }
+
+        return string
+    }
+}

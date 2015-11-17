@@ -35,4 +35,54 @@ public struct URI {
     public let path: String?
     public let query: [String : String]
     public let fragment: String?
+
+    public init(scheme: String? = nil, userInfo: UserInfo? = nil, host: String? = nil, port: Int? = nil, path: String? = nil, query: [String : String] = [:], fragment: String? = nil) {
+        self.scheme = scheme
+        self.userInfo = userInfo
+        self.host = host
+        self.port = port
+        self.path = path
+        self.query = query
+        self.fragment = fragment
+    }
+}
+
+extension URI : CustomStringConvertible {
+    public var description: String {
+        var string = ""
+
+        if let scheme = scheme {
+            string += "\(scheme)://"
+        }
+
+        if let userInfo = userInfo {
+            string += "\(userInfo.username):\(userInfo.password)@"
+        }
+
+        if let host = host {
+            string += "\(host)"
+        }
+
+        if let port = port {
+            string += ":\(port)"
+        }
+
+        if let path = path {
+            string += "\(path)"
+        }
+
+        if query.count > 0 {
+            string += "?"
+        }
+
+        for (name, value) in query {
+            string += "\(name)=\(value)"
+        }
+
+        if let fragment = fragment {
+            string += "#\(fragment)"
+        }
+
+        return string
+    }
 }
