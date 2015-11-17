@@ -688,6 +688,7 @@ class HTTPRequestParserTests: XCTestCase {
             XCTAssert(request.majorVersion == 1)
             XCTAssert(request.minorVersion == 1)
             XCTAssert(request.headers["Host"] == "zewo.co")
+            XCTAssert(request.headers["Content-Type"] == "application/json")
             XCTAssert(request.body == [])
         }
 
@@ -697,8 +698,11 @@ class HTTPRequestParserTests: XCTestCase {
             let data3 = "Hos"
             let data4 = "t: zewo.c"
             let data5 = "o\r\n"
-            let data6 = "\r"
-            let data7 = "\n"
+            let data6 = "Conten"
+            let data7 = "t-Type: appl"
+            let data8 = "ication/json\r\n"
+            let data9 = "\r"
+            let data10 = "\n"
 
             try parser.parse(data1)
             try parser.parse(data2)
@@ -707,6 +711,9 @@ class HTTPRequestParserTests: XCTestCase {
             try parser.parse(data5)
             try parser.parse(data6)
             try parser.parse(data7)
+            try parser.parse(data8)
+            try parser.parse(data9)
+            try parser.parse(data10)
         } catch {
             XCTAssert(false)
         }
