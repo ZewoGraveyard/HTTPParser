@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		3AB633811BD1354500579B74 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB633801BD1354500579B74 /* main.swift */; };
 		3AB6338A1BD135EF00579B74 /* http_parser.c in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B2D1BD09BF500D297F3 /* http_parser.c */; };
+		B06ABA4C1BFC31B400BB869A /* HTTPStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06ABA4B1BFC31B400BB869A /* HTTPStatus.swift */; };
+		B06ABA4D1BFC31B400BB869A /* HTTPStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06ABA4B1BFC31B400BB869A /* HTTPStatus.swift */; };
+		B06ABA4E1BFC31B400BB869A /* HTTPStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06ABA4B1BFC31B400BB869A /* HTTPStatus.swift */; };
 		B0A4B2501BF985D800FDA0E1 /* HTTPMethod+Luminescence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A4B24B1BF985D800FDA0E1 /* HTTPMethod+Luminescence.swift */; };
 		B0A4B2511BF985D800FDA0E1 /* HTTPMethod+Luminescence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A4B24B1BF985D800FDA0E1 /* HTTPMethod+Luminescence.swift */; };
 		B0A4B2521BF985D800FDA0E1 /* HTTPMethod+Luminescence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A4B24B1BF985D800FDA0E1 /* HTTPMethod+Luminescence.swift */; };
@@ -87,6 +90,7 @@
 /* Begin PBXFileReference section */
 		3AB6337E1BD1354500579B74 /* HTTPParser Command Line */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "HTTPParser Command Line"; path = Luminescence; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AB633801BD1354500579B74 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		B06ABA4B1BFC31B400BB869A /* HTTPStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPStatus.swift; sourceTree = "<group>"; };
 		B0A4B24B1BF985D800FDA0E1 /* HTTPMethod+Luminescence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HTTPMethod+Luminescence.swift"; sourceTree = "<group>"; };
 		B0A4B24C1BF985D800FDA0E1 /* HTTPParseError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPParseError.swift; sourceTree = "<group>"; };
 		B0A4B24D1BF985D800FDA0E1 /* HTTPRequestParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPRequestParser.swift; sourceTree = "<group>"; };
@@ -173,6 +177,7 @@
 		B0A4B2621BF985EC00FDA0E1 /* HTTPResponse */ = {
 			isa = PBXGroup;
 			children = (
+				B06ABA4B1BFC31B400BB869A /* HTTPStatus.swift */,
 				B0A4B2631BF985EC00FDA0E1 /* HTTPResponse.swift */,
 			);
 			path = HTTPResponse;
@@ -463,6 +468,7 @@
 				B0A4B2681BF985EC00FDA0E1 /* HTTPMethod.swift in Sources */,
 				B0A4B26E1BF985EC00FDA0E1 /* HTTPResponse.swift in Sources */,
 				B0A4B2581BF985D800FDA0E1 /* HTTPRequestParser.swift in Sources */,
+				B06ABA4E1BFC31B400BB869A /* HTTPStatus.swift in Sources */,
 				B0A4B2711BF985EC00FDA0E1 /* URI.swift in Sources */,
 				B0A4B26B1BF985EC00FDA0E1 /* HTTPRequest.swift in Sources */,
 				B0A4B2551BF985D800FDA0E1 /* HTTPParseError.swift in Sources */,
@@ -485,6 +491,7 @@
 				B0A4B25A1BF985D800FDA0E1 /* HTTPResponseParser.swift in Sources */,
 				B0A4B2701BF985EC00FDA0E1 /* URI.swift in Sources */,
 				B0A4B25D1BF985D800FDA0E1 /* URI+Luminescence.swift in Sources */,
+				B06ABA4D1BFC31B400BB869A /* HTTPStatus.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -512,6 +519,7 @@
 				B0A4B2591BF985D800FDA0E1 /* HTTPResponseParser.swift in Sources */,
 				B0A4B26F1BF985EC00FDA0E1 /* URI.swift in Sources */,
 				B0A4B25C1BF985D800FDA0E1 /* URI+Luminescence.swift in Sources */,
+				B06ABA4C1BFC31B400BB869A /* HTTPStatus.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
