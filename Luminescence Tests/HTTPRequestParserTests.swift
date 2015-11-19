@@ -24,6 +24,7 @@
 
 import XCTest
 import Luminescence
+import Curvature
 
 extension String {
     var bytes: [Int8] {
