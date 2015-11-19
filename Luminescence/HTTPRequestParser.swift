@@ -23,6 +23,7 @@
 // SOFTWARE.
 
 import Incandescence
+import Curvature
 
 struct HTTPRequestParserContext {
     var method: HTTPMethod! = nil

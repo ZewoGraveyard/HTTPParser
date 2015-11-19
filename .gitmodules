@@ -1,0 +1,3 @@
+[submodule "Carthage/Checkouts/Curvature"]
+	path = Carthage/Checkouts/Curvature
+	url = https://github.com/Zewo/Curvature.git

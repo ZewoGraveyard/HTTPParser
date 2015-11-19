@@ -23,6 +23,7 @@
 // SOFTWARE.
 
 import Incandescence
+import Curvature
 
 struct HTTPResponseParserContext {
     var statusCode: Int = 0

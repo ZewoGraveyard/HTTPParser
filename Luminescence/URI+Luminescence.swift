@@ -23,6 +23,7 @@
 // SOFTWARE.
 
 import Incandescence
+import Curvature
 
 extension URI {
     public init(string: String) {

@@ -9,9 +9,6 @@
 /* Begin PBXBuildFile section */
 		3AB633811BD1354500579B74 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB633801BD1354500579B74 /* main.swift */; };
 		3AB6338A1BD135EF00579B74 /* http_parser.c in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B2D1BD09BF500D297F3 /* http_parser.c */; };
-		B06ABA4C1BFC31B400BB869A /* HTTPStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06ABA4B1BFC31B400BB869A /* HTTPStatus.swift */; };
-		B06ABA4D1BFC31B400BB869A /* HTTPStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06ABA4B1BFC31B400BB869A /* HTTPStatus.swift */; };
-		B06ABA4E1BFC31B400BB869A /* HTTPStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06ABA4B1BFC31B400BB869A /* HTTPStatus.swift */; };
 		B0A4B2501BF985D800FDA0E1 /* HTTPMethod+Luminescence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A4B24B1BF985D800FDA0E1 /* HTTPMethod+Luminescence.swift */; };
 		B0A4B2511BF985D800FDA0E1 /* HTTPMethod+Luminescence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A4B24B1BF985D800FDA0E1 /* HTTPMethod+Luminescence.swift */; };
 		B0A4B2521BF985D800FDA0E1 /* HTTPMethod+Luminescence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A4B24B1BF985D800FDA0E1 /* HTTPMethod+Luminescence.swift */; };
@@ -27,18 +24,6 @@
 		B0A4B25C1BF985D800FDA0E1 /* URI+Luminescence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A4B24F1BF985D800FDA0E1 /* URI+Luminescence.swift */; };
 		B0A4B25D1BF985D800FDA0E1 /* URI+Luminescence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A4B24F1BF985D800FDA0E1 /* URI+Luminescence.swift */; };
 		B0A4B25E1BF985D800FDA0E1 /* URI+Luminescence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A4B24F1BF985D800FDA0E1 /* URI+Luminescence.swift */; };
-		B0A4B2661BF985EC00FDA0E1 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A4B2601BF985EC00FDA0E1 /* HTTPMethod.swift */; };
-		B0A4B2671BF985EC00FDA0E1 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A4B2601BF985EC00FDA0E1 /* HTTPMethod.swift */; };
-		B0A4B2681BF985EC00FDA0E1 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A4B2601BF985EC00FDA0E1 /* HTTPMethod.swift */; };
-		B0A4B2691BF985EC00FDA0E1 /* HTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A4B2611BF985EC00FDA0E1 /* HTTPRequest.swift */; };
-		B0A4B26A1BF985EC00FDA0E1 /* HTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A4B2611BF985EC00FDA0E1 /* HTTPRequest.swift */; };
-		B0A4B26B1BF985EC00FDA0E1 /* HTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A4B2611BF985EC00FDA0E1 /* HTTPRequest.swift */; };
-		B0A4B26C1BF985EC00FDA0E1 /* HTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A4B2631BF985EC00FDA0E1 /* HTTPResponse.swift */; };
-		B0A4B26D1BF985EC00FDA0E1 /* HTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A4B2631BF985EC00FDA0E1 /* HTTPResponse.swift */; };
-		B0A4B26E1BF985EC00FDA0E1 /* HTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A4B2631BF985EC00FDA0E1 /* HTTPResponse.swift */; };
-		B0A4B26F1BF985EC00FDA0E1 /* URI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A4B2651BF985EC00FDA0E1 /* URI.swift */; };
-		B0A4B2701BF985EC00FDA0E1 /* URI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A4B2651BF985EC00FDA0E1 /* URI.swift */; };
-		B0A4B2711BF985EC00FDA0E1 /* URI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A4B2651BF985EC00FDA0E1 /* URI.swift */; };
 		B0B94B151BD099AD00D297F3 /* Luminescence.h in Headers */ = {isa = PBXBuildFile; fileRef = B0B94B141BD099AD00D297F3 /* Luminescence.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0B94B1C1BD099AE00D297F3 /* Luminescence.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0B94B111BD099AD00D297F3 /* Luminescence.framework */; };
 		B0B94B301BD09BF500D297F3 /* http_parser.c in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B2D1BD09BF500D297F3 /* http_parser.c */; };
@@ -59,6 +44,48 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		B03EF2CF1BFD83FF00858663 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B03EF2C81BFD83FF00858663 /* Curvature.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B0D521701BE4F753002063D5;
+			remoteInfo = "Curvature OSX";
+		};
+		B03EF2D11BFD83FF00858663 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B03EF2C81BFD83FF00858663 /* Curvature.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3A1C55891BECE19A006EC3F7;
+			remoteInfo = "Curvature iOS";
+		};
+		B03EF2D31BFD83FF00858663 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B03EF2C81BFD83FF00858663 /* Curvature.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B0D5217A1BE4F753002063D5;
+			remoteInfo = "Curvature OSX Tests";
+		};
+		B03EF2D51BFD83FF00858663 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B03EF2C81BFD83FF00858663 /* Curvature.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3A1C55921BECE19A006EC3F7;
+			remoteInfo = "Curvature iOS Tests";
+		};
+		B03EF2D71BFD840F00858663 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B03EF2C81BFD83FF00858663 /* Curvature.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = B0D5216F1BE4F753002063D5;
+			remoteInfo = "Curvature OSX";
+		};
+		B03EF2D91BFD841400858663 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B03EF2C81BFD83FF00858663 /* Curvature.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 3A1C55881BECE19A006EC3F7;
+			remoteInfo = "Curvature iOS";
+		};
 		B0B94B1D1BD099AE00D297F3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B0B94B081BD099AD00D297F3 /* Project object */;
@@ -90,16 +117,12 @@
 /* Begin PBXFileReference section */
 		3AB6337E1BD1354500579B74 /* HTTPParser Command Line */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "HTTPParser Command Line"; path = Luminescence; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AB633801BD1354500579B74 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		B06ABA4B1BFC31B400BB869A /* HTTPStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPStatus.swift; sourceTree = "<group>"; };
+		B03EF2C81BFD83FF00858663 /* Curvature.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Curvature.xcodeproj; path = Carthage/Checkouts/Curvature/Curvature.xcodeproj; sourceTree = "<group>"; };
 		B0A4B24B1BF985D800FDA0E1 /* HTTPMethod+Luminescence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HTTPMethod+Luminescence.swift"; sourceTree = "<group>"; };
 		B0A4B24C1BF985D800FDA0E1 /* HTTPParseError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPParseError.swift; sourceTree = "<group>"; };
 		B0A4B24D1BF985D800FDA0E1 /* HTTPRequestParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPRequestParser.swift; sourceTree = "<group>"; };
 		B0A4B24E1BF985D800FDA0E1 /* HTTPResponseParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPResponseParser.swift; sourceTree = "<group>"; };
 		B0A4B24F1BF985D800FDA0E1 /* URI+Luminescence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URI+Luminescence.swift"; sourceTree = "<group>"; };
-		B0A4B2601BF985EC00FDA0E1 /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
-		B0A4B2611BF985EC00FDA0E1 /* HTTPRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPRequest.swift; sourceTree = "<group>"; };
-		B0A4B2631BF985EC00FDA0E1 /* HTTPResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPResponse.swift; sourceTree = "<group>"; };
-		B0A4B2651BF985EC00FDA0E1 /* URI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URI.swift; sourceTree = "<group>"; };
 		B0B94B111BD099AD00D297F3 /* Luminescence.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Luminescence.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0B94B141BD099AD00D297F3 /* Luminescence.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Luminescence.h; sourceTree = "<group>"; };
 		B0B94B161BD099AD00D297F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -165,39 +188,22 @@
 			path = "Luminescence Command Line";
 			sourceTree = "<group>";
 		};
-		B0A4B25F1BF985EC00FDA0E1 /* HTTPRequest */ = {
+		B03EF2C91BFD83FF00858663 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B0A4B2601BF985EC00FDA0E1 /* HTTPMethod.swift */,
-				B0A4B2611BF985EC00FDA0E1 /* HTTPRequest.swift */,
+				B03EF2D01BFD83FF00858663 /* Curvature.framework */,
+				B03EF2D21BFD83FF00858663 /* Curvature.framework */,
+				B03EF2D41BFD83FF00858663 /* CurvatureTests.xctest */,
+				B03EF2D61BFD83FF00858663 /* Curvature.xctest */,
 			);
-			path = HTTPRequest;
-			sourceTree = "<group>";
-		};
-		B0A4B2621BF985EC00FDA0E1 /* HTTPResponse */ = {
-			isa = PBXGroup;
-			children = (
-				B06ABA4B1BFC31B400BB869A /* HTTPStatus.swift */,
-				B0A4B2631BF985EC00FDA0E1 /* HTTPResponse.swift */,
-			);
-			path = HTTPResponse;
-			sourceTree = "<group>";
-		};
-		B0A4B2641BF985EC00FDA0E1 /* URI */ = {
-			isa = PBXGroup;
-			children = (
-				B0A4B2651BF985EC00FDA0E1 /* URI.swift */,
-			);
-			path = URI;
+			name = Products;
 			sourceTree = "<group>";
 		};
 		B0B94B071BD099AD00D297F3 = {
 			isa = PBXGroup;
 			children = (
+				B03EF2C81BFD83FF00858663 /* Curvature.xcodeproj */,
 				B0B94B2B1BD09B6D00D297F3 /* Dependencies */,
-				B0A4B25F1BF985EC00FDA0E1 /* HTTPRequest */,
-				B0A4B2621BF985EC00FDA0E1 /* HTTPResponse */,
-				B0A4B2641BF985EC00FDA0E1 /* URI */,
 				B0B94B131BD099AD00D297F3 /* Luminescence */,
 				3AB6337F1BD1354500579B74 /* Luminescence Command Line */,
 				B0B94B381BD0A1EC00D297F3 /* Luminescence Tests */,
@@ -316,6 +322,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				B03EF2DA1BFD841400858663 /* PBXTargetDependency */,
 			);
 			name = "Luminescence iOS";
 			productName = HTTPParser;
@@ -352,6 +359,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				B03EF2D81BFD840F00858663 /* PBXTargetDependency */,
 			);
 			name = "Luminescence OSX";
 			productName = "HTTPParser OSX";
@@ -413,6 +421,12 @@
 			mainGroup = B0B94B071BD099AD00D297F3;
 			productRefGroup = B0B94B121BD099AD00D297F3 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = B03EF2C91BFD83FF00858663 /* Products */;
+					ProjectRef = B03EF2C81BFD83FF00858663 /* Curvature.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				B0B94B461BD0C40100D297F3 /* Luminescence OSX */,
@@ -423,6 +437,37 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		B03EF2D01BFD83FF00858663 /* Curvature.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Curvature.framework;
+			remoteRef = B03EF2CF1BFD83FF00858663 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B03EF2D21BFD83FF00858663 /* Curvature.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Curvature.framework;
+			remoteRef = B03EF2D11BFD83FF00858663 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B03EF2D41BFD83FF00858663 /* CurvatureTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = CurvatureTests.xctest;
+			remoteRef = B03EF2D31BFD83FF00858663 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B03EF2D61BFD83FF00858663 /* Curvature.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = Curvature.xctest;
+			remoteRef = B03EF2D51BFD83FF00858663 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		B0B94B0F1BD099AD00D297F3 /* Resources */ = {
@@ -465,12 +510,7 @@
 				B0E25A211BD3D66C0059078E /* incandescence_swift.c in Sources */,
 				B0A4B25B1BF985D800FDA0E1 /* HTTPResponseParser.swift in Sources */,
 				B0A4B2521BF985D800FDA0E1 /* HTTPMethod+Luminescence.swift in Sources */,
-				B0A4B2681BF985EC00FDA0E1 /* HTTPMethod.swift in Sources */,
-				B0A4B26E1BF985EC00FDA0E1 /* HTTPResponse.swift in Sources */,
 				B0A4B2581BF985D800FDA0E1 /* HTTPRequestParser.swift in Sources */,
-				B06ABA4E1BFC31B400BB869A /* HTTPStatus.swift in Sources */,
-				B0A4B2711BF985EC00FDA0E1 /* URI.swift in Sources */,
-				B0A4B26B1BF985EC00FDA0E1 /* HTTPRequest.swift in Sources */,
 				B0A4B2551BF985D800FDA0E1 /* HTTPParseError.swift in Sources */,
 				B0A4B25E1BF985D800FDA0E1 /* URI+Luminescence.swift in Sources */,
 			);
@@ -482,16 +522,11 @@
 			files = (
 				B0A4B2541BF985D800FDA0E1 /* HTTPParseError.swift in Sources */,
 				B0A4B2571BF985D800FDA0E1 /* HTTPRequestParser.swift in Sources */,
-				B0A4B26D1BF985EC00FDA0E1 /* HTTPResponse.swift in Sources */,
 				B0E25A201BD3D66C0059078E /* incandescence_swift.c in Sources */,
 				B0B94B301BD09BF500D297F3 /* http_parser.c in Sources */,
-				B0A4B2671BF985EC00FDA0E1 /* HTTPMethod.swift in Sources */,
 				B0A4B2511BF985D800FDA0E1 /* HTTPMethod+Luminescence.swift in Sources */,
-				B0A4B26A1BF985EC00FDA0E1 /* HTTPRequest.swift in Sources */,
 				B0A4B25A1BF985D800FDA0E1 /* HTTPResponseParser.swift in Sources */,
-				B0A4B2701BF985EC00FDA0E1 /* URI.swift in Sources */,
 				B0A4B25D1BF985D800FDA0E1 /* URI+Luminescence.swift in Sources */,
-				B06ABA4D1BFC31B400BB869A /* HTTPStatus.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -510,16 +545,11 @@
 			files = (
 				B0A4B2531BF985D800FDA0E1 /* HTTPParseError.swift in Sources */,
 				B0A4B2561BF985D800FDA0E1 /* HTTPRequestParser.swift in Sources */,
-				B0A4B26C1BF985EC00FDA0E1 /* HTTPResponse.swift in Sources */,
 				B0B94B601BD0C48F00D297F3 /* http_parser.c in Sources */,
 				B0E25A1F1BD3D66C0059078E /* incandescence_swift.c in Sources */,
-				B0A4B2661BF985EC00FDA0E1 /* HTTPMethod.swift in Sources */,
 				B0A4B2501BF985D800FDA0E1 /* HTTPMethod+Luminescence.swift in Sources */,
-				B0A4B2691BF985EC00FDA0E1 /* HTTPRequest.swift in Sources */,
 				B0A4B2591BF985D800FDA0E1 /* HTTPResponseParser.swift in Sources */,
-				B0A4B26F1BF985EC00FDA0E1 /* URI.swift in Sources */,
 				B0A4B25C1BF985D800FDA0E1 /* URI+Luminescence.swift in Sources */,
-				B06ABA4C1BFC31B400BB869A /* HTTPStatus.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -535,6 +565,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		B03EF2D81BFD840F00858663 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Curvature OSX";
+			targetProxy = B03EF2D71BFD840F00858663 /* PBXContainerItemProxy */;
+		};
+		B03EF2DA1BFD841400858663 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Curvature iOS";
+			targetProxy = B03EF2D91BFD841400858663 /* PBXContainerItemProxy */;
+		};
 		B0B94B1E1BD099AE00D297F3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = B0B94B101BD099AD00D297F3 /* Luminescence iOS */;
