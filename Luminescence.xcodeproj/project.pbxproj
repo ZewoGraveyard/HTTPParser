@@ -7,23 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3AB633811BD1354500579B74 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB633801BD1354500579B74 /* main.swift */; };
-		3AB6338A1BD135EF00579B74 /* http_parser.c in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B2D1BD09BF500D297F3 /* http_parser.c */; };
 		B0A4B2501BF985D800FDA0E1 /* HTTPMethod+Luminescence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A4B24B1BF985D800FDA0E1 /* HTTPMethod+Luminescence.swift */; };
 		B0A4B2511BF985D800FDA0E1 /* HTTPMethod+Luminescence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A4B24B1BF985D800FDA0E1 /* HTTPMethod+Luminescence.swift */; };
-		B0A4B2521BF985D800FDA0E1 /* HTTPMethod+Luminescence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A4B24B1BF985D800FDA0E1 /* HTTPMethod+Luminescence.swift */; };
 		B0A4B2531BF985D800FDA0E1 /* HTTPParseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A4B24C1BF985D800FDA0E1 /* HTTPParseError.swift */; };
 		B0A4B2541BF985D800FDA0E1 /* HTTPParseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A4B24C1BF985D800FDA0E1 /* HTTPParseError.swift */; };
-		B0A4B2551BF985D800FDA0E1 /* HTTPParseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A4B24C1BF985D800FDA0E1 /* HTTPParseError.swift */; };
 		B0A4B2561BF985D800FDA0E1 /* HTTPRequestParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A4B24D1BF985D800FDA0E1 /* HTTPRequestParser.swift */; };
 		B0A4B2571BF985D800FDA0E1 /* HTTPRequestParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A4B24D1BF985D800FDA0E1 /* HTTPRequestParser.swift */; };
-		B0A4B2581BF985D800FDA0E1 /* HTTPRequestParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A4B24D1BF985D800FDA0E1 /* HTTPRequestParser.swift */; };
 		B0A4B2591BF985D800FDA0E1 /* HTTPResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A4B24E1BF985D800FDA0E1 /* HTTPResponseParser.swift */; };
 		B0A4B25A1BF985D800FDA0E1 /* HTTPResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A4B24E1BF985D800FDA0E1 /* HTTPResponseParser.swift */; };
-		B0A4B25B1BF985D800FDA0E1 /* HTTPResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A4B24E1BF985D800FDA0E1 /* HTTPResponseParser.swift */; };
 		B0A4B25C1BF985D800FDA0E1 /* URI+Luminescence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A4B24F1BF985D800FDA0E1 /* URI+Luminescence.swift */; };
 		B0A4B25D1BF985D800FDA0E1 /* URI+Luminescence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A4B24F1BF985D800FDA0E1 /* URI+Luminescence.swift */; };
-		B0A4B25E1BF985D800FDA0E1 /* URI+Luminescence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A4B24F1BF985D800FDA0E1 /* URI+Luminescence.swift */; };
 		B0B94B151BD099AD00D297F3 /* Luminescence.h in Headers */ = {isa = PBXBuildFile; fileRef = B0B94B141BD099AD00D297F3 /* Luminescence.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0B94B1C1BD099AE00D297F3 /* Luminescence.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0B94B111BD099AD00D297F3 /* Luminescence.framework */; };
 		B0B94B301BD09BF500D297F3 /* http_parser.c in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B2D1BD09BF500D297F3 /* http_parser.c */; };
@@ -38,7 +31,6 @@
 		B0B94B711BD18D8F00D297F3 /* HTTPResponseParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B94B6F1BD18D8F00D297F3 /* HTTPResponseParserTests.swift */; };
 		B0E25A1F1BD3D66C0059078E /* incandescence_swift.c in Sources */ = {isa = PBXBuildFile; fileRef = B0E25A1D1BD3D66C0059078E /* incandescence_swift.c */; };
 		B0E25A201BD3D66C0059078E /* incandescence_swift.c in Sources */ = {isa = PBXBuildFile; fileRef = B0E25A1D1BD3D66C0059078E /* incandescence_swift.c */; };
-		B0E25A211BD3D66C0059078E /* incandescence_swift.c in Sources */ = {isa = PBXBuildFile; fileRef = B0E25A1D1BD3D66C0059078E /* incandescence_swift.c */; };
 		B0E25A221BD3D66C0059078E /* incandescence_swift.h in Headers */ = {isa = PBXBuildFile; fileRef = B0E25A1E1BD3D66C0059078E /* incandescence_swift.h */; };
 		B0E25A231BD3D66C0059078E /* incandescence_swift.h in Headers */ = {isa = PBXBuildFile; fileRef = B0E25A1E1BD3D66C0059078E /* incandescence_swift.h */; };
 /* End PBXBuildFile section */
@@ -102,21 +94,7 @@
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		3AB6337C1BD1354500579B74 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		3AB6337E1BD1354500579B74 /* HTTPParser Command Line */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "HTTPParser Command Line"; path = Luminescence; sourceTree = BUILT_PRODUCTS_DIR; };
-		3AB633801BD1354500579B74 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		B03EF2C81BFD83FF00858663 /* Curvature.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Curvature.xcodeproj; path = Carthage/Checkouts/Curvature/Curvature.xcodeproj; sourceTree = "<group>"; };
 		B0A4B24B1BF985D800FDA0E1 /* HTTPMethod+Luminescence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HTTPMethod+Luminescence.swift"; sourceTree = "<group>"; };
 		B0A4B24C1BF985D800FDA0E1 /* HTTPParseError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPParseError.swift; sourceTree = "<group>"; };
@@ -140,13 +118,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		3AB6337B1BD1354500579B74 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		B0B94B0D1BD099AD00D297F3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -180,14 +151,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3AB6337F1BD1354500579B74 /* Luminescence Command Line */ = {
-			isa = PBXGroup;
-			children = (
-				3AB633801BD1354500579B74 /* main.swift */,
-			);
-			path = "Luminescence Command Line";
-			sourceTree = "<group>";
-		};
 		B03EF2C91BFD83FF00858663 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,7 +168,6 @@
 				B03EF2C81BFD83FF00858663 /* Curvature.xcodeproj */,
 				B0B94B2B1BD09B6D00D297F3 /* Dependencies */,
 				B0B94B131BD099AD00D297F3 /* Luminescence */,
-				3AB6337F1BD1354500579B74 /* Luminescence Command Line */,
 				B0B94B381BD0A1EC00D297F3 /* Luminescence Tests */,
 				B0B94B121BD099AD00D297F3 /* Products */,
 			);
@@ -218,7 +180,6 @@
 				B0B94B1B1BD099AE00D297F3 /* LuminescenceTests.xctest */,
 				B0B94B471BD0C40100D297F3 /* Luminescence.framework */,
 				B0B94B501BD0C40100D297F3 /* HTTPParser OSX Tests.xctest */,
-				3AB6337E1BD1354500579B74 /* HTTPParser Command Line */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -293,23 +254,6 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		3AB6337D1BD1354500579B74 /* Luminescence Command Line */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3AB633841BD1354500579B74 /* Build configuration list for PBXNativeTarget "Luminescence Command Line" */;
-			buildPhases = (
-				3AB6337A1BD1354500579B74 /* Sources */,
-				3AB6337B1BD1354500579B74 /* Frameworks */,
-				3AB6337C1BD1354500579B74 /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Luminescence Command Line";
-			productName = "HTTPParser Command Line";
-			productReference = 3AB6337E1BD1354500579B74 /* HTTPParser Command Line */;
-			productType = "com.apple.product-type.tool";
-		};
 		B0B94B101BD099AD00D297F3 /* Luminescence iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B0B94B251BD099AE00D297F3 /* Build configuration list for PBXNativeTarget "Luminescence iOS" */;
@@ -394,9 +338,6 @@
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = Zewo;
 				TargetAttributes = {
-					3AB6337D1BD1354500579B74 = {
-						CreatedOnToolsVersion = 7.0.1;
-					};
 					B0B94B101BD099AD00D297F3 = {
 						CreatedOnToolsVersion = 7.0;
 					};
@@ -433,7 +374,6 @@
 				B0B94B101BD099AD00D297F3 /* Luminescence iOS */,
 				B0B94B4F1BD0C40100D297F3 /* Luminescence OSX Tests */,
 				B0B94B1A1BD099AE00D297F3 /* Luminescence iOS Tests */,
-				3AB6337D1BD1354500579B74 /* Luminescence Command Line */,
 			);
 		};
 /* End PBXProject section */
@@ -501,21 +441,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		3AB6337A1BD1354500579B74 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3AB633811BD1354500579B74 /* main.swift in Sources */,
-				3AB6338A1BD135EF00579B74 /* http_parser.c in Sources */,
-				B0E25A211BD3D66C0059078E /* incandescence_swift.c in Sources */,
-				B0A4B25B1BF985D800FDA0E1 /* HTTPResponseParser.swift in Sources */,
-				B0A4B2521BF985D800FDA0E1 /* HTTPMethod+Luminescence.swift in Sources */,
-				B0A4B2581BF985D800FDA0E1 /* HTTPRequestParser.swift in Sources */,
-				B0A4B2551BF985D800FDA0E1 /* HTTPParseError.swift in Sources */,
-				B0A4B25E1BF985D800FDA0E1 /* URI+Luminescence.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		B0B94B0C1BD099AD00D297F3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -588,27 +513,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		3AB633821BD1354500579B74 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				PRODUCT_NAME = Luminescence;
-				SDKROOT = macosx;
-				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Dependencies";
-			};
-			name = Debug;
-		};
-		3AB633831BD1354500579B74 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				PRODUCT_NAME = Luminescence;
-				SDKROOT = macosx;
-				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Dependencies";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-			};
-			name = Release;
-		};
 		B0B94B231BD099AE00D297F3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -839,15 +743,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3AB633841BD1354500579B74 /* Build configuration list for PBXNativeTarget "Luminescence Command Line" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3AB633821BD1354500579B74 /* Debug */,
-				3AB633831BD1354500579B74 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		B0B94B0B1BD099AD00D297F3 /* Build configuration list for PBXProject "Luminescence" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
