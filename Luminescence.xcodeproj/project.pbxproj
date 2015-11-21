@@ -111,7 +111,7 @@
 		B0B94B391BD0A1EC00D297F3 /* HTTPRequestParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = HTTPRequestParserTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		B0B94B3A1BD0A1EC00D297F3 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B0B94B471BD0C40100D297F3 /* Luminescence.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Luminescence.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B0B94B501BD0C40100D297F3 /* HTTPParser OSX Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "HTTPParser OSX Tests.xctest"; path = LuminescenceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0B94B501BD0C40100D297F3 /* LuminescenceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LuminescenceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0B94B6F1BD18D8F00D297F3 /* HTTPResponseParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPResponseParserTests.swift; sourceTree = "<group>"; };
 		B0E25A1D1BD3D66C0059078E /* incandescence_swift.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = incandescence_swift.c; sourceTree = "<group>"; };
 		B0E25A1E1BD3D66C0059078E /* incandescence_swift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = incandescence_swift.h; sourceTree = "<group>"; };
@@ -179,7 +179,7 @@
 				B0B94B111BD099AD00D297F3 /* Luminescence.framework */,
 				B0B94B1B1BD099AE00D297F3 /* LuminescenceTests.xctest */,
 				B0B94B471BD0C40100D297F3 /* Luminescence.framework */,
-				B0B94B501BD0C40100D297F3 /* HTTPParser OSX Tests.xctest */,
+				B0B94B501BD0C40100D297F3 /* LuminescenceTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -325,7 +325,7 @@
 			);
 			name = "Luminescence OSX Tests";
 			productName = "HTTPParser OSXTests";
-			productReference = B0B94B501BD0C40100D297F3 /* HTTPParser OSX Tests.xctest */;
+			productReference = B0B94B501BD0C40100D297F3 /* LuminescenceTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
