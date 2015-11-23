@@ -48,62 +48,6 @@ do {
 }
 ```
 
-`HTTPRequest`
-----------------
-
-```swift
-struct HTTPRequest {
-    let method: HTTPMethod
-    let uri: URI
-    let majorVersion: Int
-    let minorVersion: Int
-    let headers: [String: String]
-    let body: [Int8]
-}
-```
-
-`HTTPMethod`
----------------
-
-```swift
-enum HTTPMethod {
-    case DELETE
-    case GET
-    case HEAD
-    case POST
-    case PUT
-    case CONNECT
-    case OPTIONS
-    case TRACE
-    ...
-}
-```
-
-`URI`
---------
-
-```swift
-struct URI {
-    let scheme: String?
-    let userInfo: URIUserInfo?
-    let host: String?
-    let port: Int?
-    let path: String?
-    let query: [String: String]
-    let fragment: String?
-}
-```
-
-`URIUserInfo`
---------
-
-```swift
-struct URI {
-    let username: String
-    let password: String
-}
-```
-
 `HTTPResponseParser`
 --------------------
 
@@ -120,20 +64,6 @@ do {
     try parser.parse(data)
 } catch {
     // Something bad happened :(
-}
-```
-
-`HTTPResponse`
------------------
-
-```swift
-struct HTTPResponse {
-    let statusCode: Int
-    let reasonPhrase: String
-    let majorVersion: Int
-    let minorVersion: Int
-    let headers: [String: String]
-    let body: [Int8]
 }
 ```
 
@@ -217,7 +147,7 @@ To integrate Luminescence into your Xcode project using CocoaPods, specify it in
 source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
-pod 'Luminescence'
+pod 'Luminescence', '0.3'
 ```
 
 Then, run the following command:
@@ -240,7 +170,7 @@ $ brew install carthage
 To integrate **Luminescence** into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
-github "Zewo/Luminescence"
+github "Zewo/Luminescence" == 0.3
 ```
 
 ### Manually
@@ -280,6 +210,13 @@ $ git submodule add https://github.com/Zewo/Luminescence.git
 - And that's it!
 
 > The `Luminescence.framework` is automagically added as a target dependency, linked framework and embedded framework in a copy files build phase which is all you need to build on the simulator and a device.
+
+###Command Line Application
+
+To use **Luminescence** in a command line application:
+
+- Install the [Swift Command Line Application](https://github.com/Zewo/Swift-Command-Line-Application-Template) Xcode template
+- Follow [Cocoa Pods](#cocoapods), [Carthage](#carthage) or [Embedded Framework](#embedded-framework) instructions.
 
 License
 -------
