@@ -23,7 +23,7 @@
 // SOFTWARE.
 
 import XCTest
-import Luminescence
+import HTTPParser
 
 class HTTPResponseParserTests: XCTestCase {
 

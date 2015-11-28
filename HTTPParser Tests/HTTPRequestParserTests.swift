@@ -23,8 +23,9 @@
 // SOFTWARE.
 
 import XCTest
-import Luminescence
-import Curvature
+import URI
+import HTTP
+import HTTPParser
 
 extension String {
     var bytes: [Int8] {

@@ -1,3 +1,4 @@
-[submodule "Carthage/Checkouts/Curvature"]
-	path = Carthage/Checkouts/Curvature
-	url = https://github.com/Zewo/Curvature.git
+[submodule "HTTP"]
+	path = HTTP
+	url = https://github.com/Zewo/HTTP.git
+    branch = master

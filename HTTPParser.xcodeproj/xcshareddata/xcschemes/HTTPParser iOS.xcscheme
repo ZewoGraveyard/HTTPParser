@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B0B94B101BD099AD00D297F3"
-               BuildableName = "Luminescence.framework"
-               BlueprintName = "Luminescence iOS"
-               ReferencedContainer = "container:Luminescence.xcodeproj">
+               BuildableName = "HTTPParser.framework"
+               BlueprintName = "HTTPParser iOS"
+               ReferencedContainer = "container:HTTPParser.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,9 +34,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B0B94B1A1BD099AE00D297F3"
-               BuildableName = "LuminescenceTests.xctest"
-               BlueprintName = "Luminescence iOS Tests"
-               ReferencedContainer = "container:Luminescence.xcodeproj">
+               BuildableName = "HTTPParser.xctest"
+               BlueprintName = "HTTPParser iOS Tests"
+               ReferencedContainer = "container:HTTPParser.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -44,9 +44,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B0B94B101BD099AD00D297F3"
-            BuildableName = "Luminescence.framework"
-            BlueprintName = "Luminescence iOS"
-            ReferencedContainer = "container:Luminescence.xcodeproj">
+            BuildableName = "HTTPParser.framework"
+            BlueprintName = "HTTPParser iOS"
+            ReferencedContainer = "container:HTTPParser.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -66,9 +66,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B0B94B101BD099AD00D297F3"
-            BuildableName = "Luminescence.framework"
-            BlueprintName = "Luminescence iOS"
-            ReferencedContainer = "container:Luminescence.xcodeproj">
+            BuildableName = "HTTPParser.framework"
+            BlueprintName = "HTTPParser iOS"
+            ReferencedContainer = "container:HTTPParser.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -84,9 +84,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B0B94B101BD099AD00D297F3"
-            BuildableName = "Luminescence.framework"
-            BlueprintName = "Luminescence iOS"
-            ReferencedContainer = "container:Luminescence.xcodeproj">
+            BuildableName = "HTTPParser.framework"
+            BlueprintName = "HTTPParser iOS"
+            ReferencedContainer = "container:HTTPParser.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
