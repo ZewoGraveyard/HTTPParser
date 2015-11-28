@@ -34,7 +34,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B0B94B4F1BD0C40100D297F3"
-               BuildableName = "HTTPParser.xctest"
+               BuildableName = "HTTPParserTests.xctest"
                BlueprintName = "HTTPParser OSX Tests"
                ReferencedContainer = "container:HTTPParser.xcodeproj">
             </BuildableReference>
