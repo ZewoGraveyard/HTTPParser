@@ -9,7 +9,7 @@ HTTPParser
 [![Travis](https://img.shields.io/badge/Build-Passing-4BC51D.svg?style=flat)](https://travis-ci.org/Zewo/HTTPParser)
 [![codecov.io](http://codecov.io/github/Zewo/HTTPParser/coverage.svg?branch=master)](http://codecov.io/github/Zewo/HTTPParser?branch=master)
 
-**HTTPParser** for **Swift 2**.
+**HTTPParser** is an HTTP [(RFC 2616)](https://tools.ietf.org/html/rfc2616) parser for **Swift 2**.
 
 ## Features
 
