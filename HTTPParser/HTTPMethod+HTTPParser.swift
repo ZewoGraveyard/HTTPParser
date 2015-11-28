@@ -1,4 +1,4 @@
-// HTTPMethod+Luminescence.swift
+// HTTPMethod+HTTPParser.swift
 //
 // The MIT License (MIT)
 //
