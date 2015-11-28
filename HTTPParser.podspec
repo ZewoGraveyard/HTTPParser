@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
     'SWIFT_INCLUDE_PATHS' => '$(SRCROOT)/HTTPParser/Dependencies'
   }
 
-  s.preserve_paths = 'HTTPParser/*'
+  s.preserve_paths = 'Dependencies/*'
   s.dependency 'HTTP'
 
   s.requires_arc = true
