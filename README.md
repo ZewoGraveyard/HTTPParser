@@ -1,15 +1,15 @@
-Luminescence
-============
+HTTPParser
+==========
 
 [![Swift 2.0](https://img.shields.io/badge/Swift-2.0-orange.svg?style=flat)](https://developer.apple.com/swift/)
 [![Platforms OS X | iOS](https://img.shields.io/badge/Platforms-OS%20X%20%7C%20iOS-lightgray.svg?style=flat)](https://developer.apple.com/swift/)
-[![Cocoapods Compatible](https://img.shields.io/badge/Cocoapods-Compatible-4BC51D.svg?style=flat)](https://cocoapods.org/pods/Luminescence)
+[![Cocoapods Compatible](https://img.shields.io/badge/Cocoapods-Compatible-4BC51D.svg?style=flat)](https://cocoapods.org/pods/HTTPParser)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-Compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![License MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![Travis](https://img.shields.io/badge/Build-Passing-4BC51D.svg?style=flat)](https://travis-ci.org/Zewo/Luminescence)
-[![codecov.io](http://codecov.io/github/Zewo/Luminescence/coverage.svg?branch=master)](http://codecov.io/github/Zewo/Luminescence?branch=master)
+[![Travis](https://img.shields.io/badge/Build-Passing-4BC51D.svg?style=flat)](https://travis-ci.org/Zewo/HTTPParser)
+[![codecov.io](http://codecov.io/github/Zewo/HTTPParser/coverage.svg?branch=master)](http://codecov.io/github/Zewo/HTTPParser?branch=master)
 
-**Luminescence** is an HTTP parser for **Swift 2**.
+**HTTPParser** for **Swift 2**.
 
 ## Features
 
@@ -19,13 +19,14 @@ Luminescence
 - [x] Decodes chunked encoding
 - [x] Defends against buffer overflow attacks
 
-**Luminescence** wraps the C library [http_parser](https://github.com/nodejs/http-parser) used in [node.js](https://github.com/nodejs/node).
+**HTTPParser** wraps the C library [http_parser](https://github.com/nodejs/http-parser) used in [node.js](https://github.com/nodejs/node).
 
 ## Products
 
-**Luminescence** is the base for the HTTP servers
+**HTTPParser** is the base for the HTTP servers
+
 - [Aeon](https://github.com/Zewo/Aeon) - GCD based HTTP server
-- [Epoch](https://github.com/Zewo/Epoch) - Luminescence based HTTP server
+- [Epoch](https://github.com/Zewo/Epoch) - HTTPParser based HTTP server
 
 ##Usage
 
@@ -33,7 +34,7 @@ Luminescence
 -------------------
 
 ```swift
-import Luminescence
+import HTTPParser
 
 let parser = HTTPRequestParser { request in
     // Here you get your parsed requests (HTTPRequest)
@@ -52,7 +53,7 @@ do {
 --------------------
 
 ```swift
-import Luminescence
+import HTTPParser
 
 let parser = HTTPResponseParser { response in
     // Here you get your parsed responses (HTTPResponse)
@@ -71,7 +72,7 @@ Chunked Data and Persistent Streams
 -----------------------------------
 
 ```swift
-import Luminescence
+import HTTPParser
 
 let parser = HTTPRequestParser { request in
     // Here you get your parsed requests (HTTPRequest)
@@ -110,7 +111,7 @@ Using EOF
 ---------
 
 ```swift
-import Luminescence
+import HTTPParser
 
 let parser = HTTPResponseParser { response in
     // Here you get your parsed responses (HTTPResponse)
@@ -139,16 +140,19 @@ do {
 $ gem install cocoapods
 ```
 
-> CocoaPods 0.39.0+ is required to build Luminescence.
+> CocoaPods 0.39.0+ is required to build HTTPParser.
 
-To integrate **Luminescence** into your Xcode project using CocoaPods, specify it in your `Podfile`:
+To integrate **HTTPParser** into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
 ```ruby
+```ruby
+source 'https://github.com/Zewo/Specs.git'
 source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
-pod 'Luminescence', '0.3'
+pod 'HTTPParser', '0.1'
 ```
+> Don't forget  `source 'https://github.com/Zewo/Specs.git'`. This is very important. It should always come before the official CocoaPods repo.
 
 Then, run the following command:
 
@@ -167,15 +171,15 @@ $ brew update
 $ brew install carthage
 ```
 
-To integrate **Luminescence** into your Xcode project using Carthage, specify it in your `Cartfile`:
+To integrate **HTTPParser** into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
-github "Zewo/Luminescence" == 0.3
+github "Zewo/HTTPParser" == 0.1
 ```
 
 ### Command Line Application
 
-To use **Luminescence** in a command line application:
+To use **HTTPParser** in a command line application:
 
 - Install the [Swift Command Line Application](https://github.com/Zewo/Swift-Command-Line-Application-Template) Xcode template
 - Follow [Cocoa Pods](#cocoapods) or [Carthage](#carthage) instructions.
@@ -183,4 +187,4 @@ To use **Luminescence** in a command line application:
 License
 -------
 
-**Luminescence** is released under the MIT license. See LICENSE for details.
+**HTTPParser** is released under the MIT license. See LICENSE for details.
