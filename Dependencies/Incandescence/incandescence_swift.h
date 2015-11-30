@@ -51,6 +51,6 @@ struct parsed_uri {
     const uint16_t fragment_end;
 };
 
-struct parsed_uri parse_uri(const char *uri_string);
+struct parsed_uri parse_uri(const char *uri_string, int is_connect);
 
 #endif /* http_parser_swift_h */

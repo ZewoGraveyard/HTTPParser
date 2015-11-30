@@ -27,9 +27,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-struct parsed_uri parse_uri(const char *uri_string) {
+struct parsed_uri parse_uri(const char *uri_string, int is_connect) {
     struct http_parser_url u;
-    http_parser_parse_url(uri_string, strlen(uri_string), 0, &u);
+    http_parser_parse_url(uri_string, strlen(uri_string), is_connect, &u);
 
     struct parsed_uri uri = {
         u.field_set,
