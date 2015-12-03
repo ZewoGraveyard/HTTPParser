@@ -79,11 +79,6 @@ public final class HTTPResponseParser {
     public func parse(data: UnsafeMutablePointer<Void>, length: Int) throws {
         let bytesParsed = http_parser_execute(&parser, &responseSettings, UnsafeMutablePointer<Int8>(data), length)
 
-        if parser.upgrade == 1 {
-            let error = HTTPParseError(description: "Upgrade not supported")
-            throw error
-        }
-
         if bytesParsed != length {
             let errorName = http_errno_name(http_errno(parser.http_errno))
             let errorDescription = http_errno_description(http_errno(parser.http_errno))
