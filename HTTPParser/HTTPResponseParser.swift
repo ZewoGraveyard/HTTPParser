@@ -32,7 +32,8 @@ struct HTTPResponseParserContext {
     var minorVersion: Int = 0
     var headers: [String: String] = [:]
     var body: [Int8] = []
-    
+
+    var buildingHeaderField = ""
     var currentHeaderField = ""
     var completion: HTTPResponse -> Void
 
@@ -78,11 +79,6 @@ public final class HTTPResponseParser {
     public func parse(data: UnsafeMutablePointer<Void>, length: Int) throws {
         let bytesParsed = http_parser_execute(&parser, &responseSettings, UnsafeMutablePointer<Int8>(data), length)
 
-        if parser.upgrade == 1 {
-            let error = HTTPParseError(description: "Upgrade not supported")
-            throw error
-        }
-
         if bytesParsed != length {
             let errorName = http_errno_name(http_errno(parser.http_errno))
             let errorDescription = http_errno_description(http_errno(parser.http_errno))
@@ -123,7 +119,7 @@ func onResponseHeaderField(parser: UnsafeMutablePointer<http_parser>, data: Unsa
 
     var buffer: [Int8] = [Int8](count: length + 1, repeatedValue: 0)
     strncpy(&buffer, data, length)
-    context.memory.currentHeaderField += String.fromCString(buffer)!
+    context.memory.buildingHeaderField += String.fromCString(buffer)!
 
     return 0
 }
@@ -133,6 +129,10 @@ func onResponseHeaderValue(parser: UnsafeMutablePointer<http_parser>, data: Unsa
 
     var buffer: [Int8] = [Int8](count: length + 1, repeatedValue: 0)
     strncpy(&buffer, data, length)
+    if context.memory.buildingHeaderField != "" {
+        context.memory.currentHeaderField = context.memory.buildingHeaderField
+    }
+    context.memory.buildingHeaderField = ""
     let headerField = context.memory.currentHeaderField
     let previousHeaderValue = context.memory.headers[headerField] ?? ""
     context.memory.headers[headerField] = previousHeaderValue + String.fromCString(buffer)!
@@ -143,6 +143,7 @@ func onResponseHeaderValue(parser: UnsafeMutablePointer<http_parser>, data: Unsa
 func onResponseHeadersComplete(parser: UnsafeMutablePointer<http_parser>) -> Int32 {
     let context = UnsafeMutablePointer<HTTPResponseParserContext>(parser.memory.data)
 
+    context.memory.buildingHeaderField = ""
     context.memory.currentHeaderField = ""
     context.memory.statusCode = Int(parser.memory.status_code)
     context.memory.majorVersion = Int(parser.memory.http_major)
