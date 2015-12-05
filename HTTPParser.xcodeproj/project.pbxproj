@@ -104,12 +104,12 @@
 		B0B0A4121C09CDB4005E92B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B0B0A4461C09D1CC005E92B0 /* HTTP.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = HTTP.xcodeproj; path = HTTP/HTTP.xcodeproj; sourceTree = "<group>"; };
 		B0B94B111BD099AD00D297F3 /* HTTPParser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HTTPParser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B0B94B1B1BD099AE00D297F3 /* LuminescenceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LuminescenceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0B94B1B1BD099AE00D297F3 /* HTTPParserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HTTPParserTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0B94B2D1BD09BF500D297F3 /* http_parser.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = http_parser.c; sourceTree = "<group>"; };
 		B0B94B2E1BD09BF500D297F3 /* http_parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = http_parser.h; sourceTree = "<group>"; };
 		B0B94B2F1BD09BF500D297F3 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		B0B94B471BD0C40100D297F3 /* HTTPParser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HTTPParser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B0B94B501BD0C40100D297F3 /* LuminescenceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LuminescenceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0B94B501BD0C40100D297F3 /* HTTPParserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HTTPParserTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0E25A1D1BD3D66C0059078E /* incandescence_swift.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = incandescence_swift.c; sourceTree = "<group>"; };
 		B0E25A1E1BD3D66C0059078E /* incandescence_swift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = incandescence_swift.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -197,9 +197,9 @@
 			isa = PBXGroup;
 			children = (
 				B0B94B111BD099AD00D297F3 /* HTTPParser.framework */,
-				B0B94B1B1BD099AE00D297F3 /* LuminescenceTests.xctest */,
+				B0B94B1B1BD099AE00D297F3 /* HTTPParserTests.xctest */,
 				B0B94B471BD0C40100D297F3 /* HTTPParser.framework */,
-				B0B94B501BD0C40100D297F3 /* LuminescenceTests.xctest */,
+				B0B94B501BD0C40100D297F3 /* HTTPParserTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -284,7 +284,7 @@
 			);
 			name = "HTTPParser iOS Tests";
 			productName = HTTPParserTests;
-			productReference = B0B94B1B1BD099AE00D297F3 /* LuminescenceTests.xctest */;
+			productReference = B0B94B1B1BD099AE00D297F3 /* HTTPParserTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		B0B94B461BD0C40100D297F3 /* HTTPParser OSX */ = {
@@ -321,7 +321,7 @@
 			);
 			name = "HTTPParser OSX Tests";
 			productName = "HTTPParser OSXTests";
-			productReference = B0B94B501BD0C40100D297F3 /* LuminescenceTests.xctest */;
+			productReference = B0B94B501BD0C40100D297F3 /* HTTPParserTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
