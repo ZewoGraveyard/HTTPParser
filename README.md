@@ -1,33 +1,28 @@
 HTTPParser
 ==========
 
-[![Swift 2.0](https://img.shields.io/badge/Swift-2.0-orange.svg?style=flat)](https://developer.apple.com/swift/)
-[![Platforms OS X | iOS](https://img.shields.io/badge/Platforms-OS%20X%20%7C%20iOS-lightgray.svg?style=flat)](https://developer.apple.com/swift/)
-[![Cocoapods Compatible](https://img.shields.io/badge/Cocoapods-Compatible-4BC51D.svg?style=flat)](https://cocoapods.org/pods/HTTPParser)
-[![Carthage Compatible](https://img.shields.io/badge/Carthage-Compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Swift 2.2](https://img.shields.io/badge/Swift-2.2-orange.svg?style=flat)](https://developer.apple.com/swift/)
+[![Platforms Linux](https://img.shields.io/badge/Platforms-Linux-lightgray.svg?style=flat)](https://developer.apple.com/swift/)
 [![License MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)](https://tldrlegal.com/license/mit-license)
-[![Travis](https://img.shields.io/badge/Build-Passing-4BC51D.svg?style=flat)](https://travis-ci.org/Zewo/HTTPParser)
-[![codecov.io](http://codecov.io/github/Zewo/HTTPParser/coverage.svg?branch=master)](http://codecov.io/github/Zewo/HTTPParser?branch=master)
 [![Slack Status](https://zewo-slackin.herokuapp.com/badge.svg)](https://zewo-slackin.herokuapp.com)
 
-**HTTPParser** is an HTTP [(RFC 2616)](https://tools.ietf.org/html/rfc2616) parser for **Swift 2**.
+**HTTPParser** is an HTTP [(RFC 2616)](https://tools.ietf.org/html/rfc2616) parser for **Swift 2.2**.
 
 ## Features
 
-- [x] No `Foundation` dependency (**Linux ready**)
 - [x] Asynchronous parsing
 - [x] Handles persistent streams (keep-alive)
 - [x] Decodes chunked encoding
 - [x] Defends against buffer overflow attacks
 
-**HTTPParser** wraps the C library [http_parser](https://github.com/nodejs/http-parser) used in [node.js](https://github.com/nodejs/node).
+**HTTPParser** wraps a fork of the C library [http_parser](https://github.com/nodejs/http-parser) used in [node.js](https://github.com/nodejs/node).
 
 ## Products
 
 **HTTPParser** is the base for the HTTP servers
 
 - [Aeon](https://github.com/Zewo/Aeon) - GCD based HTTP server
-- [Epoch](https://github.com/Zewo/Epoch) - HTTPParser based HTTP server
+- [Epoch](https://github.com/Zewo/Epoch) - Venice based HTTP server
 
 ##Usage
 
@@ -133,57 +128,36 @@ do {
 	
 ## Installation
 
-### CocoaPods
-
-[CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects. You can install it with the following command:
+- Install [`uri_parser`](https://github.com/Zewo/uri_parser)
 
 ```bash
-$ gem install cocoapods
+$ git clone https://github.com/Zewo/uri_parser.git
+$ cd uri_parser
+$ make
+$ dpkg -i uri_parser.deb
 ```
 
-> CocoaPods 0.39.0+ is required to build HTTPParser.
-
-To integrate **HTTPParser** into your Xcode project using CocoaPods, specify it in your `Podfile`:
-
-```ruby
-```ruby
-source 'https://github.com/Zewo/Specs.git'
-source 'https://github.com/CocoaPods/Specs.git'
-use_frameworks!
-
-pod 'HTTPParser', '0.1'
-```
-> Don't forget  `source 'https://github.com/Zewo/Specs.git'`. This is very important. It should always come before the official CocoaPods repo.
-
-Then, run the following command:
+- Install [`http_parser`](https://github.com/Zewo/http_parser)
 
 ```bash
-$ pod install
+$ git clone https://github.com/Zewo/http_parser.git
+$ cd http_parser
+$ make
+$ dpkg -i http_parser.deb
 ```
 
-### Carthage
+- Add `HTTPParser` to your `Package.swift`
 
-[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that automates the process of adding frameworks to your Cocoa application.
+```swift
+import PackageDescription
 
-You can install Carthage with [Homebrew](http://brew.sh/) using the following command:
+let package = Package(
+	dependencies: [
+		.Package(url: "https://github.com/Zewo/HTTPParser.git", majorVersion: 0, minor: 1)
+	]
+)
 
-```bash
-$ brew update
-$ brew install carthage
 ```
-
-To integrate **HTTPParser** into your Xcode project using Carthage, specify it in your `Cartfile`:
-
-```ogdl
-github "Zewo/HTTPParser" == 0.1
-```
-
-### Command Line Application
-
-To use **HTTPParser** in a command line application:
-
-- Install the [Swift Command Line Application](https://github.com/Zewo/Swift-Command-Line-Application-Template) Xcode template
-- Follow [Cocoa Pods](#cocoapods) or [Carthage](#carthage) instructions.
 
 ## Community
 
