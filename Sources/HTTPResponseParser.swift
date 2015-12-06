@@ -94,7 +94,8 @@ public final class HTTPResponseParser {
 }
 
 extension HTTPResponseParser {
-    public func parse(var data: [Int8]) throws {
+    public func parse(data: [Int8]) throws {
+        var data = data
         try parse(&data, length: data.count)
     }
 
