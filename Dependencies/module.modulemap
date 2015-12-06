@@ -1,4 +1,0 @@
-module Incandescence [system] {
-    header "Incandescence/incandescence_swift.h"
-    export *
-}
