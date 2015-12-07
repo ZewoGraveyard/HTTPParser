@@ -1,4 +1,4 @@
-// HTTPMethod+HTTPParser.swift
+// Method+HTTPParser.swift
 //
 // The MIT License (MIT)
 //
@@ -24,7 +24,7 @@
 
 import HTTP
 
-extension HTTPMethod {
+extension Method {
     init(code: Int) {
         switch code {
         case 00: self = DELETE

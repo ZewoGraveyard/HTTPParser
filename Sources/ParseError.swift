@@ -1,4 +1,4 @@
-// HTTPParseError.swift
+// ParseError.swift
 //
 // The MIT License (MIT)
 //
@@ -22,6 +22,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-struct HTTPParseError: ErrorType {
+struct ParseError: ErrorType {
     let description: String
 }
