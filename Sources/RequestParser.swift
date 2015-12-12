@@ -27,9 +27,9 @@
 #else
     import Darwin.C
 #endif
-import CHTTPParser
-import URI
+import Core
 import HTTP
+import CHTTPParser
 
 struct RequestParserContext {
     var method: Method! = nil

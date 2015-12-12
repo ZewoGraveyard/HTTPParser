@@ -27,8 +27,8 @@
 #else
     import Darwin.C
 #endif
-import CHTTPParser
 import HTTP
+import CHTTPParser
 
 struct ResponseParserContext {
     var statusCode: Int = 0
