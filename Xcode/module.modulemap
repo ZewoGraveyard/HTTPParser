@@ -1,5 +1,0 @@
-module CHTTPParser [system] {
-    header "/usr/local/include/http_parser/http_parser.h"
-    link "http_parser"
-    export *
-}
