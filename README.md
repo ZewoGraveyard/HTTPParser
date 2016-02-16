@@ -22,7 +22,7 @@ HTTPParser
 **HTTPParser** is the base for the HTTP servers
 
 - [Aeon](https://github.com/Zewo/Aeon) - GCD based HTTP server
-- [Epoch](https://github.com/Zewo/Epoch) - Venice based HTTP server
+- [Epoch](https://github.com/Zewo/Zewo) - Venice based HTTP server
 
 ##Usage
 
