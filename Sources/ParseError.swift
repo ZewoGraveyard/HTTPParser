@@ -22,6 +22,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-struct ParseError: ErrorType {
+struct ParseError: ErrorProtocol {
     let description: String
 }

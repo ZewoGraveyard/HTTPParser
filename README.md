@@ -1,12 +1,11 @@
 HTTPParser
 ==========
+[![Swift][swift-badge]][swift-url]
+[![Platform][platform-badge]][platform-url]
+[![License][mit-badge]][mit-url]
+[![Slack][slack-badge]][slack-url]
 
-[![Swift 2.2](https://img.shields.io/badge/Swift-2.2-orange.svg?style=flat)](https://developer.apple.com/swift/)
-[![Platforms Linux](https://img.shields.io/badge/Platforms-Linux-lightgray.svg?style=flat)](https://developer.apple.com/swift/)
-[![License MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)](https://tldrlegal.com/license/mit-license)
-[![Slack Status](https://zewo-slackin.herokuapp.com/badge.svg)](https://zewo-slackin.herokuapp.com)
-
-**HTTPParser** is an HTTP [(RFC 2616)](https://tools.ietf.org/html/rfc2616) parser for **Swift 2.2**.
+**HTTPParser** is an HTTP [(RFC 2616)](https://tools.ietf.org/html/rfc2616) parser for **Swift 3.0**.
 
 ## Features
 
@@ -128,22 +127,6 @@ do {
 	
 ## Installation
 
-- Install [`uri_parser`](https://github.com/Zewo/uri_parser)
-
-```bash
-$ git clone https://github.com/Zewo/uri_parser.git
-$ cd uri_parser
-$ make
-$ dpkg -i uri_parser.deb
-```
-
-- Install [`http_parser`](https://github.com/Zewo/http_parser)
-
-```bash
-$ git clone https://github.com/Zewo/http_parser.git
-$ cd http_parser
-$ make
-$ dpkg -i http_parser.deb
 ```
 
 - Add `HTTPParser` to your `Package.swift`
@@ -169,3 +152,13 @@ License
 -------
 
 **HTTPParser** is released under the MIT license. See LICENSE for details.
+
+[swift-badge]: https://img.shields.io/badge/Swift-3.0-orange.svg?style=flat
+[swift-url]: https://swift.org
+[platform-badge]: https://img.shields.io/badge/Platform-Mac%20%26%20Linux-lightgray.svg?style=flat
+[platform-url]: https://swift.org
+[mit-badge]: https://img.shields.io/badge/License-MIT-blue.svg?style=flat
+[mit-url]: https://tldrlegal.com/license/mit-license
+[slack-image]: http://s13.postimg.org/ybwy92ktf/Slack.png
+[slack-badge]: https://zewo-slackin.herokuapp.com/badge.svg
+[slack-url]: http://slack.zewo.io

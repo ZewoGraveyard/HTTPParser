@@ -71,7 +71,7 @@ public final class RequestParser {
     public init(completion: Request -> Void) {
         self.completion = completion
 
-        self.context = UnsafeMutablePointer<RequestParserContext>.alloc(1)
+        self.context = UnsafeMutablePointer<RequestParserContext>(allocatingCapacity: 1)
         self.context.initialize(RequestParserContext(completion: completion))
 
         http_parser_init(&self.parser, HTTP_REQUEST)
@@ -80,7 +80,7 @@ public final class RequestParser {
 
     deinit {
         context.destroy()
-        context.dealloc(1)
+        context.deallocateCapacity(1)
     }
 
     public func parse(data: UnsafeMutablePointer<Void>, length: Int) throws {
@@ -89,7 +89,7 @@ public final class RequestParser {
         if bytesParsed != length {
             let errorName = http_errno_name(http_errno(parser.http_errno))
             let errorDescription = http_errno_description(http_errno(parser.http_errno))
-            let error = ParseError(description: "\(String.fromCString(errorName)!): \(String.fromCString(errorDescription)!)")
+            let error = ParseError(description: "\(String(validatingUTF8: errorName)!): \(String(validatingUTF8: errorDescription)!)")
             throw error
         }
     }
@@ -108,86 +108,86 @@ extension RequestParser {
 }
 
 func onRequestURL(parser: UnsafeMutablePointer<http_parser>, data: UnsafePointer<Int8>, length: Int) -> Int32 {
-    let context = UnsafeMutablePointer<RequestParserContext>(parser.memory.data)
+    let context = UnsafeMutablePointer<RequestParserContext>(parser.pointee.data)
 
     var buffer: [Int8] = [Int8](count: length + 1, repeatedValue: 0)
     strncpy(&buffer, data, length)
-    context.memory.currentURI += String.fromCString(buffer)!
+    context.pointee.currentURI += String(validatingUTF8: buffer)!
 
     return 0
 }
 
 func onRequestHeaderField(parser: UnsafeMutablePointer<http_parser>, data: UnsafePointer<Int8>, length: Int) -> Int32 {
-    let context = UnsafeMutablePointer<RequestParserContext>(parser.memory.data)
+    let context = UnsafeMutablePointer<RequestParserContext>(parser.pointee.data)
 
     var buffer: [Int8] = [Int8](count: length + 1, repeatedValue: 0)
     strncpy(&buffer, data, length)
-    context.memory.buildingHeaderField += String.fromCString(buffer)!
+    context.pointee.buildingHeaderField += String(validatingUTF8: buffer)!
 
     return 0
 }
 
 func onRequestHeaderValue(parser: UnsafeMutablePointer<http_parser>, data: UnsafePointer<Int8>, length: Int) -> Int32 {
-    let context = UnsafeMutablePointer<RequestParserContext>(parser.memory.data)
+    let context = UnsafeMutablePointer<RequestParserContext>(parser.pointee.data)
 
     var buffer: [Int8] = [Int8](count: length + 1, repeatedValue: 0)
     strncpy(&buffer, data, length)
-    if context.memory.buildingHeaderField != "" {
-        context.memory.currentHeaderField = context.memory.buildingHeaderField
+    if context.pointee.buildingHeaderField != "" {
+        context.pointee.currentHeaderField = context.pointee.buildingHeaderField
     }
-    context.memory.buildingHeaderField = ""
-    let headerField = context.memory.currentHeaderField
-    let previousHeaderValue = context.memory.headers[headerField] ?? ""
-    context.memory.headers[headerField] = previousHeaderValue + String.fromCString(buffer)!
+    context.pointee.buildingHeaderField = ""
+    let headerField = context.pointee.currentHeaderField
+    let previousHeaderValue = context.pointee.headers[headerField] ?? ""
+    context.pointee.headers[headerField] = previousHeaderValue + String(validatingUTF8: buffer)!
 
     return 0
 }
 
 func onRequestHeadersComplete(parser: UnsafeMutablePointer<http_parser>) -> Int32 {
-    let context = UnsafeMutablePointer<RequestParserContext>(parser.memory.data)
+    let context = UnsafeMutablePointer<RequestParserContext>(parser.pointee.data)
 
-    context.memory.method = Method(code: Int(parser.memory.method))
-    context.memory.majorVersion = Int(parser.memory.http_major)
-    context.memory.minorVersion = Int(parser.memory.http_minor)
-    context.memory.uri = URI(string: context.memory.currentURI)
+    context.pointee.method = Method(code: Int(parser.pointee.method))
+    context.pointee.majorVersion = Int(parser.pointee.http_major)
+    context.pointee.minorVersion = Int(parser.pointee.http_minor)
+    context.pointee.uri = URI(string: context.pointee.currentURI)
 
-    context.memory.currentURI = ""
-    context.memory.buildingHeaderField = ""
-    context.memory.currentHeaderField = ""
+    context.pointee.currentURI = ""
+    context.pointee.buildingHeaderField = ""
+    context.pointee.currentHeaderField = ""
 
     return 0
 }
 
 func onRequestBody(parser: UnsafeMutablePointer<http_parser>, data: UnsafePointer<Int8>, length: Int) -> Int32 {
-    let context = UnsafeMutablePointer<RequestParserContext>(parser.memory.data)
+    let context = UnsafeMutablePointer<RequestParserContext>(parser.pointee.data)
 
     var buffer: [Int8] = [Int8](count: length, repeatedValue: 0)
     memcpy(&buffer, data, length)
-    context.memory.body += buffer
+    context.pointee.body += buffer
 
     return 0
 }
 
 func onRequestMessageComplete(parser: UnsafeMutablePointer<http_parser>) -> Int32 {
-    let context = UnsafeMutablePointer<RequestParserContext>(parser.memory.data)
+    let context = UnsafeMutablePointer<RequestParserContext>(parser.pointee.data)
 
     let request = Request(
-        method: context.memory.method,
-        uri: context.memory.uri,
-        majorVersion: context.memory.majorVersion,
-        minorVersion: context.memory.minorVersion,
-        headers: context.memory.headers,
-        body: context.memory.body
+        method: context.pointee.method,
+        uri: context.pointee.uri,
+        majorVersion: context.pointee.majorVersion,
+        minorVersion: context.pointee.minorVersion,
+        headers: context.pointee.headers,
+        body: context.pointee.body
     )
 
-    context.memory.completion(request)
+    context.pointee.completion(request)
 
-    context.memory.method = nil
-    context.memory.uri = nil
-    context.memory.majorVersion = 0
-    context.memory.minorVersion = 0
-    context.memory.headers = [:]
-    context.memory.body = []
+    context.pointee.method = nil
+    context.pointee.uri = nil
+    context.pointee.majorVersion = 0
+    context.pointee.minorVersion = 0
+    context.pointee.headers = [:]
+    context.pointee.body = []
 
     return 0
 }
