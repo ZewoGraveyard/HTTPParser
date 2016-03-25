@@ -24,9 +24,8 @@
 
 import XCTest
 
-@testable import HTTPTeststest
+@testable import HTTPParserTestSuite
 
 XCTMain([
-   MessageTests(),
-   RequestParserTests()
+    testCase(RequestParserTests.allTests),
 ])

@@ -67,7 +67,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
                 XCTAssert(request.headers.headers.count == 0)
-                 
+
             } else {
                 XCTAssert(false)
             }
@@ -87,7 +87,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
                 XCTAssert(request.headers.headers.count == 0)
-                 
+
             } else {
                 XCTAssert(false)
             }
@@ -107,7 +107,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
                 XCTAssert(request.headers.headers.count == 0)
-                 
+
             } else {
                 XCTAssert(false)
             }
@@ -127,7 +127,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
                 XCTAssert(request.headers.headers.count == 0)
-                 
+
             } else {
                 XCTAssert(false)
             }
@@ -147,7 +147,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
                 XCTAssert(request.headers.headers.count == 0)
-                 
+
             } else {
                 XCTAssert(false)
             }
@@ -167,7 +167,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
                 XCTAssert(request.headers.headers.count == 0)
-                 
+
             } else {
                 XCTAssert(false)
             }
@@ -187,7 +187,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
                 XCTAssert(request.headers.headers.count == 0)
-                 
+
             } else {
                 XCTAssert(false)
             }
@@ -207,7 +207,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
                 XCTAssert(request.headers.headers.count == 0)
-                 
+
             } else {
                 XCTAssert(false)
             }
@@ -227,7 +227,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
                 XCTAssert(request.headers.headers.count == 0)
-                 
+
             } else {
                 XCTAssert(false)
             }
@@ -247,7 +247,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
                 XCTAssert(request.headers.headers.count == 0)
-                 
+
             } else {
                 XCTAssert(false)
             }
@@ -267,7 +267,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
                 XCTAssert(request.headers.headers.count == 0)
-                 
+
             } else {
                 XCTAssert(false)
             }
@@ -287,7 +287,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
                 XCTAssert(request.headers.headers.count == 0)
-                 
+
             } else {
                 XCTAssert(false)
             }
@@ -307,7 +307,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
                 XCTAssert(request.headers.headers.count == 0)
-                 
+
             } else {
                 XCTAssert(false)
             }
@@ -327,7 +327,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
                 XCTAssert(request.headers.headers.count == 0)
-                 
+
             } else {
                 XCTAssert(false)
             }
@@ -347,7 +347,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
                 XCTAssert(request.headers.headers.count == 0)
-                 
+
             } else {
                 XCTAssert(false)
             }
@@ -367,7 +367,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
                 XCTAssert(request.headers.headers.count == 0)
-                 
+
             } else {
                 XCTAssert(false)
             }
@@ -387,7 +387,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
                 XCTAssert(request.headers.headers.count == 0)
-                 
+
             } else {
                 XCTAssert(false)
             }
@@ -407,7 +407,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
                 XCTAssert(request.headers.headers.count == 0)
-                 
+
             } else {
                 XCTAssert(false)
             }
@@ -427,7 +427,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
                 XCTAssert(request.headers.headers.count == 0)
-                 
+
             } else {
                 XCTAssert(false)
             }
@@ -447,7 +447,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
                 XCTAssert(request.headers.headers.count == 0)
-                 
+
             } else {
                 XCTAssert(false)
             }
@@ -467,7 +467,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
                 XCTAssert(request.headers.headers.count == 0)
-                 
+
             } else {
                 XCTAssert(false)
             }
@@ -487,7 +487,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
                 XCTAssert(request.headers.headers.count == 0)
-                 
+
             } else {
                 XCTAssert(false)
             }
@@ -507,7 +507,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
                 XCTAssert(request.headers.headers.count == 0)
-                 
+
             } else {
                 XCTAssert(false)
             }
@@ -527,7 +527,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
                 XCTAssert(request.headers.headers.count == 0)
-                 
+
             } else {
                 XCTAssert(false)
             }
@@ -547,7 +547,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
                 XCTAssert(request.headers.headers.count == 0)
-                 
+
             } else {
                 XCTAssert(false)
             }
@@ -567,7 +567,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
                 XCTAssert(request.headers.headers.count == 0)
-                 
+
             } else {
                 XCTAssert(false)
             }
@@ -587,7 +587,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
                 XCTAssert(request.headers.headers.count == 0)
-                 
+
             } else {
                 XCTAssert(false)
             }
@@ -626,7 +626,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
                 XCTAssert(request.headers.headers.count == 0)
-                 
+
             } else {
                 XCTAssert(false)
             }
@@ -655,7 +655,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
                 XCTAssert(request.headers.headers.count == 0)
-                 
+
             }
         } catch {
             XCTAssert(false)
@@ -675,7 +675,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.version.minor == 1)
                 print(request)
                 XCTAssert(request.headers.headers["Host"]?.values[0] == "zewo.co")
-                 
+
             }
         } catch {
             XCTAssert(false)
@@ -721,7 +721,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.version.minor == 1)
                 XCTAssert(request.headers.headers["Host"]?.values[0] == "zewo.co")
                 XCTAssert(request.headers.headers["Content-Type"]?.values[0] == "application/json")
-                 
+
             }
         } catch {
             XCTAssert(false)
@@ -779,7 +779,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.headers.headers["Host"]?.values[0] == "zewo.co")
                 XCTAssert(request.headers.headers["Set-Cookie"]?.values[0] == "server=zewo")
                 XCTAssert(request.headers.headers["Set-Cookie"]?.values[1] == "lang=swift")
-                 
+
             }
         } catch {
             XCTAssert(false)
@@ -872,7 +872,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
                 XCTAssert(request.headers.headers.count == 0)
-                 
+
             } else {
                 XCTAssert(false)
             }
@@ -894,7 +894,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
                 XCTAssert(request.headers.headers.count == 0)
-                 
+
             } else {
                 XCTAssert(false)
             }
@@ -1119,4 +1119,52 @@ class RequestParserTests: XCTestCase {
 //        XCTAssert(uri.query["for"] == "")
 //        XCTAssert(uri.fragment == "yeah")
 //    }
+}
+
+
+
+extension RequestParserTests {
+    static var allTests: [(String, RequestParserTests -> () throws -> Void)] {
+        return [
+            ("testInvalidMethod", testInvalidMethod),
+            ("testShortDELETERequest", testShortDELETERequest),
+            ("testShortGETRequest", testShortGETRequest),
+            ("testShortHEADRequest", testShortHEADRequest),
+            ("testShortPOSTRequest", testShortPOSTRequest),
+            ("testShortPUTRequest", testShortPUTRequest),
+            ("testShortCONNECTRequest", testShortCONNECTRequest),
+            ("testShortOPTIONSRequest", testShortOPTIONSRequest),
+            ("testShortTRACERequest", testShortTRACERequest),
+            ("testShortCOPYRequest", testShortCOPYRequest),
+            ("testShortLOCKRequest", testShortLOCKRequest),
+            ("testShortMKCOLRequest", testShortMKCOLRequest),
+            ("testShortMOVERequest", testShortMOVERequest),
+            ("testShortPROPFINDRequest", testShortPROPFINDRequest),
+            ("testShortPROPPATCHRequest", testShortPROPPATCHRequest),
+            ("testShortSEARCHRequest", testShortSEARCHRequest),
+            ("testShortUNLOCKRequest", testShortUNLOCKRequest),
+            ("testShortBINDRequest", testShortBINDRequest),
+            ("testShortREBINDRequest", testShortREBINDRequest),
+            ("testShortUNBINDRequest", testShortUNBINDRequest),
+            ("testShortACLRequest", testShortACLRequest),
+            ("testShortREPORTRequest", testShortREPORTRequest),
+            ("testShortMKACTIVITYRequest", testShortMKACTIVITYRequest),
+            ("testShortCHECKOUTRequest", testShortCHECKOUTRequest),
+            ("testShortMERGERequest", testShortMERGERequest),
+            ("testShortNOTIFYRequest", testShortNOTIFYRequest),
+            ("testShortSUBSCRIBERequest", testShortSUBSCRIBERequest),
+            ("testShortUNSUBSCRIBERequest", testShortUNSUBSCRIBERequest),
+            ("testShortPATCHRequest", testShortPATCHRequest),
+            ("testShortPURGERequest", testShortPURGERequest),
+            ("testShortMKCALENDARRequest", testShortMKCALENDARRequest),
+            ("testDiscontinuousShortRequest", testDiscontinuousShortRequest),
+            ("testMediumRequest", testMediumRequest),
+            ("testDiscontinuousMediumRequest", testDiscontinuousMediumRequest),
+            ("testDiscontinuousMediumRequestMultipleSetCookie", testDiscontinuousMediumRequestMultipleSetCookie),
+            ("testCompleteRequest", testCompleteRequest),
+            ("testDiscontinuousCompleteRequest", testDiscontinuousCompleteRequest),
+            ("testMultipleShortRequestsInTheSameStream", testMultipleShortRequestsInTheSameStream),
+            ("testManyRequests", testManyRequests),
+        ]
+    }
 }
