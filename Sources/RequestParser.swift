@@ -22,26 +22,20 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#if os(Linux)
-    import Glibc
-#else
-    import Darwin.C
-#endif
-import Core
-import HTTP
 import CHTTPParser
+
+typealias RequestContext = UnsafeMutablePointer<RequestParserContext>
 
 struct RequestParserContext {
     var method: Method! = nil
     var uri: URI! = nil
-    var majorVersion: Int = 0
-    var minorVersion: Int = 0
-    var headers: [String: String] = [:]
-    var body: [Int8] = []
+    var version: Version = Version(major: 0, minor: 0)
+    var headers: Headers = Headers([:])
+    var body: Data = []
 
     var currentURI = ""
-    var buildingHeaderField = ""
-    var currentHeaderField = ""
+    var buildingHeaderName = ""
+    var currentHeaderName: HeaderName = ""
     var completion: Request -> Void
 
     init(completion: Request -> Void) {
@@ -63,131 +57,151 @@ var requestSettings: http_parser_settings = {
     return settings
 }()
 
-public final class RequestParser {
-    let completion: Request -> Void
-    let context: UnsafeMutablePointer<RequestParserContext>
+public final class RequestParser: S4.RequestParser {
+    let context: RequestContext
     var parser = http_parser()
+    var request: Request?
 
-    public init(completion: Request -> Void) {
-        self.completion = completion
+    public init() {
+        context = RequestContext(allocatingCapacity: 1)
+        context.initialize(with: RequestParserContext { request in
+            self.request = request
+            })
 
-        self.context = UnsafeMutablePointer<RequestParserContext>(allocatingCapacity: 1)
-        self.context.initialize(RequestParserContext(completion: completion))
-
-        http_parser_init(&self.parser, HTTP_REQUEST)
-        self.parser.data = UnsafeMutablePointer<Void>(context)
+        resetParser()
     }
 
     deinit {
-        context.destroy()
+        context.deinitialize(count:1)
         context.deallocateCapacity(1)
     }
 
-    public func parse(data: UnsafeMutablePointer<Void>, length: Int) throws {
-        let bytesParsed = http_parser_execute(&parser, &requestSettings, UnsafeMutablePointer<Int8>(data), length)
+    func resetParser() {
+        http_parser_init(&parser, HTTP_REQUEST)
+        parser.data = UnsafeMutablePointer<Void>(context)
+    }
 
-        if bytesParsed != length {
+    public func parse(data: Data) throws -> Request? {
+        defer { request = nil }
+
+        let buffer = data.withUnsafeBufferPointer {
+            UnsafeMutablePointer<Int8>($0.baseAddress)
+        }
+
+        let bytesParsed = http_parser_execute(&parser, &requestSettings, buffer, data.count)
+
+        if bytesParsed != data.count {
+            resetParser()
             let errorName = http_errno_name(http_errno(parser.http_errno))
             let errorDescription = http_errno_description(http_errno(parser.http_errno))
             let error = ParseError(description: "\(String(validatingUTF8: errorName)!): \(String(validatingUTF8: errorDescription)!)")
             throw error
         }
+
+        if request != nil {
+            resetParser()
+        }
+
+        return request
     }
 }
 
 extension RequestParser {
-    public func parse(data: [Int8]) throws {
-        var data = data
-        try parse(&data, length: data.count)
-    }
-
-    public func parse(string: String) throws {
-        var data = string.utf8.map { Int8($0) }
-        try parse(&data, length: data.count)
+    public func parse(convertible: DataConvertible) throws -> Request? {
+        return try parse(convertible.data)
     }
 }
 
-func onRequestURL(parser: UnsafeMutablePointer<http_parser>, data: UnsafePointer<Int8>, length: Int) -> Int32 {
-    let context = UnsafeMutablePointer<RequestParserContext>(parser.pointee.data)
+func onRequestURL(parser: Parser, data: UnsafePointer<Int8>, length: Int) -> Int32 {
+    return RequestContext(parser.pointee.data).withMemory {
+        guard let uri = String(pointer: data, length: length) else {
+            return 1
+        }
 
-    var buffer: [Int8] = [Int8](count: length + 1, repeatedValue: 0)
-    strncpy(&buffer, data, length)
-    context.pointee.currentURI += String(validatingUTF8: buffer)!
-
-    return 0
-}
-
-func onRequestHeaderField(parser: UnsafeMutablePointer<http_parser>, data: UnsafePointer<Int8>, length: Int) -> Int32 {
-    let context = UnsafeMutablePointer<RequestParserContext>(parser.pointee.data)
-
-    var buffer: [Int8] = [Int8](count: length + 1, repeatedValue: 0)
-    strncpy(&buffer, data, length)
-    context.pointee.buildingHeaderField += String(validatingUTF8: buffer)!
-
-    return 0
-}
-
-func onRequestHeaderValue(parser: UnsafeMutablePointer<http_parser>, data: UnsafePointer<Int8>, length: Int) -> Int32 {
-    let context = UnsafeMutablePointer<RequestParserContext>(parser.pointee.data)
-
-    var buffer: [Int8] = [Int8](count: length + 1, repeatedValue: 0)
-    strncpy(&buffer, data, length)
-    if context.pointee.buildingHeaderField != "" {
-        context.pointee.currentHeaderField = context.pointee.buildingHeaderField
+        $0.currentURI += uri
+        return 0
     }
-    context.pointee.buildingHeaderField = ""
-    let headerField = context.pointee.currentHeaderField
-    let previousHeaderValue = context.pointee.headers[headerField] ?? ""
-    context.pointee.headers[headerField] = previousHeaderValue + String(validatingUTF8: buffer)!
+}
+
+func onRequestHeaderField(parser: Parser, data: UnsafePointer<Int8>, length: Int) -> Int32 {
+    return RequestContext(parser.pointee.data).withMemory {
+        guard let headerName = String(pointer: data, length: length) else {
+            return 1
+        }
+
+        if $0.currentHeaderName != "" {
+            $0.currentHeaderName = ""
+        }
+
+        $0.buildingHeaderName += headerName
+        return 0
+    }
+}
+
+func onRequestHeaderValue(parser: Parser, data: UnsafePointer<Int8>, length: Int) -> Int32 {
+    return RequestContext(parser.pointee.data).withMemory {
+        guard let headerValue = String(pointer: data, length: length) else {
+            return 1
+        }
+
+        if $0.currentHeaderName == "" {
+            $0.currentHeaderName = HeaderName($0.buildingHeaderName)
+            $0.buildingHeaderName = ""
+
+            $0.headers[$0.currentHeaderName].append("")
+        }
+
+        let previousHeaderValue = $0.headers[$0.currentHeaderName].last ?? ""
+        $0.headers[$0.currentHeaderName][$0.headers[$0.currentHeaderName].count - 1] = previousHeaderValue + headerValue
+        
+        return 0
+    }
+}
+
+func onRequestHeadersComplete(parser: Parser) -> Int32 {
+    return RequestContext(parser.pointee.data).withMemory {
+        $0.method = Method(code: Int(parser.pointee.method))
+        let major = Int(parser.pointee.http_major)
+        let minor = Int(parser.pointee.http_minor)
+        $0.version = Version(major: major, minor: minor)
+
+        guard let uri = try? URI($0.currentURI) else {
+            return 1
+        }
+
+        $0.uri = uri
+        $0.currentURI = ""
+        $0.buildingHeaderName = ""
+        $0.currentHeaderName = ""
+        return 0
+    }
+}
+
+func onRequestBody(parser: Parser, data: UnsafePointer<Int8>, length: Int) -> Int32 {
+    RequestContext(parser.pointee.data).withMemory {
+        $0.body += Data(pointer: data, length: length)
+    }
 
     return 0
 }
 
-func onRequestHeadersComplete(parser: UnsafeMutablePointer<http_parser>) -> Int32 {
-    let context = UnsafeMutablePointer<RequestParserContext>(parser.pointee.data)
+func onRequestMessageComplete(parser: Parser) -> Int32 {
+    return RequestContext(parser.pointee.data).withMemory {
+        let request = Request(
+            method: $0.method,
+            uri: $0.uri,
+            version: $0.version,
+            headers: $0.headers,
+            body: Drain($0.body)
+        )
 
-    context.pointee.method = Method(code: Int(parser.pointee.method))
-    context.pointee.majorVersion = Int(parser.pointee.http_major)
-    context.pointee.minorVersion = Int(parser.pointee.http_minor)
-    context.pointee.uri = URI(string: context.pointee.currentURI)
-
-    context.pointee.currentURI = ""
-    context.pointee.buildingHeaderField = ""
-    context.pointee.currentHeaderField = ""
-
-    return 0
-}
-
-func onRequestBody(parser: UnsafeMutablePointer<http_parser>, data: UnsafePointer<Int8>, length: Int) -> Int32 {
-    let context = UnsafeMutablePointer<RequestParserContext>(parser.pointee.data)
-
-    var buffer: [Int8] = [Int8](count: length, repeatedValue: 0)
-    memcpy(&buffer, data, length)
-    context.pointee.body += buffer
-
-    return 0
-}
-
-func onRequestMessageComplete(parser: UnsafeMutablePointer<http_parser>) -> Int32 {
-    let context = UnsafeMutablePointer<RequestParserContext>(parser.pointee.data)
-
-    let request = Request(
-        method: context.pointee.method,
-        uri: context.pointee.uri,
-        majorVersion: context.pointee.majorVersion,
-        minorVersion: context.pointee.minorVersion,
-        headers: context.pointee.headers,
-        body: context.pointee.body
-    )
-
-    context.pointee.completion(request)
-
-    context.pointee.method = nil
-    context.pointee.uri = nil
-    context.pointee.majorVersion = 0
-    context.pointee.minorVersion = 0
-    context.pointee.headers = [:]
-    context.pointee.body = []
-
-    return 0
+        $0.completion(request)
+        
+        $0.method = nil
+        $0.uri = nil
+        $0.version = Version(major: 0, minor: 0)
+        $0.headers = Headers([:])
+        $0.body = []
+        return 0
+    }
 }

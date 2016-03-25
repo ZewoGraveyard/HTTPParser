@@ -1,4 +1,0 @@
-[submodule "HTTP"]
-	path = HTTP
-	url = https://github.com/Zewo/HTTP
-	branch = master
