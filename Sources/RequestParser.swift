@@ -153,7 +153,7 @@ func onRequestHeaderValue(parser: Parser, data: UnsafePointer<Int8>, length: Int
 
         let previousHeaderValue = $0.headers[$0.currentHeaderName].last ?? ""
         $0.headers[$0.currentHeaderName][$0.headers[$0.currentHeaderName].count - 1] = previousHeaderValue + headerValue
-        
+
         return 0
     }
 }
@@ -192,11 +192,11 @@ func onRequestMessageComplete(parser: Parser) -> Int32 {
             uri: $0.uri,
             version: $0.version,
             headers: $0.headers,
-            body: Drain($0.body)
+            body: .buffer($0.body)
         )
 
         $0.completion(request)
-        
+
         $0.method = nil
         $0.uri = nil
         $0.version = Version(major: 0, minor: 0)

@@ -184,7 +184,7 @@ func onResponseMessageComplete(parser: Parser) -> Int32 {
             version: $0.version,
             status: Status(statusCode: $0.statusCode, reasonPhrase: $0.reasonPhrase),
             headers: $0.headers,
-            body: Drain($0.body)
+            body: .buffer($0.body)
         )
 
         $0.completion(response)
