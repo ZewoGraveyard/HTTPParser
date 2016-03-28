@@ -127,9 +127,9 @@ do {
 	
 ## Installation
 
-```
 
 - Add `HTTPParser` to your `Package.swift`
+
 
 ```swift
 import PackageDescription
