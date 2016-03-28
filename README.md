@@ -14,7 +14,7 @@ HTTPParser
 - [x] Decodes chunked encoding
 - [x] Defends against buffer overflow attacks
 
-**HTTPParser** wraps the C library [http_parser](https://github.com/nodejs/http-parser) used in [node.js](https://github.com/nodejs/node).
+**HTTPParser** wraps the C library [http_parser](https://github.com/nodejs/http-parser) used by [node.js](https://github.com/nodejs/node).
 
 ## Installation
 
