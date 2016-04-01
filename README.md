@@ -37,10 +37,10 @@ let package = Package(
 
 ```swift
 
-      let parser = ResponseParser()
-      guard let response = try parser.parse(str) else {
-          throw something?
-      }
+let parser = ResponseParser()
+guard let response = try parser.parse(str) else {
+  throw something?
+}
       
 ```
 
