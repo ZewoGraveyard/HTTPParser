@@ -16,24 +16,7 @@ HTTPParser
 
 **HTTPParser** wraps the C library [http_parser](https://github.com/nodejs/http-parser) used by [node.js](https://github.com/nodejs/node).
 
-## Installation
-
-
-- Add `HTTPParser` to your `Package.swift`
-
-
-```swift
-import PackageDescription
-
-let package = Package(
-	dependencies: [
-		.Package(url: "https://github.com/Zewo/HTTPParser.git", majorVersion: 0, minor: 4)
-	]
-)
-
-```
-
-## Example
+## Usage
 
 The parser works asynchronously so you should keep feeding it data that until it returns a request/response.
 
@@ -69,6 +52,20 @@ while true {
         break
     }
 }
+```
+
+## Installation
+
+- Add `HTTPParser` to your `Package.swift`
+
+```swift
+import PackageDescription
+
+let package = Package(
+	dependencies: [
+		.Package(url: "https://github.com/Zewo/HTTPParser.git", majorVersion: 0, minor: 4)
+	]
+)
 ```
 
 ## Community
