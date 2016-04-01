@@ -35,13 +35,40 @@ let package = Package(
 
 ## Example
 
-```swift
+The parser works asynchronously so you should keep feeding it data that until it returns a request/response.
 
-let parser = ResponseParser()
-guard let response = try parser.parse(str) else {
-  throw something?
+```swift
+let parser = RequestParser()
+
+while true {
+    do {
+        let data = getDataFromSomewhere()
+        if let request = try parser.parse(data) {
+            // do something with request
+        }
+    } catch {
+        // something bad happened :(
+        break
+    }
 }
-      
+```
+
+Parser works the same way for requests and responses.
+
+```swift
+let parser = ResponseParser()
+
+while true {
+    do {
+        let data = getDataFromSomewhere()
+        if let response = try parser.parse(data) {
+            // do something with response
+        }
+    } catch {
+        // something bad happened :(
+        break
+    }
+}
 ```
 
 ## Community
