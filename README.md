@@ -33,6 +33,17 @@ let package = Package(
 
 ```
 
+## Example
+
+```swift
+
+      let parser = ResponseParser()
+      guard let response = try parser.parse(str) else {
+          throw something?
+      }
+      
+```
+
 ## Community
 
 [![Slack](http://s13.postimg.org/ybwy92ktf/Slack.png)](https://zewo-slackin.herokuapp.com)
