@@ -14,120 +14,47 @@ HTTPParser
 - [x] Decodes chunked encoding
 - [x] Defends against buffer overflow attacks
 
-**HTTPParser** wraps a fork of the C library [http_parser](https://github.com/nodejs/http-parser) used in [node.js](https://github.com/nodejs/node).
+**HTTPParser** wraps the C library [http_parser](https://github.com/nodejs/http-parser) used by [node.js](https://github.com/nodejs/node).
 
-## Products
+## Usage
 
-**HTTPParser** is the base for the HTTP servers
-
-- [Aeon](https://github.com/Zewo/Aeon) - GCD based HTTP server
-- [Epoch](https://github.com/Zewo/Epoch) - Venice based HTTP server
-
-##Usage
-
-`HTTPRequestParser`
--------------------
+The parser works asynchronously so you should keep feeding it data that until it returns a request/response.
 
 ```swift
-import HTTPParser
+let parser = RequestParser()
 
-let parser = HTTPRequestParser { request in
-    // Here you get your parsed requests (HTTPRequest)
-}
-
-do {
-    // Here you'll probably get the real data from a socket, right?
-    let data = "GET / HTTP/1.1\r\n\r\n"
-    try parser.parse(data)
-} catch {
-    // Something bad happened :(
+while true {
+    do {
+        let data = getDataFromSomewhere()
+        if let request = try parser.parse(data) {
+            // do something with request
+        }
+    } catch {
+        // something bad happened :(
+        break
+    }
 }
 ```
 
-`HTTPResponseParser`
---------------------
+Parser works the same way for requests and responses.
 
 ```swift
-import HTTPParser
+let parser = ResponseParser()
 
-let parser = HTTPResponseParser { response in
-    // Here you get your parsed responses (HTTPResponse)
-}
-
-do {
-    // Here you'll probably get the real data from a socket, right?
-    let data = "HTTP/1.1 204 No Content\r\n\r\n"
-    try parser.parse(data)
-} catch {
-    // Something bad happened :(
+while true {
+    do {
+        let data = getDataFromSomewhere()
+        if let response = try parser.parse(data) {
+            // do something with response
+        }
+    } catch {
+        // something bad happened :(
+        break
+    }
 }
 ```
 
-Chunked Data and Persistent Streams
------------------------------------
-
-```swift
-import HTTPParser
-
-let parser = HTTPRequestParser { request in
-    // Here you get your parsed requests (HTTPRequest)
-}
-
-do {
-    // You can call parse as many times as you like
-    // passing chunks of the request or response.
-    // Once the parser completes it will spit the result
-
-    let data1 = "GE"
-    let data2 = "T / HTT"
-    let data3 = "P/1.1\r\n\r\n")
-
-    try parser.parse(data1)
-    try parser.parse(data2)
-    try parser.parse(data3)
-
-    // The parser supports persistent streams (keep-alive)
-    // so you can keep streaming requests or responses
-    // all you want.
-
-    let data4 = "POS"
-    let data5 = "T / H"
-    let data6 = "TTP/1.1\r\n\r\n")
-
-    try parser.parse(data4)
-    try parser.parse(data5)
-    try parser.parse(data6)
-} catch {
-    // Something bad happened :(
-}
-```
-
-Using EOF
----------
-
-```swift
-import HTTPParser
-
-let parser = HTTPResponseParser { response in
-    // Here you get your parsed responses (HTTPResponse)
-}
-
-do {
-	// Sometimes servers return a response without Content-Length
-	// to close the stream you can call eof()
-    let data = ("HTTP/1.1 200 OK\r\n" +
-                "\r\n" +
-                "Zewo")
-	try parser.parse(data)
-	try parser.eof()
-} catch {
-    // Something bad happened :(
-}
-```
-	
 ## Installation
-
-```
 
 - Add `HTTPParser` to your `Package.swift`
 
@@ -136,10 +63,9 @@ import PackageDescription
 
 let package = Package(
 	dependencies: [
-		.Package(url: "https://github.com/Zewo/HTTPParser.git", majorVersion: 0, minor: 1)
+		.Package(url: "https://github.com/Zewo/HTTPParser.git", majorVersion: 0, minor: 4)
 	]
 )
-
 ```
 
 ## Community
