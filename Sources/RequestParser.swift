@@ -25,6 +25,7 @@
 import CHTTPParser
 
 typealias RequestContext = UnsafeMutablePointer<RequestParserContext>
+typealias HeaderName = CaseInsensitiveString
 
 struct RequestParserContext {
     var method: Method! = nil
