@@ -25,7 +25,6 @@
 import CHTTPParser
 @_exported import S4
 @_exported import URI
-@_exported import Data
 
 typealias Parser = UnsafeMutablePointer<http_parser>
 
@@ -71,6 +70,14 @@ extension Method {
         case 32: self = other(method: "UNLINK")
         default: self = other(method: "UNKNOWN")
         }
+    }
+}
+
+extension Data {
+    public init(pointer: UnsafePointer<Int8>, length: Int) {
+        var bytes: [UInt8] = [UInt8](repeating: 0, count: length)
+        memcpy(&bytes, pointer, length)
+        self.bytes = bytes
     }
 }
 
