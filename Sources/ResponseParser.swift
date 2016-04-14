@@ -113,7 +113,7 @@ extension ResponseParser {
     }
 }
 
-func onResponseStatus(_ parser: Parser, data: UnsafePointer<Int8>, length: Int) -> Int32 {
+func onResponseStatus(_ parser: Parser, data: UnsafePointer<Int8>!, length: Int) -> Int32 {
     return ResponseContext(parser.pointee.data).withMemory {
         guard let reasonPhrase = String(pointer: data, length: length) else {
             return 1
@@ -124,7 +124,7 @@ func onResponseStatus(_ parser: Parser, data: UnsafePointer<Int8>, length: Int) 
     }
 }
 
-func onResponseHeaderField(_ parser: Parser, data: UnsafePointer<Int8>, length: Int) -> Int32 {
+func onResponseHeaderField(_ parser: Parser, data: UnsafePointer<Int8>!, length: Int) -> Int32 {
     return ResponseContext(parser.pointee.data).withMemory {
         guard let headerName = String(pointer: data, length: length) else {
             return 1
@@ -139,7 +139,7 @@ func onResponseHeaderField(_ parser: Parser, data: UnsafePointer<Int8>, length: 
     }
 }
 
-func onResponseHeaderValue(_ parser: Parser, data: UnsafePointer<Int8>, length: Int) -> Int32 {
+func onResponseHeaderValue(_ parser: Parser, data: UnsafePointer<Int8>!, length: Int) -> Int32 {
     return ResponseContext(parser.pointee.data).withMemory {
         guard let headerValue = String(pointer: data, length: length) else {
             return 1
@@ -171,7 +171,7 @@ func onResponseHeadersComplete(_ parser: Parser) -> Int32 {
     }
 }
 
-func onResponseBody(_ parser: Parser, data: UnsafePointer<Int8>, length: Int) -> Int32 {
+func onResponseBody(_ parser: Parser, data: UnsafePointer<Int8>!, length: Int) -> Int32 {
     return ResponseContext(parser.pointee.data).withMemory {
         $0.body += Data(pointer: data, length: length)
         return 0
