@@ -181,6 +181,7 @@ func onRequestHeadersComplete(_ parser: Parser) -> Int32 {
 func onRequestBody(_ parser: Parser, data: UnsafePointer<Int8>!, length: Int) -> Int32 {
     RequestContext(parser.pointee.data).withMemory {
         $0.body += Data(pointer: data, length: length)
+        return
     }
 
     return 0

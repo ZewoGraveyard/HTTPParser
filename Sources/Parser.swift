@@ -82,7 +82,7 @@ extension Data {
 }
 
 extension UnsafeMutablePointer {
-    func withMemory<R>(@noescape _ body: (inout Pointee) throws -> R) rethrows -> R {
-        return try body(&pointee)
+    func withMemory<R>(@noescape _ body: (inout pointer: Pointee) throws -> R) rethrows -> R {
+        return try body(pointer: &pointee)
     }
 }
