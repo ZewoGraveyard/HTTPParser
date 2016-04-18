@@ -25,7 +25,6 @@
 import CHTTPParser
 
 typealias RequestContext = UnsafeMutablePointer<RequestParserContext>
-typealias HeaderName = CaseInsensitiveString
 
 struct RequestParserContext {
     var method: Method! = nil
@@ -36,7 +35,7 @@ struct RequestParserContext {
 
     var currentURI = ""
     var buildingHeaderName = ""
-    var currentHeaderName: HeaderName = ""
+    var currentHeaderName: CaseInsensitiveString = ""
     var completion: Request -> Void
 
     init(completion: Request -> Void) {
@@ -146,7 +145,7 @@ func onRequestHeaderValue(_ parser: Parser, data: UnsafePointer<Int8>!, length: 
         }
 
         if $0.currentHeaderName == "" {
-            $0.currentHeaderName = HeaderName($0.buildingHeaderName)
+            $0.currentHeaderName = CaseInsensitiveString($0.buildingHeaderName)
             $0.buildingHeaderName = ""
 
             $0.headers[$0.currentHeaderName].append("")

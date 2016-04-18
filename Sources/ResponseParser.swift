@@ -34,7 +34,7 @@ struct ResponseParserContext {
     var body: Data = []
 
     var buildingHeaderName = ""
-    var currentHeaderName: HeaderName = ""
+    var currentHeaderName: CaseInsensitiveString = ""
     var completion: Response -> Void
 
     init(completion: Response -> Void) {
@@ -146,7 +146,7 @@ func onResponseHeaderValue(_ parser: Parser, data: UnsafePointer<Int8>!, length:
         }
 
         if $0.currentHeaderName == "" {
-            $0.currentHeaderName = HeaderName($0.buildingHeaderName)
+            $0.currentHeaderName = CaseInsensitiveString($0.buildingHeaderName)
             $0.buildingHeaderName = ""
 
             $0.headers[$0.currentHeaderName].append("")
