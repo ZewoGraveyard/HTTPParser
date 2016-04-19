@@ -34,7 +34,7 @@ struct ResponseParserContext {
     var body: Data = []
 
     var buildingHeaderName = ""
-    var currentHeaderName: HeaderName = ""
+    var currentHeaderName: CaseInsensitiveString = ""
     var completion: Response -> Void
 
     init(completion: Response -> Void) {
@@ -80,7 +80,7 @@ public final class ResponseParser: S4.ResponseParser {
         parser.data = UnsafeMutablePointer<Void>(context)
     }
 
-    public func parse(data: Data) throws -> Response? {
+    public func parse(_ data: Data) throws -> Response? {
         defer { response = nil }
 
         var data = data
@@ -108,12 +108,12 @@ public final class ResponseParser: S4.ResponseParser {
 }
 
 extension ResponseParser {
-    public func parse(convertible: DataConvertible) throws -> Response? {
+    public func parse(_ convertible: DataConvertible) throws -> Response? {
         return try parse(convertible.data)
     }
 }
 
-func onResponseStatus(parser: Parser, data: UnsafePointer<Int8>, length: Int) -> Int32 {
+func onResponseStatus(_ parser: Parser, data: UnsafePointer<Int8>!, length: Int) -> Int32 {
     return ResponseContext(parser.pointee.data).withMemory {
         guard let reasonPhrase = String(pointer: data, length: length) else {
             return 1
@@ -124,7 +124,7 @@ func onResponseStatus(parser: Parser, data: UnsafePointer<Int8>, length: Int) ->
     }
 }
 
-func onResponseHeaderField(parser: Parser, data: UnsafePointer<Int8>, length: Int) -> Int32 {
+func onResponseHeaderField(_ parser: Parser, data: UnsafePointer<Int8>!, length: Int) -> Int32 {
     return ResponseContext(parser.pointee.data).withMemory {
         guard let headerName = String(pointer: data, length: length) else {
             return 1
@@ -139,14 +139,14 @@ func onResponseHeaderField(parser: Parser, data: UnsafePointer<Int8>, length: In
     }
 }
 
-func onResponseHeaderValue(parser: Parser, data: UnsafePointer<Int8>, length: Int) -> Int32 {
+func onResponseHeaderValue(_ parser: Parser, data: UnsafePointer<Int8>!, length: Int) -> Int32 {
     return ResponseContext(parser.pointee.data).withMemory {
         guard let headerValue = String(pointer: data, length: length) else {
             return 1
         }
 
         if $0.currentHeaderName == "" {
-            $0.currentHeaderName = HeaderName($0.buildingHeaderName)
+            $0.currentHeaderName = CaseInsensitiveString($0.buildingHeaderName)
             $0.buildingHeaderName = ""
 
             $0.headers[$0.currentHeaderName].append("")
@@ -159,7 +159,7 @@ func onResponseHeaderValue(parser: Parser, data: UnsafePointer<Int8>, length: In
     }
 }
 
-func onResponseHeadersComplete(parser: Parser) -> Int32 {
+func onResponseHeadersComplete(_ parser: Parser) -> Int32 {
     return ResponseContext(parser.pointee.data).withMemory {
         $0.buildingHeaderName = ""
         $0.currentHeaderName = ""
@@ -171,14 +171,14 @@ func onResponseHeadersComplete(parser: Parser) -> Int32 {
     }
 }
 
-func onResponseBody(parser: Parser, data: UnsafePointer<Int8>, length: Int) -> Int32 {
+func onResponseBody(_ parser: Parser, data: UnsafePointer<Int8>!, length: Int) -> Int32 {
     return ResponseContext(parser.pointee.data).withMemory {
         $0.body += Data(pointer: data, length: length)
         return 0
     }
 }
 
-func onResponseMessageComplete(parser: Parser) -> Int32 {
+func onResponseMessageComplete(_ parser: Parser) -> Int32 {
     return ResponseContext(parser.pointee.data).withMemory {
         let response = Response(
             version: $0.version,

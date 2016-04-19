@@ -25,7 +25,6 @@
 import CHTTPParser
 
 typealias RequestContext = UnsafeMutablePointer<RequestParserContext>
-typealias HeaderName = CaseInsensitiveString
 
 struct RequestParserContext {
     var method: Method! = nil
@@ -36,7 +35,7 @@ struct RequestParserContext {
 
     var currentURI = ""
     var buildingHeaderName = ""
-    var currentHeaderName: HeaderName = ""
+    var currentHeaderName: CaseInsensitiveString = ""
     var completion: Request -> Void
 
     init(completion: Request -> Void) {
@@ -82,7 +81,7 @@ public final class RequestParser: S4.RequestParser {
         parser.data = UnsafeMutablePointer<Void>(context)
     }
 
-    public func parse(data: Data) throws -> Request? {
+    public func parse(_ data: Data) throws -> Request? {
         defer { request = nil }
 
         let buffer = data.withUnsafeBufferPointer {
@@ -108,12 +107,12 @@ public final class RequestParser: S4.RequestParser {
 }
 
 extension RequestParser {
-    public func parse(convertible: DataConvertible) throws -> Request? {
+    public func parse(_ convertible: DataConvertible) throws -> Request? {
         return try parse(convertible.data)
     }
 }
 
-func onRequestURL(parser: Parser, data: UnsafePointer<Int8>, length: Int) -> Int32 {
+func onRequestURL(_ parser: Parser, data: UnsafePointer<Int8>!, length: Int) -> Int32 {
     return RequestContext(parser.pointee.data).withMemory {
         guard let uri = String(pointer: data, length: length) else {
             return 1
@@ -124,7 +123,7 @@ func onRequestURL(parser: Parser, data: UnsafePointer<Int8>, length: Int) -> Int
     }
 }
 
-func onRequestHeaderField(parser: Parser, data: UnsafePointer<Int8>, length: Int) -> Int32 {
+func onRequestHeaderField(_ parser: Parser, data: UnsafePointer<Int8>!, length: Int) -> Int32 {
     return RequestContext(parser.pointee.data).withMemory {
         guard let headerName = String(pointer: data, length: length) else {
             return 1
@@ -139,14 +138,14 @@ func onRequestHeaderField(parser: Parser, data: UnsafePointer<Int8>, length: Int
     }
 }
 
-func onRequestHeaderValue(parser: Parser, data: UnsafePointer<Int8>, length: Int) -> Int32 {
+func onRequestHeaderValue(_ parser: Parser, data: UnsafePointer<Int8>!, length: Int) -> Int32 {
     return RequestContext(parser.pointee.data).withMemory {
         guard let headerValue = String(pointer: data, length: length) else {
             return 1
         }
 
         if $0.currentHeaderName == "" {
-            $0.currentHeaderName = HeaderName($0.buildingHeaderName)
+            $0.currentHeaderName = CaseInsensitiveString($0.buildingHeaderName)
             $0.buildingHeaderName = ""
 
             $0.headers[$0.currentHeaderName].append("")
@@ -159,7 +158,7 @@ func onRequestHeaderValue(parser: Parser, data: UnsafePointer<Int8>, length: Int
     }
 }
 
-func onRequestHeadersComplete(parser: Parser) -> Int32 {
+func onRequestHeadersComplete(_ parser: Parser) -> Int32 {
     return RequestContext(parser.pointee.data).withMemory {
         $0.method = Method(code: Int(parser.pointee.method))
         let major = Int(parser.pointee.http_major)
@@ -178,15 +177,16 @@ func onRequestHeadersComplete(parser: Parser) -> Int32 {
     }
 }
 
-func onRequestBody(parser: Parser, data: UnsafePointer<Int8>, length: Int) -> Int32 {
+func onRequestBody(_ parser: Parser, data: UnsafePointer<Int8>!, length: Int) -> Int32 {
     RequestContext(parser.pointee.data).withMemory {
         $0.body += Data(pointer: data, length: length)
+        return
     }
 
     return 0
 }
 
-func onRequestMessageComplete(parser: Parser) -> Int32 {
+func onRequestMessageComplete(_ parser: Parser) -> Int32 {
     return RequestContext(parser.pointee.data).withMemory {
         let request = Request(
             method: $0.method,
