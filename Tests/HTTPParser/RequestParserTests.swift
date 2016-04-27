@@ -904,21 +904,23 @@ class RequestParserTests: XCTestCase {
     }
 
     func testManyRequests() {
-        let data = ("POST / HTTP/1.1\r\n" +
-                    "Content-Length: 4\r\n" +
-                    "\r\n" +
-                    "Zewo")
+        #if os(OSX)
+            let data = ("POST / HTTP/1.1\r\n" +
+                        "Content-Length: 4\r\n" +
+                        "\r\n" +
+                        "Zewo")
 
-        self.measure {
-            for _ in 0 ..< 10000 {
-                let parser = RequestParser()
-                do {
-                    try parser.parse(data)
-                } catch {
-                    XCTAssert(false)
+            self.measure {
+                for _ in 0 ..< 10000 {
+                    let parser = RequestParser()
+                    do {
+                        try parser.parse(data)
+                    } catch {
+                        XCTAssert(false)
+                    }
                 }
             }
-        }
+        #endif
     }
 //
 //    func testUpgradeRequests() {
