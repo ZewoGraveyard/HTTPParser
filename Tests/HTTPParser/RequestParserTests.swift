@@ -650,7 +650,8 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
                 print(request)
-                XCTAssert(request.headers.headers["Host"]?.values[0] == "zewo.co")
+                let wat = request.headers.headers["Host"]?.values[0]
+                XCTAssert(wat == "zewo.co")
 
             }
         } catch {

@@ -152,7 +152,7 @@ func onResponseHeaderValue(_ parser: Parser, data: UnsafePointer<Int8>!, length:
             $0.headers[$0.currentHeaderName].append("")
         }
 
-        let previousHeaderValue = $0.headers[$0.currentHeaderName].last ?? ""
+        let previousHeaderValue = $0.headers[$0.currentHeaderName].values.last ?? ""
         $0.headers[$0.currentHeaderName][$0.headers[$0.currentHeaderName].count - 1] = previousHeaderValue + headerValue
 
         return 0
