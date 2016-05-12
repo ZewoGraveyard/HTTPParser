@@ -26,7 +26,7 @@ import CHTTPParser
 @_exported import S4
 @_exported import URI
 
-typealias Parser = UnsafeMutablePointer<http_parser>!
+typealias Parser = UnsafeMutablePointer<http_parser>
 
 struct ParseError: ErrorProtocol {
     let description: String

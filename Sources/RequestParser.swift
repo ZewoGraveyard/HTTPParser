@@ -36,9 +36,9 @@ struct RequestParserContext {
     var currentURI = ""
     var buildingHeaderName = ""
     var currentHeaderName: CaseInsensitiveString = ""
-    var completion: Request -> Void
+    var completion: (Request) -> Void
 
-    init(completion: Request -> Void) {
+    init(completion: (Request) -> Void) {
         self.completion = completion
     }
 }
@@ -92,8 +92,8 @@ public final class RequestParser: S4.RequestParser {
 
         if bytesParsed != data.count {
             resetParser()
-            let errorName = http_errno_name(http_errno(parser.http_errno))
-            let errorDescription = http_errno_description(http_errno(parser.http_errno))
+            let errorName = http_errno_name(http_errno(parser.http_errno))!
+            let errorDescription = http_errno_description(http_errno(parser.http_errno))!
             let error = ParseError(description: "\(String(validatingUTF8: errorName)!): \(String(validatingUTF8: errorDescription)!)")
             throw error
         }
@@ -112,9 +112,9 @@ extension RequestParser {
     }
 }
 
-func onRequestURL(_ parser: Parser, data: UnsafePointer<Int8>!, length: Int) -> Int32 {
-    return RequestContext(parser.pointee.data).withMemory {
-        guard let uri = String(pointer: data, length: length) else {
+func onRequestURL(_ parser: Parser?, data: UnsafePointer<Int8>?, length: Int) -> Int32 {
+    return RequestContext(parser!.pointee.data).withMemory {
+        guard let uri = String(pointer: data!, length: length) else {
             return 1
         }
 
@@ -123,9 +123,9 @@ func onRequestURL(_ parser: Parser, data: UnsafePointer<Int8>!, length: Int) -> 
     }
 }
 
-func onRequestHeaderField(_ parser: Parser, data: UnsafePointer<Int8>!, length: Int) -> Int32 {
-    return RequestContext(parser.pointee.data).withMemory {
-        guard let headerName = String(pointer: data, length: length) else {
+func onRequestHeaderField(_ parser: Parser?, data: UnsafePointer<Int8>?, length: Int) -> Int32 {
+    return RequestContext(parser!.pointee.data).withMemory {
+        guard let headerName = String(pointer: data!, length: length) else {
             return 1
         }
 
@@ -138,9 +138,9 @@ func onRequestHeaderField(_ parser: Parser, data: UnsafePointer<Int8>!, length: 
     }
 }
 
-func onRequestHeaderValue(_ parser: Parser, data: UnsafePointer<Int8>!, length: Int) -> Int32 {
-    return RequestContext(parser.pointee.data).withMemory {
-        guard let headerValue = String(pointer: data, length: length) else {
+func onRequestHeaderValue(_ parser: Parser?, data: UnsafePointer<Int8>?, length: Int) -> Int32 {
+    return RequestContext(parser!.pointee.data).withMemory {
+        guard let headerValue = String(pointer: data!, length: length) else {
             return 1
         }
 
@@ -158,11 +158,11 @@ func onRequestHeaderValue(_ parser: Parser, data: UnsafePointer<Int8>!, length: 
     }
 }
 
-func onRequestHeadersComplete(_ parser: Parser) -> Int32 {
-    return RequestContext(parser.pointee.data).withMemory {
-        $0.method = Method(code: Int(parser.pointee.method))
-        let major = Int(parser.pointee.http_major)
-        let minor = Int(parser.pointee.http_minor)
+func onRequestHeadersComplete(_ parser: Parser?) -> Int32 {
+    return RequestContext(parser!.pointee.data).withMemory {
+        $0.method = Method(code: Int(parser!.pointee.method))
+        let major = Int(parser!.pointee.http_major)
+        let minor = Int(parser!.pointee.http_minor)
         $0.version = Version(major: major, minor: minor)
 
         guard let uri = try? URI($0.currentURI) else {
@@ -177,17 +177,17 @@ func onRequestHeadersComplete(_ parser: Parser) -> Int32 {
     }
 }
 
-func onRequestBody(_ parser: Parser, data: UnsafePointer<Int8>!, length: Int) -> Int32 {
-    RequestContext(parser.pointee.data).withMemory {
-        $0.body += Data(pointer: data, length: length)
+func onRequestBody(_ parser: Parser?, data: UnsafePointer<Int8>?, length: Int) -> Int32 {
+    RequestContext(parser!.pointee.data).withMemory {
+        $0.body += Data(pointer: data!, length: length)
         return
     }
 
     return 0
 }
 
-func onRequestMessageComplete(_ parser: Parser) -> Int32 {
-    return RequestContext(parser.pointee.data).withMemory {
+func onRequestMessageComplete(_ parser: Parser?) -> Int32 {
+    return RequestContext(parser!.pointee.data).withMemory {
         let request = Request(
             method: $0.method,
             uri: $0.uri,
