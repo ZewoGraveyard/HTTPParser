@@ -74,7 +74,7 @@ extension Method {
 }
 
 extension UnsafeMutablePointer {
-    func withMemory<R>(_ body: @noescape (inout pointer: Pointee) throws -> R) rethrows -> R {
+    func withPointee<R>(_ body: @noescape (inout pointer: Pointee) throws -> R) rethrows -> R {
         return try body(pointer: &pointee)
     }
 }
