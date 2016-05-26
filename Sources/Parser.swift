@@ -73,16 +73,8 @@ extension Method {
     }
 }
 
-extension Data {
-    public init(pointer: UnsafePointer<Int8>, length: Int) {
-        var bytes: [UInt8] = [UInt8](repeating: 0, count: length)
-        memcpy(&bytes, pointer, length)
-        self.bytes = bytes
-    }
-}
-
 extension UnsafeMutablePointer {
-    func withMemory<R>(_ body: @noescape (inout pointer: Pointee) throws -> R) rethrows -> R {
+    func withPointee<R>(_ body: @noescape (inout pointer: Pointee) throws -> R) rethrows -> R {
         return try body(pointer: &pointee)
     }
 }

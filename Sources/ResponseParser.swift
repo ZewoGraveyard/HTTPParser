@@ -71,7 +71,6 @@ public final class ResponseParser: S4.ResponseParser {
     }
 
     deinit {
-        context.deinitialize(count: 1)
         context.deallocateCapacity(1)
     }
 
@@ -83,15 +82,8 @@ public final class ResponseParser: S4.ResponseParser {
     public func parse(_ data: Data) throws -> Response? {
         defer { response = nil }
 
-        var data = data
-
-        let buffer = data.withUnsafeMutableBufferPointer {
-            UnsafeMutablePointer<Int8>($0.baseAddress)
-        }
-
-        let bytesParsed = http_parser_execute(&parser, &responseSettings, buffer, data.count)
-
-        if bytesParsed != data.count {
+        let bytesParsed = http_parser_execute(&parser, &responseSettings, UnsafePointer(data.bytes), data.count)
+        guard bytesParsed == data.count else {
             resetParser()
             let errorName = http_errno_name(http_errno(parser.http_errno))!
             let errorDescription = http_errno_description(http_errno(parser.http_errno))!
@@ -114,7 +106,7 @@ extension ResponseParser {
 }
 
 func onResponseStatus(_ parser: Parser?, data: UnsafePointer<Int8>?, length: Int) -> Int32 {
-    return ResponseContext(parser!.pointee.data).withMemory {
+    return ResponseContext(parser!.pointee.data).withPointee {
         guard let reasonPhrase = String(pointer: data!, length: length) else {
             return 1
         }
@@ -125,7 +117,7 @@ func onResponseStatus(_ parser: Parser?, data: UnsafePointer<Int8>?, length: Int
 }
 
 func onResponseHeaderField(_ parser: Parser?, data: UnsafePointer<Int8>?, length: Int) -> Int32 {
-    return ResponseContext(parser!.pointee.data).withMemory {
+    return ResponseContext(parser!.pointee.data).withPointee {
         guard let headerName = String(pointer: data!, length: length) else {
             return 1
         }
@@ -140,7 +132,7 @@ func onResponseHeaderField(_ parser: Parser?, data: UnsafePointer<Int8>?, length
 }
 
 func onResponseHeaderValue(_ parser: Parser?, data: UnsafePointer<Int8>?, length: Int) -> Int32 {
-    return ResponseContext(parser!.pointee.data).withMemory {
+    return ResponseContext(parser!.pointee.data).withPointee {
         guard let headerValue = String(pointer: data!, length: length) else {
             return 1
         }
@@ -160,7 +152,7 @@ func onResponseHeaderValue(_ parser: Parser?, data: UnsafePointer<Int8>?, length
 }
 
 func onResponseHeadersComplete(_ parser: Parser?) -> Int32 {
-    return ResponseContext(parser!.pointee.data).withMemory {
+    return ResponseContext(parser!.pointee.data).withPointee {
         $0.buildingHeaderName = ""
         $0.currentHeaderName = ""
         $0.statusCode = Int(parser!.pointee.status_code)
@@ -172,14 +164,15 @@ func onResponseHeadersComplete(_ parser: Parser?) -> Int32 {
 }
 
 func onResponseBody(_ parser: Parser?, data: UnsafePointer<Int8>?, length: Int) -> Int32 {
-    return ResponseContext(parser!.pointee.data).withMemory {
-        $0.body += Data(pointer: data!, length: length)
+    return ResponseContext(parser!.pointee.data).withPointee {
+        let buffer = UnsafeBufferPointer<UInt8>(start: UnsafePointer(data), count: length)
+        $0.body += Data(Array(buffer))
         return 0
     }
 }
 
 func onResponseMessageComplete(_ parser: Parser?) -> Int32 {
-    return ResponseContext(parser!.pointee.data).withMemory {
+    return ResponseContext(parser!.pointee.data).withPointee {
         let response = Response(
             version: $0.version,
             status: Status(statusCode: $0.statusCode, reasonPhrase: $0.reasonPhrase),
