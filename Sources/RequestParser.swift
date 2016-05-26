@@ -72,7 +72,6 @@ public final class RequestParser: S4.RequestParser {
     }
 
     deinit {
-        context.deinitialize(count:1)
         context.deallocateCapacity(1)
     }
 

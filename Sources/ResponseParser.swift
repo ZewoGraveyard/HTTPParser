@@ -71,7 +71,6 @@ public final class ResponseParser: S4.ResponseParser {
     }
 
     deinit {
-        context.deinitialize(count: 1)
         context.deallocateCapacity(1)
     }
 
