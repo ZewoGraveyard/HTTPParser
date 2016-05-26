@@ -83,15 +83,8 @@ public final class ResponseParser: S4.ResponseParser {
     public func parse(_ data: Data) throws -> Response? {
         defer { response = nil }
 
-        var data = data
-
-        let buffer = data.withUnsafeMutableBufferPointer {
-            UnsafeMutablePointer<Int8>($0.baseAddress)
-        }
-
-        let bytesParsed = http_parser_execute(&parser, &responseSettings, buffer, data.count)
-
-        if bytesParsed != data.count {
+        let bytesParsed = http_parser_execute(&parser, &responseSettings, UnsafePointer(data.bytes), data.count)
+        guard bytesParsed == data.count else {
             resetParser()
             let errorName = http_errno_name(http_errno(parser.http_errno))!
             let errorDescription = http_errno_description(http_errno(parser.http_errno))!
