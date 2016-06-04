@@ -23,7 +23,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.uri.path == "/")
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
-                XCTAssert(request.headers.headers.count == 0)
+                XCTAssert(request.headers.count == 0)
             } else {
                 XCTAssert(false)
             }
@@ -42,8 +42,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.uri.path == "/")
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
-                XCTAssert(request.headers.headers.count == 0)
-
+                XCTAssert(request.headers.count == 0)
             } else {
                 XCTAssert(false)
             }
@@ -62,8 +61,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.uri.path == "/")
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
-                XCTAssert(request.headers.headers.count == 0)
-
+                XCTAssert(request.headers.count == 0)
             } else {
                 XCTAssert(false)
             }
@@ -82,8 +80,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.uri.path == "/")
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
-                XCTAssert(request.headers.headers.count == 0)
-
+                XCTAssert(request.headers.count == 0)
             } else {
                 XCTAssert(false)
             }
@@ -102,8 +99,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.uri.path == "/")
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
-                XCTAssert(request.headers.headers.count == 0)
-
+                XCTAssert(request.headers.count == 0)
             } else {
                 XCTAssert(false)
             }
@@ -122,8 +118,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.uri.path == "/")
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
-                XCTAssert(request.headers.headers.count == 0)
-
+                XCTAssert(request.headers.count == 0)
             } else {
                 XCTAssert(false)
             }
@@ -142,8 +137,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.uri.path == "/")
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
-                XCTAssert(request.headers.headers.count == 0)
-
+                XCTAssert(request.headers.count == 0)
             } else {
                 XCTAssert(false)
             }
@@ -162,8 +156,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.uri.path == "/")
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
-                XCTAssert(request.headers.headers.count == 0)
-
+                XCTAssert(request.headers.count == 0)
             } else {
                 XCTAssert(false)
             }
@@ -182,8 +175,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.uri.path == "/")
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
-                XCTAssert(request.headers.headers.count == 0)
-
+                XCTAssert(request.headers.count == 0)
             } else {
                 XCTAssert(false)
             }
@@ -202,8 +194,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.uri.path == "/")
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
-                XCTAssert(request.headers.headers.count == 0)
-
+                XCTAssert(request.headers.count == 0)
             } else {
                 XCTAssert(false)
             }
@@ -222,8 +213,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.uri.path == "/")
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
-                XCTAssert(request.headers.headers.count == 0)
-
+                XCTAssert(request.headers.count == 0)
             } else {
                 XCTAssert(false)
             }
@@ -242,8 +232,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.uri.path == "/")
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
-                XCTAssert(request.headers.headers.count == 0)
-
+                XCTAssert(request.headers.count == 0)
             } else {
                 XCTAssert(false)
             }
@@ -262,8 +251,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.uri.path == "/")
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
-                XCTAssert(request.headers.headers.count == 0)
-
+                XCTAssert(request.headers.count == 0)
             } else {
                 XCTAssert(false)
             }
@@ -282,8 +270,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.uri.path == "/")
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
-                XCTAssert(request.headers.headers.count == 0)
-
+                XCTAssert(request.headers.count == 0)
             } else {
                 XCTAssert(false)
             }
@@ -302,8 +289,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.uri.path == "/")
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
-                XCTAssert(request.headers.headers.count == 0)
-
+                XCTAssert(request.headers.count == 0)
             } else {
                 XCTAssert(false)
             }
@@ -322,8 +308,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.uri.path == "/")
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
-                XCTAssert(request.headers.headers.count == 0)
-
+                XCTAssert(request.headers.count == 0)
             } else {
                 XCTAssert(false)
             }
@@ -342,8 +327,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.uri.path == "/")
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
-                XCTAssert(request.headers.headers.count == 0)
-
+                XCTAssert(request.headers.count == 0)
             } else {
                 XCTAssert(false)
             }
@@ -362,8 +346,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.uri.path == "/")
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
-                XCTAssert(request.headers.headers.count == 0)
-
+                XCTAssert(request.headers.count == 0)
             } else {
                 XCTAssert(false)
             }
@@ -382,8 +365,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.uri.path == "/")
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
-                XCTAssert(request.headers.headers.count == 0)
-
+                XCTAssert(request.headers.count == 0)
             } else {
                 XCTAssert(false)
             }
@@ -402,8 +384,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.uri.path == "/")
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
-                XCTAssert(request.headers.headers.count == 0)
-
+                XCTAssert(request.headers.count == 0)
             } else {
                 XCTAssert(false)
             }
@@ -422,8 +403,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.uri.path == "/")
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
-                XCTAssert(request.headers.headers.count == 0)
-
+                XCTAssert(request.headers.count == 0)
             } else {
                 XCTAssert(false)
             }
@@ -442,8 +422,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.uri.path == "/")
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
-                XCTAssert(request.headers.headers.count == 0)
-
+                XCTAssert(request.headers.count == 0)
             } else {
                 XCTAssert(false)
             }
@@ -462,8 +441,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.uri.path == "/")
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
-                XCTAssert(request.headers.headers.count == 0)
-
+                XCTAssert(request.headers.count == 0)
             } else {
                 XCTAssert(false)
             }
@@ -482,8 +460,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.uri.path == "/")
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
-                XCTAssert(request.headers.headers.count == 0)
-
+                XCTAssert(request.headers.count == 0)
             } else {
                 XCTAssert(false)
             }
@@ -502,8 +479,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.uri.path == "/")
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
-                XCTAssert(request.headers.headers.count == 0)
-
+                XCTAssert(request.headers.count == 0)
             } else {
                 XCTAssert(false)
             }
@@ -522,8 +498,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.uri.path == "/")
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
-                XCTAssert(request.headers.headers.count == 0)
-
+                XCTAssert(request.headers.count == 0)
             } else {
                 XCTAssert(false)
             }
@@ -542,8 +517,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.uri.path == "/")
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
-                XCTAssert(request.headers.headers.count == 0)
-
+                XCTAssert(request.headers.count == 0)
             } else {
                 XCTAssert(false)
             }
@@ -562,8 +536,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.uri.path == "/")
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
-                XCTAssert(request.headers.headers.count == 0)
-
+                XCTAssert(request.headers.count == 0)
             } else {
                 XCTAssert(false)
             }
@@ -582,7 +555,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.uri.path == "/")
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
-                XCTAssert(request.headers.headers.count == 0)
+                XCTAssert(request.headers.count == 0)
             } else {
                 XCTAssert(false)
             }
@@ -601,8 +574,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.uri.path == "/")
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
-                XCTAssert(request.headers.headers.count == 0)
-
+                XCTAssert(request.headers.count == 0)
             } else {
                 XCTAssert(false)
             }
@@ -630,8 +602,9 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.uri.path == "/")
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
-                XCTAssert(request.headers.headers.count == 0)
-
+                XCTAssert(request.headers.count == 0)
+            } else {
+                XCTAssert(false)
             }
         } catch {
             XCTAssert(false)
@@ -649,9 +622,9 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.uri.path == "/")
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
-                print(request)
-                XCTAssert(request.headers.headers["Host"]?.values[0] == "zewo.co")
-
+                XCTAssert(request.headers["Host"] == "zewo.co")
+            } else {
+                XCTAssert(false)
             }
         } catch {
             XCTAssert(false)
@@ -695,9 +668,10 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.uri.path == "/")
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
-                XCTAssert(request.headers.headers["Host"]?.values[0] == "zewo.co")
-                XCTAssert(request.headers.headers["Content-Type"]?.values[0] == "application/json")
-
+                XCTAssert(request.headers["Host"] == "zewo.co")
+                XCTAssert(request.headers["Content-Type"] == "application/json")
+            } else {
+                XCTAssert(false)
             }
         } catch {
             XCTAssert(false)
@@ -705,7 +679,7 @@ class RequestParserTests: XCTestCase {
     }
 
 
-    func testDiscontinuousMediumRequestMultipleSetCookie() {
+    func testDiscontinuousMediumRequestMultipleCookie() {
         let parser = RequestParser()
 
         do {
@@ -714,11 +688,11 @@ class RequestParserTests: XCTestCase {
             let data3 = "Hos"
             let data4 = "t: zewo.c"
             let data5 = "o\r\n"
-            let data6 = "Set-"
-            let data7 = "Cookie: serv"
+            let data6 = "C"
+            let data7 = "ookie: serv"
             let data8 = "er=zewo\r\n"
-            let data9 = "Set-"
-            let data10 = "Cookie: lan"
+            let data9 = "C"
+            let data10 = "ookie: lan"
             let data11 = "g=swift\r\n"
             let data12 = "\r"
             let data13 = "\n"
@@ -752,10 +726,10 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.uri.path == "/")
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
-                XCTAssert(request.headers.headers["Host"]?.values[0] == "zewo.co")
-                XCTAssert(request.headers.headers["Set-Cookie"]?.values[0] == "server=zewo")
-                XCTAssert(request.headers.headers["Set-Cookie"]?.values[1] == "lang=swift")
-
+                XCTAssert(request.headers["Host"] == "zewo.co")
+                XCTAssert(request.headers["Cookie"] == "server=zewo, lang=swift")
+            } else {
+                XCTAssert(false)
             }
         } catch {
             XCTAssert(false)
@@ -774,7 +748,9 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.uri.path == "/")
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
-                XCTAssert(request.headers.headers["Content-Length"]?.values[0] == "4")
+                XCTAssert(request.headers["Content-Length"] == "4")
+            } else {
+                XCTAssert(false)
             }
         } catch {
             XCTAssert(false)
@@ -821,7 +797,9 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.uri.path == "/profile")
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
-                XCTAssert(request.headers.headers["Content-Length"]?.values[0] == "4")
+                XCTAssert(request.headers["Content-Length"] == "4")
+            } else {
+                XCTAssert(false)
             }
         } catch {
             XCTAssert(false)
@@ -847,8 +825,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.uri.path == "/")
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
-                XCTAssert(request.headers.headers.count == 0)
-
+                XCTAssert(request.headers.count == 0)
             } else {
                 XCTAssert(false)
             }
@@ -869,8 +846,7 @@ class RequestParserTests: XCTestCase {
                 XCTAssert(request.uri.path == "/profile")
                 XCTAssert(request.version.major == 1)
                 XCTAssert(request.version.minor == 1)
-                XCTAssert(request.headers.headers.count == 0)
-
+                XCTAssert(request.headers.count == 0)
             } else {
                 XCTAssert(false)
             }
@@ -890,7 +866,11 @@ class RequestParserTests: XCTestCase {
                 for _ in 0 ..< 10000 {
                     let parser = RequestParser()
                     do {
-                        try parser.parse(data)
+                        if let request = try parser.parse(data) {
+                            XCTAssert(request.method == .post)
+                        } else {
+                            XCTAssert(false)
+                        }
                     } catch {
                         XCTAssert(false)
                     }
@@ -1102,7 +1082,7 @@ class RequestParserTests: XCTestCase {
 
 
 extension RequestParserTests {
-    static var allTests: [(String, RequestParserTests -> () throws -> Void)] {
+    static var allTests: [(String, (RequestParserTests) -> () throws -> Void)] {
         return [
             ("testInvalidMethod", testInvalidMethod),
             ("testShortDELETERequest", testShortDELETERequest),
@@ -1138,7 +1118,7 @@ extension RequestParserTests {
             ("testDiscontinuousShortRequest", testDiscontinuousShortRequest),
             ("testMediumRequest", testMediumRequest),
             ("testDiscontinuousMediumRequest", testDiscontinuousMediumRequest),
-            ("testDiscontinuousMediumRequestMultipleSetCookie", testDiscontinuousMediumRequestMultipleSetCookie),
+            ("testDiscontinuousMediumRequestMultipleCookie", testDiscontinuousMediumRequestMultipleCookie),
             ("testCompleteRequest", testCompleteRequest),
             ("testDiscontinuousCompleteRequest", testDiscontinuousCompleteRequest),
             ("testMultipleShortRequestsInTheSameStream", testMultipleShortRequestsInTheSameStream),

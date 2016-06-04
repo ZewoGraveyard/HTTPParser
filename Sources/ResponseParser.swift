@@ -31,9 +31,11 @@ struct ResponseParserContext {
     var reasonPhrase: String = ""
     var version: Version = Version(major: 0, minor: 0)
     var headers: Headers = [:]
+    var cookies: Cookies = Cookies()
     var body: Data = []
 
     var buildingHeaderName = ""
+    var buildingCookieValue = ""
     var currentHeaderName: CaseInsensitiveString = ""
     var completion: (Response) -> Void
 
@@ -140,12 +142,19 @@ func onResponseHeaderValue(_ parser: Parser?, data: UnsafePointer<Int8>?, length
         if $0.currentHeaderName == "" {
             $0.currentHeaderName = CaseInsensitiveString($0.buildingHeaderName)
             $0.buildingHeaderName = ""
-
-            $0.headers[$0.currentHeaderName].append("")
         }
 
-        let previousHeaderValue = $0.headers[$0.currentHeaderName].values.last ?? ""
-        $0.headers[$0.currentHeaderName][$0.headers[$0.currentHeaderName].count - 1] = previousHeaderValue + headerValue
+        if $0.currentHeaderName == "Set-Cookie" {
+            $0.buildingCookieValue += headerValue
+
+            if let cookie = Cookie($0.buildingCookieValue) {
+                $0.cookies.insert(cookie)
+                $0.buildingCookieValue = ""
+            }
+        } else {
+            let previousHeaderValue = $0.headers[$0.currentHeaderName] ?? ""
+            $0.headers[$0.currentHeaderName] = previousHeaderValue + headerValue
+        }
 
         return 0
     }
@@ -177,6 +186,7 @@ func onResponseMessageComplete(_ parser: Parser?) -> Int32 {
             version: $0.version,
             status: Status(statusCode: $0.statusCode, reasonPhrase: $0.reasonPhrase),
             headers: $0.headers,
+            cookies: $0.cookies,
             body: .buffer($0.body)
         )
 
@@ -185,6 +195,7 @@ func onResponseMessageComplete(_ parser: Parser?) -> Int32 {
         $0.reasonPhrase = ""
         $0.version = Version(major: 0, minor: 0)
         $0.headers = [:]
+        $0.cookies = []
         $0.body = []
         return 0
     }

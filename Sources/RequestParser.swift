@@ -142,11 +142,14 @@ func onRequestHeaderValue(_ parser: Parser?, data: UnsafePointer<Int8>?, length:
             $0.currentHeaderName = CaseInsensitiveString($0.buildingHeaderName)
             $0.buildingHeaderName = ""
 
-            $0.headers[$0.currentHeaderName].append("")
+            if $0.headers[$0.currentHeaderName] != nil {
+                let previousHeaderValue = $0.headers[$0.currentHeaderName] ?? ""
+                $0.headers[$0.currentHeaderName] = previousHeaderValue + ", "
+            }
         }
 
-        let previousHeaderValue = $0.headers[$0.currentHeaderName].values.last ?? ""
-        $0.headers[$0.currentHeaderName][$0.headers[$0.currentHeaderName].count - 1] = previousHeaderValue + headerValue
+        let previousHeaderValue = $0.headers[$0.currentHeaderName] ?? ""
+        $0.headers[$0.currentHeaderName] = previousHeaderValue + headerValue
 
         return 0
     }
