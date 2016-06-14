@@ -31,11 +31,11 @@ struct ResponseParserContext {
     var reasonPhrase: String = ""
     var version: Version = Version(major: 0, minor: 0)
     var headers: Headers = [:]
-    var cookies: Cookies = Cookies()
+    var cookies = Set<String>()
     var body: Data = []
 
     var buildingHeaderName = ""
-    var buildingCookieValue = ""
+//    var buildingCookieValue = ""
     var currentHeaderName: CaseInsensitiveString = ""
     var completion: (Response) -> Void
 
@@ -153,12 +153,7 @@ func onResponseHeaderValue(_ parser: Parser?, data: UnsafePointer<Int8>?, length
         }
 
         if $0.currentHeaderName == "Set-Cookie" {
-            $0.buildingCookieValue += headerValue
-
-            if let cookie = Cookie($0.buildingCookieValue) {
-                $0.cookies.insert(cookie)
-                $0.buildingCookieValue = ""
-            }
+            $0.cookies.insert(headerValue)
         } else {
             let previousHeaderValue = $0.headers[$0.currentHeaderName] ?? ""
             $0.headers[$0.currentHeaderName] = previousHeaderValue + headerValue
