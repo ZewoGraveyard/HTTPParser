@@ -31,7 +31,7 @@ struct ResponseParserContext {
     var reasonPhrase: String = ""
     var version: Version = Version(major: 0, minor: 0)
     var headers: Headers = [:]
-    var cookies: Cookies = Cookies()
+    var cookieHeaders: Set<String> = []
     var body: Data = []
 
     var buildingHeaderName = ""
@@ -59,13 +59,15 @@ var responseSettings: http_parser_settings = {
 }()
 
 public final class ResponseParser: S4.ResponseParser {
+    let stream: Stream
     let context: ResponseContext
     var parser = http_parser()
     var response: Response?
 
-    public init() {
-        context = ResponseContext(allocatingCapacity: 1)
-        context.initialize(with: ResponseParserContext { response in
+    public init(stream: Stream) {
+        self.stream = stream
+        self.context = ResponseContext(allocatingCapacity: 1)
+        self.context.initialize(with: ResponseParserContext { response in
             self.response = response
             })
 
@@ -81,29 +83,28 @@ public final class ResponseParser: S4.ResponseParser {
         parser.data = UnsafeMutablePointer<Void>(context)
     }
 
-    public func parse(_ data: Data) throws -> Response? {
-        defer { response = nil }
+    public func parse() throws -> Response {
+        while true {
+            defer {
+                response = nil
+            }
 
-        let bytesParsed = http_parser_execute(&parser, &responseSettings, UnsafePointer(data.bytes), data.count)
-        guard bytesParsed == data.count else {
-            resetParser()
-            let errorName = http_errno_name(http_errno(parser.http_errno))!
-            let errorDescription = http_errno_description(http_errno(parser.http_errno))!
-            let error = ParseError(description: "\(String(validatingUTF8: errorName)!): \(String(validatingUTF8: errorDescription)!)")
-            throw error
+            let data = try stream.receive(upTo: 2048)
+            let bytesParsed = http_parser_execute(&parser, &responseSettings, UnsafePointer(data.bytes), data.count)
+
+            guard bytesParsed == data.count else {
+                resetParser()
+                let errorName = http_errno_name(http_errno(parser.http_errno))!
+                let errorDescription = http_errno_description(http_errno(parser.http_errno))!
+                let error = ParseError(description: "\(String(validatingUTF8: errorName)!): \(String(validatingUTF8: errorDescription)!)")
+                throw error
+            }
+
+            if let response  = response {
+                resetParser()
+                return response
+            }
         }
-
-        if response != nil {
-            resetParser()
-        }
-
-        return response
-    }
-}
-
-extension ResponseParser {
-    public func parse(_ convertible: DataConvertible) throws -> Response? {
-        return try parse(convertible.data)
     }
 }
 
@@ -128,6 +129,11 @@ func onResponseHeaderField(_ parser: Parser?, data: UnsafePointer<Int8>?, length
             $0.currentHeaderName = ""
         }
 
+        if $0.buildingCookieValue != "" {
+            $0.cookieHeaders.insert($0.buildingCookieValue)
+            $0.buildingCookieValue = ""
+        }
+
         $0.buildingHeaderName += headerName
         return 0
     }
@@ -146,11 +152,6 @@ func onResponseHeaderValue(_ parser: Parser?, data: UnsafePointer<Int8>?, length
 
         if $0.currentHeaderName == "Set-Cookie" {
             $0.buildingCookieValue += headerValue
-
-            if let cookie = Cookie($0.buildingCookieValue) {
-                $0.cookies.insert(cookie)
-                $0.buildingCookieValue = ""
-            }
         } else {
             let previousHeaderValue = $0.headers[$0.currentHeaderName] ?? ""
             $0.headers[$0.currentHeaderName] = previousHeaderValue + headerValue
@@ -162,6 +163,11 @@ func onResponseHeaderValue(_ parser: Parser?, data: UnsafePointer<Int8>?, length
 
 func onResponseHeadersComplete(_ parser: Parser?) -> Int32 {
     return ResponseContext(parser!.pointee.data).withPointee {
+        if $0.buildingCookieValue != "" {
+            $0.cookieHeaders.insert($0.buildingCookieValue)
+            $0.buildingCookieValue = ""
+        }
+
         $0.buildingHeaderName = ""
         $0.currentHeaderName = ""
         $0.statusCode = Int(parser!.pointee.status_code)
@@ -186,7 +192,7 @@ func onResponseMessageComplete(_ parser: Parser?) -> Int32 {
             version: $0.version,
             status: Status(statusCode: $0.statusCode, reasonPhrase: $0.reasonPhrase),
             headers: $0.headers,
-            cookies: $0.cookies,
+            cookieHeaders: $0.cookieHeaders,
             body: .buffer($0.body)
         )
 
@@ -195,7 +201,7 @@ func onResponseMessageComplete(_ parser: Parser?) -> Int32 {
         $0.reasonPhrase = ""
         $0.version = Version(major: 0, minor: 0)
         $0.headers = [:]
-        $0.cookies = []
+        $0.cookieHeaders = []
         $0.body = []
         return 0
     }
