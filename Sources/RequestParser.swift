@@ -58,15 +58,17 @@ var requestSettings: http_parser_settings = {
 }()
 
 public final class RequestParser: S4.RequestParser {
+    let stream: Stream
     let context: RequestContext
     var parser = http_parser()
     var request: Request?
 
-    public init() {
-        context = RequestContext(allocatingCapacity: 1)
-        context.initialize(with: RequestParserContext { request in
+    public init(stream: Stream) {
+        self.stream = stream
+        self.context = RequestContext(allocatingCapacity: 1)
+        self.context.initialize(with: RequestParserContext { request in
             self.request = request
-            })
+        })
 
         resetParser()
     }
@@ -80,29 +82,28 @@ public final class RequestParser: S4.RequestParser {
         parser.data = UnsafeMutablePointer<Void>(context)
     }
 
-    public func parse(_ data: Data) throws -> Request? {
-        defer { request = nil }
+    public func parse() throws -> Request {
+        while true {
+            defer {
+                request = nil
+            }
 
-        let bytesParsed = http_parser_execute(&parser, &requestSettings, UnsafePointer(data.bytes), data.count)
-        guard bytesParsed == data.count else {
-            resetParser()
-            let errorName = http_errno_name(http_errno(parser.http_errno))!
-            let errorDescription = http_errno_description(http_errno(parser.http_errno))!
-            let error = ParseError(description: "\(String(validatingUTF8: errorName)!): \(String(validatingUTF8: errorDescription)!)")
-            throw error
+            let data = try stream.receive(upTo: 2048)
+            let bytesParsed = http_parser_execute(&parser, &requestSettings, UnsafePointer(data.bytes), data.count)
+
+            guard bytesParsed == data.count else {
+                resetParser()
+                let errorName = http_errno_name(http_errno(parser.http_errno))!
+                let errorDescription = http_errno_description(http_errno(parser.http_errno))!
+                let error = ParseError(description: "\(String(validatingUTF8: errorName)!): \(String(validatingUTF8: errorDescription)!)")
+                throw error
+            }
+
+            if let request = request {
+                resetParser()
+                return request
+            }
         }
-
-        if request != nil {
-            resetParser()
-        }
-
-        return request
-    }
-}
-
-extension RequestParser {
-    public func parse(_ convertible: DataConvertible) throws -> Request? {
-        return try parse(convertible.data)
     }
 }
 
