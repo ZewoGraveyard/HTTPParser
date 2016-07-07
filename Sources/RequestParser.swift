@@ -61,14 +61,22 @@ public final class RequestParser: S4.RequestParser {
     let context: RequestContext
     var parser = http_parser()
     var request: Request?
+    let data: Data
 
-    public init() {
+    public init(_ data: Data) {
+        self.data = data
+
         context = RequestContext(allocatingCapacity: 1)
         context.initialize(with: RequestParserContext { request in
             self.request = request
             })
 
         resetParser()
+    }
+
+    public convenience init(stream: Stream) {
+        let drain = Drain(for: stream)
+        self.init(drain.data)
     }
 
     deinit {
@@ -80,7 +88,7 @@ public final class RequestParser: S4.RequestParser {
         parser.data = UnsafeMutablePointer<Void>(context)
     }
 
-    public func parse(_ data: Data) throws -> Request? {
+    public func parse() throws -> Request {
         defer { request = nil }
 
         let bytesParsed = http_parser_execute(&parser, &requestSettings, UnsafePointer(data.bytes), data.count)
@@ -96,13 +104,13 @@ public final class RequestParser: S4.RequestParser {
             resetParser()
         }
 
-        return request
+        return request!
     }
 }
 
 extension RequestParser {
-    public func parse(_ convertible: DataConvertible) throws -> Request? {
-        return try parse(convertible.data)
+    public convenience init(_ convertible: DataConvertible) {
+        self.init(convertible.data)
     }
 }
 

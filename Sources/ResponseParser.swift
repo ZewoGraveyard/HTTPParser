@@ -31,11 +31,11 @@ struct ResponseParserContext {
     var reasonPhrase: String = ""
     var version: Version = Version(major: 0, minor: 0)
     var headers: Headers = [:]
-    var cookies: Cookies = Cookies()
+    var cookies = Set<String>()
     var body: Data = []
 
     var buildingHeaderName = ""
-    var buildingCookieValue = ""
+//    var buildingCookieValue = ""
     var currentHeaderName: CaseInsensitiveString = ""
     var completion: (Response) -> Void
 
@@ -62,14 +62,22 @@ public final class ResponseParser: S4.ResponseParser {
     let context: ResponseContext
     var parser = http_parser()
     var response: Response?
+    let data: Data
 
-    public init() {
+    public init(_ data: Data) {
+        self.data = data
+
         context = ResponseContext(allocatingCapacity: 1)
         context.initialize(with: ResponseParserContext { response in
             self.response = response
             })
 
         resetParser()
+    }
+
+    public convenience init(stream: Stream) {
+        let drain = Drain(for: stream)
+        self.init(drain.data)
     }
 
     deinit {
@@ -81,7 +89,7 @@ public final class ResponseParser: S4.ResponseParser {
         parser.data = UnsafeMutablePointer<Void>(context)
     }
 
-    public func parse(_ data: Data) throws -> Response? {
+    public func parse() throws -> Response {
         defer { response = nil }
 
         let bytesParsed = http_parser_execute(&parser, &responseSettings, UnsafePointer(data.bytes), data.count)
@@ -97,13 +105,13 @@ public final class ResponseParser: S4.ResponseParser {
             resetParser()
         }
 
-        return response
+        return response!
     }
 }
 
 extension ResponseParser {
-    public func parse(_ convertible: DataConvertible) throws -> Response? {
-        return try parse(convertible.data)
+    public convenience init(_ convertible: DataConvertible) {
+        self.init(convertible.data)
     }
 }
 
@@ -145,12 +153,7 @@ func onResponseHeaderValue(_ parser: Parser?, data: UnsafePointer<Int8>?, length
         }
 
         if $0.currentHeaderName == "Set-Cookie" {
-            $0.buildingCookieValue += headerValue
-
-            if let cookie = Cookie($0.buildingCookieValue) {
-                $0.cookies.insert(cookie)
-                $0.buildingCookieValue = ""
-            }
+            $0.cookies.insert(headerValue)
         } else {
             let previousHeaderValue = $0.headers[$0.currentHeaderName] ?? ""
             $0.headers[$0.currentHeaderName] = previousHeaderValue + headerValue
@@ -186,7 +189,7 @@ func onResponseMessageComplete(_ parser: Parser?) -> Int32 {
             version: $0.version,
             status: Status(statusCode: $0.statusCode, reasonPhrase: $0.reasonPhrase),
             headers: $0.headers,
-            cookies: $0.cookies,
+            cookieHeaders: Set<String>(),//$0.cookies,
             body: .buffer($0.body)
         )
 
